@@ -375,21 +375,7 @@
               </div>
             </div>
             <div class="times">
-              <div class="times-limit" data-max-height="css">
-                {{#spreadsheet.PHOH--hours}}
-                {{#start-time}}
-                {{#end-time}}
-                <p data-validate-type="datetime">{{{date}}} {{{start-time}}} - {{{end-time}}}</p>
-                {{/end-time}}
-                {{/start-time}}
-                
-                {{^start-time}}
-                {{^end-time}}
-                <p><span data-validate-type2="datetime">{{{date}}}</span> - Closed</p>
-                {{/end-time}}
-                {{/start-time}}
-                {{/spreadsheet.PHOH--hours}}
-              </div>
+              <div class="times-limit js-open-hours-inject-container" data-max-height="css"></div>
             </div>
           </div>
         </div>
@@ -419,6 +405,32 @@
   <script>
 
     console.clear();
+    
+    function openHoursInject() {
+      const container = document.querySelector('.js-open-hours-inject-container');
+      let dayObjs = [];
+      {{#spreadsheet.PHOH--hours}}
+      dayObjs.push({
+        date: '{{{date}}}', 
+    	startTime: '{{{start-time}}}',
+        endTime: '{{{end-time}}}'
+      });
+      {{/spreadsheet.PHOH--hours}}
+        
+      container.innerHTML = dayObjs.map(dayObj => {
+        const { startTime, endTime, date } = dayObj;
+        const emptyHoursCheck = startTime === '' || endTime === '';
+        const closedStringCheck = startTime.toLowerCase() === 'closed' || endTime.toLowerCase() === 'closed';
+        
+        if ( emptyHoursCheck || closedStringCheck ) {
+          return `<p><span data-validate-type2="datetime">${date}</span> - CLOSED</p>`
+        } else {
+          return `<p data-validate-type="datetime">${date} ${startTime} - ${endTime}</p>`;
+        }
+      }).join('');
+    }
+       
+    openHoursInject();
     
     function validation() {
       const els = document.querySelectorAll("[data-validate-type]");
