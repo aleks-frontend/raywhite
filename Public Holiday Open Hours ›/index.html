@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html data-sign="OS?">
+
+<head>
+  <title>Outfit</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" type="text/css" href="./css/minireset.css">
+  <link rel="stylesheet" type="text/css" href="./css/main.css">
+ 
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i');
+    @import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i');
+
+    :root {
+      --yellow: {{{account.colors.brand-color}}};
+      --white: {{{account.colors.whiter}}};
+      --grey: {{{account.colors.secondary}}};
+    }
+
+    body {
+      font-family: "Lato";
+      font-size: 1rem;
+      color: var(--grey);
+      word-break: break-word;
+    }
+
+    .backgroundImage {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+    }
+
+    .backgroundImage div {
+      width: auto !important;
+      height: auto !important;
+      right: 0;
+      bottom: 0;
+    }
+
+    /* Helper classes */
+    .u-hide {
+      display: none;
+    }
+    
+    .overflow[data-validate-type="datetime"]:hover:after {
+      content: "Datetime is invalid";
+    }
+    
+    .overflow[data-validate-type2="datetime"]:hover:after {
+      content: "Date is invalid";
+    }
+
+    /* Helper class for fixing Reposition tool bug */
+    .reposition-fix {
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+
+    .reposition-fix div {
+      top: 0 !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    .wrapper {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .main {
+      width: 100%;
+      position: relative;
+    }
+
+    .photo {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 578px;
+    }
+
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .icon {
+      height: 101px;
+      width: auto;
+      margin-bottom: 40px;
+    }
+
+    .heading {
+      font-family: 'Playfair Display';
+      font-weight: normal;
+      font-size: 64px;
+      line-height: 1.2em;
+      text-align: center;
+      color: var(--grey);
+      background: var(--yellow);
+      width: 100%;
+      padding: 0 10px 10px;
+      margin-bottom: 25px;      
+    }
+    
+    .heading h1 {
+      font-family: 'Playfair Display';
+      font-weight: normal;
+      font-size: 64px;
+      line-height: 1.2em;
+      max-height: 1.4em;
+    }
+
+    .subheading {
+      font-family: 'Lato';
+      font-weight: normal;
+      font-size: 54px;
+      line-height: 1.2em;
+      text-align: center;
+      margin-bottom: 20px; 
+    }
+    
+    .subheading h2 {
+      font-family: 'Lato';
+      font-weight: normal;
+      font-size: 54px;
+      line-height: 1.2em;
+      max-height: 1.4em;
+    }
+
+    .times,
+    .times p {
+      font-family: 'Lato';
+      font-weight: 300;
+      font-size: 36px;
+      line-height: 1.2em;
+      text-align: center;      
+    }    
+    
+    .times p {
+      margin-bottom: 13px;
+    }
+    
+    .times .overflow:after {
+      font-size: 0.8em;
+    }
+    
+    /* Theme 1 */
+    .theme-1 .wrapper {
+      justify-content: flex-start;
+    }
+
+    .theme-1 .photo {
+      height: calc(3mm + 720px);
+    }
+
+    .theme-1 .main {
+      height: 100%;
+      padding: calc(3mm + 720px) 3mm 3mm;
+      margin-top: auto;
+    }
+    
+    .theme-1 .icon {
+      height: 72px;
+      margin-bottom: 25px;
+    }
+    
+    .theme-1 .heading {
+      width: 100%;
+      background: transparent;
+      font-size: 45px;
+      padding: 0;
+      margin-bottom: 25px;
+    }
+    
+    .theme-1 .heading h1 {
+      font-size: 45px;
+      max-height: 2.6em;
+    }
+
+    .theme-1 .subheading {
+      font-size: 32px;
+      margin-bottom: 0;
+    }
+    
+    .theme-1 .subheading h2 {
+      font-size: 32px;
+    }
+
+    .theme-1 .times {
+      flex: 0 0 50%;
+      padding: 10px 30px;
+    }
+
+    .theme-1 .times p {
+      font-size: 28px;
+      margin-bottom: 5px;
+    }
+    
+    .theme-1 .times-limit {
+      max-height: 315px;
+    }
+
+    /* Theme 2 */
+    .theme-2 .main {
+      margin-top: calc(3mm + 50px);
+      padding: 0 calc(3mm + 50px);
+    }
+    
+    .theme-2 .photo {
+      top: 183px;
+      height: 612px;
+    }
+    
+    .theme-2 .heading {
+      margin-bottom: 615px;
+    } 
+    
+    .theme-2 .times-limit {
+      max-height: 57px;
+    }
+    
+    /* Theme 3 */
+    .theme-3 .wrapper {
+      top: calc(3mm + 35px);
+      right: calc(3mm + 35px);
+      bottom: calc(3mm + 35px);
+      left: calc(3mm + 35px);
+    }
+
+    .theme-3 .main {
+      padding: 536px 25px 0;
+    }
+
+    .theme-3 .icon {
+      display: none;
+    }
+    
+    .theme-3 .times-limit {
+      max-height: 280px;
+    }
+    
+    @media (min-aspect-ratio: 2/3) {
+      .theme-1 .main {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }           
+      
+      .theme-1 .header {
+        flex: 0 0 50%;
+        padding: 20px 50px 10px;
+      }
+    }
+    
+    /*Portrait*/
+    @media (max-aspect-ratio: 2/3) {            
+      /* Theme 1 */
+      .theme-1 .photo {
+        height: calc(3mm + 960px);
+      }
+      
+      .theme-1 .icon {
+        height: 86px;
+        margin-bottom: 35px;
+      }
+      
+      .theme-1 .main {
+        padding: calc(3mm + 960px) calc(3mm + 50px) 3mm;
+      }
+      
+      .theme-1 .header {
+        margin-top: 95px;
+        margin-bottom: 85px;
+      }
+      
+      .theme-1 .heading {
+        font-size: 54px;
+      }
+      
+      .theme-1 .heading h1 {
+        font-size: 54px;
+      }
+      
+      .theme-1 .subheading {
+        font-size: 38.4px;
+      }
+      
+      .theme-1 .subheading h2 {
+        font-size: 38.4px;
+      }
+      
+      .theme-1 .times p {
+        font-size: 33.6px;
+        margin-bottom: 6px;
+      }
+      
+      .theme-1 .times-limit {
+        max-height: 378px;
+      }
+      
+      /* Theme 2 */
+      .theme-2 .main {
+        margin-top: calc(3mm + 257px);
+      }
+      
+      .theme-2 .photo {
+        height: 1060px;
+      }
+      
+      .theme-2 .heading {
+        margin-bottom: 1060px;
+      }
+      
+      /* Theme 3 */
+      .theme-3 .main {
+        padding-top: 883px;
+        margin-top: 222px;
+      }
+      
+      .theme-3 .photo {
+        height: 925px;
+      }
+      
+      .theme-3 .heading {
+        margin-bottom: 95px;
+      }           
+    }
+    
+  </style>
+</head>
+
+<body style="background: white" data-crop="{{show-crop}}">
+ 
+  <div class="page theme-{{{PHOH--layout}}}{{^PHOH--layout}}1{{/PHOH--layout}}">
+
+    <div class="bleed">
+
+      <div class="container fit">
+        <div class="wrapper">
+          <div class="main">
+            <div class="photo">
+              <div class="backgroundImage reposition-fix">{{{background-image-repositionable}}}</div>
+            </div>
+            <div class="header">
+              <img src="https://files.outfit.io/media_library_items/174283/icon-home.svg" class="icon">
+              <div class="heading">
+                <h1 data-max-height="css">{{{PHOH--heading}}}{{^PHOH--heading}}&nbsp;{{/PHOH--heading}}</h1>
+              </div>
+              <div class="subheading">
+                <h2 data-max-height="css">Ray White {{PHOH--office}}{{^PHOH--office}}&lt;Office&gt;{{/PHOH--office}}</h2>
+              </div>
+            </div>
+            <div class="times">
+              <div class="times-limit" data-max-height="css">
+                {{#spreadsheet.PHOH--hours}}
+                {{#start-time}}
+                {{#end-time}}
+                <p data-validate-type="datetime">{{{date}}} {{{start-time}}} - {{{end-time}}}</p>
+                {{/end-time}}
+                {{/start-time}}
+                
+                {{^start-time}}
+                {{^end-time}}
+                <p><span data-validate-type2="datetime">{{{date}}}</span> - Closed</p>
+                {{/end-time}}
+                {{/start-time}}
+                {{/spreadsheet.PHOH--hours}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--container fit-->
+
+    </div>
+    <!--bleed-->
+
+  </div>
+  <!--page-->
+
+  <script>
+    window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+  </script>
+  <script src="js/main.js"></script>
+  <script src="js/moment.js"></script>
+  <script src="js/prefixfree.js"></script>
+  <script src="js/check-export-mode.js"></script>
+  <script src="js/dynamic-inject.js"></script>
+  <script src="js/char-limit.js"></script>
+  <script src="js/max-line-check.js"></script>
+  <script src="js/max-height-check.js"></script>
+  <script src="js/textfit.js"></script>
+  <script src="js/utils.js"></script>
+ 
+  <script>
+
+    console.clear();
+    
+    function validation() {
+      const els = document.querySelectorAll("[data-validate-type]");
+      
+      els.forEach(el => {
+        const type = el.dataset.validateType;
+        const value = el.innerText;
+        let error = false;
+
+        switch(type) {
+          case 'datetime':            
+            const weekdayString = value.substr(0, value.indexOf(' '));
+            const dateString = value.substr(value.indexOf(' ') + 1);
+            
+            const weekday = moment(weekdayString, 'dddd', true);
+            const date = moment(dateString, 'D MMMM ha - ha', true);
+            
+            if (!weekday.isValid() || !date.isValid()) {
+              error = true;
+            }
+            break;
+            
+        }
+
+        if (error) {
+          el.classList.add("overflow"); 
+        } else {
+          el.classList.remove("overflow");
+        }
+      });
+    }
+    
+    function validation2() {
+      const els = document.querySelectorAll("[data-validate-type2]");
+      
+      els.forEach(el => {
+        const type = el.dataset.validateType2;
+        const value = el.innerText;
+        let error = false;
+
+        switch(type) {
+          case 'datetime':            
+            const weekdayString = value.substr(0, value.indexOf(' '));
+            const dateString = value.substr(value.indexOf(' ') + 1);
+            
+            const weekday = moment(weekdayString, 'dddd', true);
+            const date = moment(dateString, 'D MMMM', true);
+            
+            if (!weekday.isValid() || !date.isValid()) {
+              error = true;
+            }
+            break;
+            
+        }
+
+        if (error) {
+          el.classList.add("overflow"); 
+        } else {
+          el.classList.remove("overflow");
+        }
+      });
+    }
+
+    // Tracking text changes and firing text restriction functions (mutationObserver)
+    const overflowObserver = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        maxLineCheck();
+        maxHeightCheck();
+        validation();
+        validation2();
+      });
+    });
+
+    const injectObserver = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        injectDynamicContent();
+      });
+    });
+
+    const injectSources = document.querySelectorAll('[data-target-id]');
+
+    overflowObserver.observe(document.body, {
+      attributes: false,
+      characterData: true,
+      childList: true,
+      subtree: true,
+      attributeOldValue: false,
+      characterDataOldValue: true
+    });
+
+    if (injectSources.length > 0) {
+      injectSources.forEach(src => {
+        injectObserver.observe(src, {
+          attributes: false,
+          characterData: true,
+          childList: true,
+          subtree: true,
+          attributeOldValue: false,
+          characterDataOldValue: true
+        });
+      });
+    }
+
+    // Calling text size restriction functions once the fonts are loaded
+    document.fonts.ready.then(() => {
+      maxLineCheck();
+      maxHeightCheck();
+      validation();
+      validation2();
+      injectDynamicContent();
+    });
+
+    checkCrop();
+    checkExport();
+
+    // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+    TextFit.fit({
+      selector: '.lockup',
+      alignItems: 'center',
+    });
+
+  </script>
+</body>
+
+</html>
