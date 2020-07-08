@@ -1,0 +1,187 @@
+<!doctype html>
+<!-- VERSION: 0.3.0 -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Great Auction Result - Social Tile v2</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="index.css" />
+    <script type="text/javascript">
+      var INPUTS = {
+        salemethod: {{# sale_method }}'{{ sale_method }}',{{/ sale_method }}{{^ sale_method }}'Auction',{{/ sale_method }}
+        auction: {
+          // activeBidders: +'{{ auction__active_bidders }}',
+          clearanceRate: +'{{ auction__clearance_rate }}',
+          attendees: +'{{ auction__attendees }}',
+          // registeredBidders: +'{{ auction__registered_bidders }}',
+          soldPriceValue: +'{{ auction__sold_price_value }}',
+          agentRole: '{{agent_role}}',
+        },
+        listingImage: '{{ listing_image }}',
+        office: {
+          name: '{{ _office__name }}',
+        },
+      }
+    </script>
+    {{# spreadsheet._listing---scope-OFFICE--status-SLD }}
+      <style type="text/css">
+        .tile__background { background-image: url('{{{ listing__image_url }}}?maxheight=1920&maxwidth=1920&scale=down&format=webp'); }
+
+        {{# listing__image_url_1 }} .tile__background--1  { background-image: url('{{{ listing__image_url_1 }}}?maxheight=1920&maxwidth=1920&scale=down&format=webp');  }{{/ listing__image_url_1 }}
+        {{# listing__image_url_2 }} .tile__background--2  { background-image: url('{{{ listing__image_url_2 }}}?maxheight=1920&maxwidth=1920&scale=down&format=webp');  }{{/ listing__image_url_2 }}
+        {{# listing__image_url_3 }} .tile__background--3  { background-image: url('{{{ listing__image_url_3 }}}?maxheight=1920&maxwidth=1920&scale=down&format=webp');  }{{/ listing__image_url_3 }}
+        {{# listing__image_url_4 }} .tile__background--4  { background-image: url('{{{ listing__image_url_4 }}}?maxheight=1920&maxwidth=1920&scale=down&format=webp');  }{{/ listing__image_url_4 }}
+        {{# listing__image_url_5 }} .tile__background--5  { background-image: url('{{{ listing__image_url_5 }}}?maxheight=1920&maxwidth=1920&scale=down&format=webp');  }{{/ listing__image_url_5 }}
+        {{# listing__image_url_6 }} .tile__background--6  { background-image: url('{{{ listing__image_url_6 }}}?maxheight=1920&maxwidth=1920&scale=down&format=webp');  }{{/ listing__image_url_6 }}
+        {{# listing__image_url_7 }} .tile__background--7  { background-image: url('{{{ listing__image_url_7 }}}?maxheight=1920&maxwidth=1920&scale=down&format=webp');  }{{/ listing__image_url_7 }}
+        {{# listing__image_url_8 }} .tile__background--8  { background-image: url('{{{ listing__image_url_8 }}}?maxheight=1920&maxwidth=1920&scale=down&format=webp');  }{{/ listing__image_url_8 }}
+        {{# listing__image_url_9 }} .tile__background--9  { background-image: url('{{{ listing__image_url_9 }}}?maxheight=1920&maxwidth=1920&scale=down&format=webp');  }{{/ listing__image_url_9 }}
+        {{# listing__image_url_10 }}.tile__background--10 { background-image: url('{{{ listing__image_url_10 }}}?maxheight=1920&maxwidth=1920&scale=down&format=webp'); }{{/ listing__image_url_10 }}
+        {{# listing__image_url_11 }}.tile__background--11 { background-image: url('{{{ listing__image_url_11 }}}?maxheight=1920&maxwidth=1920&scale=down&format=webp'); }{{/ listing__image_url_11 }}
+        {{# listing__image_url_12 }}.tile__background--12 { background-image: url('{{{ listing__image_url_12 }}}?maxheight=1920&maxwidth=1920&scale=down&format=webp'); }{{/ listing__image_url_12 }}
+        {{# listing__image_url_13 }}.tile__background--13 { background-image: url('{{{ listing__image_url_13 }}}?maxheight=1920&maxwidth=1920&scale=down&format=webp'); }{{/ listing__image_url_13 }}
+        {{# listing__image_url_14 }}.tile__background--14 { background-image: url('{{{ listing__image_url_14 }}}?maxheight=1920&maxwidth=1920&scale=down&format=webp'); }{{/ listing__image_url_14 }}
+        {{# listing__image_url_15 }}.tile__background--15 { background-image: url('{{{ listing__image_url_15 }}}?maxheight=1920&maxwidth=1920&scale=down&format=webp'); }{{/ listing__image_url_15 }}
+        {{# listing__image_url_16 }}.tile__background--16 { background-image: url('{{{ listing__image_url_16 }}}?maxheight=1920&maxwidth=1920&scale=down&format=webp'); }{{/ listing__image_url_16 }}
+        {{# listing__image_url_17 }}.tile__background--17 { background-image: url('{{{ listing__image_url_17 }}}?maxheight=1920&maxwidth=1920&scale=down&format=webp'); }{{/ listing__image_url_17 }}
+        {{# listing__image_url_18 }}.tile__background--18 { background-image: url('{{{ listing__image_url_18 }}}?maxheight=1920&maxwidth=1920&scale=down&format=webp'); }{{/ listing__image_url_18 }}
+        {{# listing__image_url_19 }}.tile__background--19 { background-image: url('{{{ listing__image_url_19 }}}?maxheight=1920&maxwidth=1920&scale=down&format=webp'); }{{/ listing__image_url_19 }}
+        {{# listing__image_url_20 }}.tile__background--20 { background-image: url('{{{ listing__image_url_20 }}}?maxheight=1920&maxwidth=1920&scale=down&format=webp'); }{{/ listing__image_url_20 }}
+      </style>
+    {{/ spreadsheet._listing---scope-OFFICE--status-SLD}}
+  </head>
+  <body>
+    <main class="tile">
+      {{# spreadsheet._listing---scope-OFFICE--status-SLD }}
+        <article class="tile__content">
+          <div class="tile__border-wrap">
+            <section class="tile__inner">
+              <div class="row h-100 no-gutters align-items-center">
+                <header class="tile__header col-12 align-self-start">
+                  <h5 class="text-spacing-wide text-uppercase">
+                    {{# sale_method }}{{ sale_method }}{{/ sale_method }}
+                    <!-- {{^ sale_method }} Auction {{/ sale_method }} -->
+                  </h5>
+                  {{#auction__sold_price_value}}
+                  <h1>
+                    {{ listing__address_street }}<br/>
+                    {{ listing__address_suburb }}
+                  </h1>
+                  {{/auction__sold_price_value}}
+
+                  {{#auction__attendees}}
+                  <h1>
+                    Average auction<br/>
+                    attendees
+                  </h1>
+                  {{/auction__attendees}}
+
+                  {{#auction__clearance_rate}}
+                  <h1>
+                   Ray White {{ _office__name }}<br/>
+                    clearance rate
+                  </h1>
+                  {{/auction__clearance_rate}}
+                </header>
+
+                <div class="col-12 align-self-stretch">
+                  <div class="row h-100 align-items-center">
+                    {{# auction__clearance_rate }}
+                    <div class="col-12 auction-stat">
+                      <h1>
+                        {{ auction__clearance_rate }}%
+                        <hr/>
+                      </h1>
+
+                    </div>
+                    {{/ auction__clearance_rate }}
+
+                    {{# auction__active_bidders }}
+                    <div class="col-12 auction-stat">
+                      <h2>
+                        {{ auction__active_bidders }} {{# auction__registered_bidders }}active {{/ auction__registered_bidders}}
+                        <span
+                          data-formatter="pluralise"
+                          data-format-value="{{ auction__active_bidders }}"
+                        >bidder</span>
+                      </h2>
+                    </div>
+                    {{/ auction__active_bidders }}
+
+                    {{# auction__attendees }}
+                    <div class="col-12 auction-stat">
+                      <h1>
+                        {{ auction__attendees }}
+                        <hr/>
+                      </h1>
+                    </div>
+                    {{/ auction__attendees }}
+
+                    <div class="col-12 auction-stat">
+                      {{^ auction__sold_price_value }}
+                        <!-- <h2 class="text-uppercase color-yellow"><b>{{ listing__status }}</b></h6> -->
+                      {{/ auction__sold_price_value }}
+                      {{# auction__sold_price_value }}
+                        <!-- <h6 class="text-uppercase color-yellow"><b>{{ listing__status }}</b></h6> -->
+                        <h2 data-format="$,.0f" data-formatter="d3.format">{{ auction__sold_price_value }}</h2>
+                        <hr/>
+                      {{/ auction__sold_price_value }}
+                    </div>
+                  </div>
+                </div>
+
+                <footer class="tile__footer col-12 align-self-end">
+                  <!-- {{# listing__agent_name }}
+                    <h3>
+                      <b>
+                        {{ listing__agent_name }}
+                        {{# listing__agent_2_name }}
+                          &amp; {{ listing__agent_2_name }}
+                        {{/ listing__agent_2_name }}
+                      </b>
+                    </h3>
+                    <h5>{{ _office__name }}</h5>
+                  {{/ listing__agent_name }}
+
+                  {{^ listing__agent_name }}
+                    <h3><b>{{ _office__name }}</b></h3>
+                  {{/ listing__agent_name }} -->
+
+                  {{#auction__sold_price_value}}
+                  <div class="agent-data">
+                  <h4>{{ _office__name }}</h4>
+                  <h4>{{ listing__agent_name }}</h4>
+                  <h4>{{ agent_role }}</h4><br/>
+                  </div>
+
+                  {{/auction__sold_price_value}}
+
+                  {{^auction__sold_price_value}}
+                  {{/auction__sold_price_value}}
+
+                  <h5>{{ _office__name }} auction data
+                    {{# listing__auction_at }}
+                    <span
+                    data-formatter="dfns.format"
+                    data-format="YYYY-MM-DD"
+                  > {{ listing__auction_at }}</span></h5>
+                  {{/ listing__auction_at }}
+                </footer>
+              </div>
+            </section>
+          </div>
+        </article>
+        <picture class="tile__background tile__background--{{# listing_image }}{{ listing_image }}{{/ listing_image }}{{^ listing_image }}0{{/ listing_image }}">
+          {{{ resizable_background_image }}}
+        </picture>
+      {{/ spreadsheet._listing---scope-OFFICE--status-SLD }}
+    </main>
+    <script type="text/javascript" src="index.js"></script>
+    <script>RW.init(window)</script>
+  </body>
+</html>
