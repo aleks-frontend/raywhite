@@ -1,0 +1,263 @@
+<!doctype html>
+<!-- VERSION: 1.0.0 -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+
+    <style>
+      .placeholder {
+        background-image: url('https://files.outfit.io/media_library_items/175469/Office%2520open%2520sign%2520A4%2520_Page_1.png');
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.5;
+        z-index: 5;
+        pointer-events: none;
+      }
+
+      html{
+        height:100%;
+      }
+
+      /**** A4 ****/
+
+      /* Theme 1 */
+
+      body{
+        height: 100%;
+        width: 100%;
+        padding: 3.3rem;
+      }
+
+      .logo{
+        height: 8.5rem;
+        display: flex;
+        justify-content: center;
+      }
+
+      .logo img{
+        width: 10.6rem;
+      }
+
+      .artwork {
+        display: none;
+      }
+
+      .theme-1 .art-theme-1.artwork {
+        display: block;
+        margin-top: 9.1rem;
+        margin-left: 2rem;
+        margin-right: 0.5rem;
+      }
+      .theme-1 .art-theme-2.artwork {display: none}
+
+      .bottom {
+        position: absolute;
+        text-align: center;
+        bottom: 4.6rem;
+        left: 0;
+        right: 0;
+      }
+
+      .bottom .contact {
+        margin-bottom: 1.7rem;
+      }
+
+      .bottom h2 {
+        margin-bottom: 1.8rem;
+        font-size: 31.44px;
+      }
+
+      .bottom h3 {
+        font-family: 'Lato';
+        font-size: 22.63px;
+        margin: 0;
+      }
+
+      .bottom p {
+        font-size: 22.63px;
+        margin: 0;
+        line-height: 1.15;
+      }
+
+      h1 {
+        display: none;
+        font-size: 29px;
+        font-family: 'Lato';
+        font-weight: 300;
+        margin-bottom: 4rem;
+        line-height: 2.4rem;
+      }
+
+      h1 span {
+        font-weight: 500;
+      }
+
+      /* Theme 2 */
+
+      .theme-2 .art-theme-2.artwork {
+        display: block;
+        margin-top: 4.6rem;
+        margin-left: 1.3rem;
+        margin-right: 1.8rem;
+      }
+      .theme-2 .art-theme-1.artwork {display: none}
+      .theme-2 .bg {
+        content: '';
+        background-image: url('https://files.outfit.io/media_library_items/175515/Asset%25205%25403x.png');
+        position: absolute;
+        top: 10.8rem;
+        left: 9.6rem;
+        width: 31.6rem;
+        height: 44.9rem;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        z-index: -1;
+      }
+
+      .theme-2 .bottom {
+        bottom: 2.7rem;
+      }
+
+      .theme-2 .bottom h2 {
+        font-size: 26px;
+        margin-bottom: 1.5rem;
+      }
+
+      .theme-2 h1 {
+        display: block;
+      }
+
+      /**** A3 ****/
+
+      /* Theme 1 */
+
+      body.a3 {
+        height: 100%;
+        width: 100%;
+        padding: 4.6rem;
+      }
+
+      .a3 .logo {
+        height: 12.2rem;
+        display: flex;
+        justify-content: center;
+      }
+
+      .a3 .logo img {
+        width: 12.1rem;
+      }
+
+      .a3.theme-1 .art-theme-1.artwork {
+        display: block;
+        margin-top: 12.7rem;
+        margin-left: 3rem;
+        margin-right: 0.9rem;
+      }
+
+      .a3 .bottom {
+        bottom: 6.6rem;
+        left: 0;
+        right: 0;
+      }
+
+      .a3 .bottom .contact {
+        margin-bottom: 2.4rem;
+      }
+
+      .a3 .bottom h2 {
+        margin-bottom: 2.7rem;
+        font-size: 44.44px;
+      }
+
+      .a3 .bottom h3 {
+        font-family: 'Lato';
+        font-size: 31.63px;
+        margin: 0;
+      }
+
+      .a3 .bottom p {
+        font-size: 31.63px;
+        margin: 0;
+        line-height: 1.15;
+      }
+
+      /* Theme 2 */
+
+      .a3.theme-2 .art-theme-2.artwork {
+        margin-top: 6.4rem;
+        margin-left: 2.2rem;
+        margin-right: 2.7rem;
+      }
+      .a3.theme-2 .bg {
+        top: 22.1rem;
+        left: 13.6rem;
+        width: 44.9rem;
+        height: 50rem;
+      }
+
+
+      .a3.theme-2 .bottom {
+        bottom: 3.9rem;
+      }
+
+      .a3.theme-2 .bottom h2 {
+        margin-bottom: 2rem;
+        font-size: 36.84px;
+      }
+
+      .a3 h1 {
+        font-size: 41px;
+        font-family: 'Lato';
+        font-weight: 300;
+        margin-bottom: 5.7rem;
+        line-height: 3.4rem;
+      }
+    </style>
+  </head>
+  <body class="{{size}} {{covid-theme}}">
+    <!--<div class="placeholder"></div>-->
+    <section class="logo">
+      <img src="{{{account.logos.primary}}}">
+    </section>
+
+    <img class="artwork art-theme-1" src="https://files.outfit.io/media_library_items/175521/Asset%25202.svg"/>
+
+    <img class="artwork art-theme-2" src="https://files.outfit.io/media_library_items/175516/Asset%25206.svg"/>
+    <div class="bg"></div>
+
+    <section class="bottom">
+      <h1>Near, far, wherever you are,<br><span>we're just a call away.</span></h1>
+
+      <h2>Contact us to find out more.</h2>
+      <div class="contact">
+        <p>{{ _office__name }}</p>
+        <p>{{ _office__phone_local }}</p>
+        <p>{{ _office__email }}</p>
+      </div>
+      <h3>{{ _office__website_display }}{{^ _office__website_display }}raywhite.com{{/ _office__website_display }}</h3>
+    </section>
+   <script type="text/javascript">
+      var INPUTS = {
+        office: {
+          email: '{{ _office__email }}',
+          name: '{{ _office__name }}',
+          phoneLocal: '{{ _office__phone_local }}',
+          websiteDisplay: '{{ _office__website_display }}'
+        }
+      }
+    </script>
+  </body>
+</html>
