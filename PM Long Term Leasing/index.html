@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html data-sign="OSM">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      /*
+      {{show-crop}}
+      {{ placeholder-opacity }}
+      {{ placeholder-image-1 }} 
+      {{ placeholder-toggle-new }}
+      {{placeholder-validation}}
+      {{{RW_layout--pm}}}
+      */
+
+      @import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i');
+
+      :root {
+        --black: {{{account.colors.secondary}}};
+        --white: {{{account.colors.white}}};
+      }
+
+      html {
+        font-family: 'Playfair Display';
+        font-size: 11pt;
+        color: var(--black);
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .backgroundImage {
+        display: none;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+
+      .layout--social-square .backgroundImage--socialSquare { background-image: url('https://files.outfit.io/media_library_items/178022/RW-PM-Long-term-leasing-Social-image.jpg'); }
+      .layout--social-story .backgroundImage--socialStory { background-image: url('https://files.outfit.io/media_library_items/178021/RW-PM-Long-term-leasing-Social-image2.jpg'); }
+      .layout--banner .backgroundImage--banner { background-image: url('https://files.outfit.io/media_library_items/178019/RW-PM-Long-term-leasing-Social-image3.jpg'); }
+      .layout--linkedIn .backgroundImage--linkedIn { background-image: url('https://files.outfit.io/media_library_items/178020/RW-PM-Long-term-leasing-Social-image4.jpg'); }
+
+      .layout--social-square .backgroundImage--socialSquare,
+      .layout--social-story .backgroundImage--socialStory,
+      .layout--banner .backgroundImage--banner,
+      .layout--linkedIn .backgroundImage--linkedIn {
+        display: block;
+      }
+
+      .body {
+        display: flex;
+        flex-direction: column;
+        flex: 1 0 0%;
+      }
+
+      .layout--social-square .body { padding: 146pt 35pt 71pt; }
+      .layout--linkedIn .body { padding-top: 14pt; }
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex: 1 0 0%;
+        text-align: center;
+      }
+
+      .layout--social-square .content {  justify-content: flex-start;}
+
+      .decoration {
+        position: absolute;
+        opacity: 0.9;
+        background-color: var(--white);
+      }
+
+      .layout--social-square .decoration,
+      .layout--social-story .decoration,
+      .layout--linkedIn .decoration{
+        top: 35pt;
+        right: 35pt;
+        bottom: 35pt;
+        left: 35pt;
+      }
+
+      .layout--banner .decoration {
+        top: 24pt;
+        right: 24pt;
+        bottom: 24pt;
+        left: 24pt;
+      }
+
+      .logo {
+        position: relative;
+        height: 457pt;
+        background-image: url(https://files.outfit.io/media_library_items/178023/RW-logo.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+
+      .layout--social-square .logo {
+        width: 227pt;
+        height: 227pt;
+        margin-bottom: 58pt;
+      }
+
+      .layout--social-story .logo {
+        width: 303pt;
+        height: 303pt;
+        margin-bottom: 73.7pt;
+      }
+
+      .layout--banner .logo {
+        width: 154pt;
+        height: 154pt;
+        margin-bottom: 9.7pt;
+      }
+
+      .layout--linkedIn .logo {
+        width: 200pt;
+        height: 200pt;
+        margin-bottom: 26.7pt;
+      }
+
+      .text {
+        position: relative;
+        display: none;
+        line-height: 1.25em;
+      }
+
+      .layout--social-square .text--socialSquare { font-size: 49.8pt; }
+      .layout--social-story .text--socialStory {
+        font-size: 61.9pt;
+        line-height: 1.3em;
+      }
+      .layout--banner .text--banner { font-size: 36pt; }
+      .layout--linkedIn .text--linkedIn { font-size: 49.8pt; }
+
+      .layout--social-square .text--socialSquare,
+      .layout--social-story .text--socialStory,
+      .layout--banner .text--banner,
+      .layout--linkedIn .text--linkedIn {
+        display: block;
+      }
+      .u-bold {
+        font-weight: 700;
+        color: var(--black); 
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" data-crop="{{show-crop}}" data-reduce-export-font-size-by-percent="0" data-reduce-firefox-font-size-by-percent="0" data-prevent-export-overflow="false"
+        class="layout--{{{RW_layout--pm}}}{{^RW_layout--pm}}social-square{{/RW_layout--pm}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+
+          <div class="backgroundImage backgroundImage--socialSquare"></div><!--backgroundImage-->
+          <div class="backgroundImage backgroundImage--socialStory"></div><!--backgroundImage-->
+          <div class="backgroundImage backgroundImage--banner"></div><!--backgroundImage-->
+          <div class="backgroundImage backgroundImage--linkedIn"></div><!--backgroundImage-->
+          <div class="body">
+            <div class="content">
+              <div class="decoration"></div><!--decoration-->
+              <div class="logo"></div><!--logo-->
+              <div class="text text--socialSquare">In uncertain times it<br>could be time you considered<br><span class="u-bold">long term leasing.</span></div><!--text--socialSquare-->
+              <div class="text text--socialStory">In uncertain times<br>it could be time<br>you considered<br><span class="u-bold">long term leasing.</span></div><!--text--socialStory-->
+              <div class="text text--banner">In uncertain times it could be time<br>you considered <span class="u-bold">long term leasing.</span></div><!--text--perfectMatch-->
+              <div class="text text--linkedIn">In uncertain times it could be time<br>you considered <span class="u-bold">long term leasing.</span></div><!--text--digitalAuction-->
+            </div><!--content-->
+          </div><!--body-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/custom-rich-text.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/text-fit-min.js"></script>
+    <script src="js/fontfaceobserver.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+      {{ #placeholder-toggle-new }}document.body.classList.add("u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}"); {{ /placeholder-toggle-new }}
+      {{ #placeholder-validation }}document.body.classList.add("placeholder__validation--{{placeholder-validation}}"){{ /placeholder-validation }}
+    </script>
+    <script>
+      
+      console.clear();
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+      
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+      
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+      
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+      
+      // Calling text size restriction functions once the fonts are loaded
+      // All external font-families need to be added to 'fonts' array
+      document.addEventListener('DOMContentLoaded', function(event) {
+        const fonts = ['Playfair Display'];
+        const fontObservers = [];
+
+        fonts.forEach(font => {
+          const obs = new FontFaceObserver(font);
+          fontObservers.push(obs.load())
+        });
+
+        Promise.all(fontObservers).then(() => {
+          maxLineCheck();
+          maxHeightCheck();
+          injectDynamicContent();
+          hideEmptyTitles();
+
+          document.dispatchEvent(new Event('printready'));
+        });
+      });      
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+
+    </script>
+
+
+  </body>
+</html>
