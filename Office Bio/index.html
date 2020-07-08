@@ -1,0 +1,94 @@
+<!doctype html>
+<!-- VERSION: 1.0.0 -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Office Bio – {{ external_office__name }}</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+    <style>
+      .office-photo { background-image: url('{{{ external_office__image }}}?width=2480&scale=both') }
+      .office-photo--exterior { background-image: url('{{{ external_office__image_exterior }}}?width=2480&scale=both') }
+      .office-photo--reception { background-image: url('{{{ external_office__image_reception }}}?width=2480&scale=both') }
+      .office-photo--staff { background-image: url('{{{ external_office__image_staff }}}?width=2480&scale=both') }
+      .office-photo--custom { background-image: none; }
+    </style>
+  </head>
+  <body>
+    <article class="document">
+      <section class="page-A4 page-with-margins justify-content-between">
+        <div class="row">
+          <div class="col-6">
+            <hgroup class="align-self-start">
+              <h6><span class="highlight">Who we are</span></h6>
+              <h3>Local experts, working for you.</h3>
+            </hgroup>
+          </div>
+          <div class="col-12">
+            <div class="text-col-2 align-self-end">
+              {{# office_leadin_paragraph }}
+                <p class="leadin">{{ office_leadin_paragraph }}</p>
+              {{/ office_leadin_paragraph }}
+              <div class="copy">
+                <div id="officeBio">
+                  {{# editable_office__bio_html }}<div>{{{ editable_office__bio_html }}}</div>{{/ editable_office__bio_html }}
+                  {{^ editable_office__bio_html }}<div>{{{ external_office__bio_html }}}</div>{{/ editable_office__bio_html }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{# external_office__image }}
+          <figure class="office-photo__outer">
+            <picture class="
+              aspect--three-fourths
+              office-photo
+              {{# office_resizable_image }}office-photo--custom{{/ office_resizable_image }}
+              {{^ office_resizable_image }}
+                {{# office_photo_type }}office-photo--{{ office_photo_type }}{{/ office_photo_type }}
+              {{/ office_resizable_image }}
+            ">
+              {{# office_resizable_image }}{{{ office_resizable_image }}}{{/ office_resizable_image }}
+            </picture>
+            {{# office_caption }}
+              <figcaption class="background--lighterGrey">{{ office_caption }}</figcaption>
+            {{/ office_caption }}
+          </figure>
+        {{/ external_office__image }}
+        {{^ external_office__image }}
+          {{# office_resizable_image }}
+            <figure class="office-photo__outer">
+              <picture class="aspect--three-fourths office-photo
+                {{# office_resizable_image }}office-photo--custom{{/ office_resizable_image }}
+              ">
+                {{# office_resizable_image }}{{{ office_resizable_image }}}{{/ office_resizable_image }}
+              </picture>
+              {{# office_caption }}
+                <figcaption class="background--lighterGrey">{{ office_caption }}</figcaption>
+              {{/ office_caption }}
+            </figure>
+          {{/ office_resizable_image }}
+        {{/ external_office__image }}
+      </section>
+    </article>
+    <script type="text/javascript" src="index.js"></script>
+
+    <script id="officeBioExternal" type="text/template">{{{ external_office__bio_html }}}</script>
+    <script id="officeBioEditable" type="text/template">{{{ editable_office__bio_html }}}</script>
+
+    <script type="text/javascript">
+      RW.outfit.applyEditableDefaults(window, [
+        {
+          id: 'officeBio',
+          editable: RW.dom.text(window, 'officeBioEditable'),
+          external: RW.dom.html(window, 'officeBioExternal'),
+        },
+      ]);
+    </script>
+  </body>
+</html>
