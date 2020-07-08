@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html data-sign="OS?">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+    
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+
+    <style>
+      
+      html {
+        font-family: "Playfair Display";
+        font-size: 11pt;
+        color: #000;
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }
+      
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+      
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+      
+      /* COVID Online Processes Styles */
+      
+      .content{
+        display: grid;
+        grid-template-rows: 200px 285px 285px 285px;
+        padding: 40px 0px;
+        color: #595959;
+      }
+      
+      .header{
+        color: #595959;
+        text-align: center;
+      }
+      
+      .header-text{
+        font-size: 37px;
+      }
+      
+      .header-caption{
+        font-size: 15px;
+        font-weight: 300;
+        font-family: 'Lato';
+        margin-top: 10px;
+      }
+      
+      .auction-content, .appraisal-content{
+        background-color: rgb(235,235,235);
+        margin: 0px 40px;
+      }
+      
+      .inspection-content{
+        margin: 0px 40px;
+      }
+      
+      .auction-content, .inspection-content, .appraisal-content{
+        display: grid;
+        grid-template-columns: 234px 140px 335px;
+      }
+      
+      .content-header{
+        justify-self: center;
+        margin-top: 44px;
+      }
+      
+      .content-header h2{
+        font-size: 37px;
+      }
+      
+      .auction-content .content-caption, .inspection-content .content-caption, .appraisal-content .content-caption{
+        font-size: 15px;
+        font-family: 'Lato';
+        font-weight: 300;
+      }
+      
+       .auction-content .content-images, .inspection-content .content-images, .appraisal-content .content-images {
+        display: grid;
+         grid-template-columns: 90px 40px;
+      }
+      
+      .auction-content .content-images img, .inspection-content .content-images img, .appraisal-content .content-images img{
+        height: 80px;
+        vertical-align: middle;
+        
+      }
+      
+      .img-icons{
+        margin-left: -35px;
+        align-self:center;
+      }
+      
+      .content-descriptions{
+        font-size: 15px;
+        display:grid;
+        grid-template-rows: 1fr 1fr 1fr;
+        font-family: 'Lato';
+        font-weight: 300;
+      }
+      
+      .content-descriptions .description{
+        align-self: center;
+      }
+      
+      
+      
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" data-crop="{{show-crop}}" data-reduce-export-font-size-by-percent="0" data-reduce-firefox-font-size-by-percent="0" data-prevent-export-overflow="false">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          <div class="content">
+            
+            <div class="header">
+              <div class="header-text">{{{covid_processes_header_text}}}</div>
+              <div class="header-caption">{{{covid_processes_header_caption_text}}}</div>
+            </div>
+            
+            <div class="auction-content">
+              <div class="content-header">
+                <h2>Auctions</h2>
+                <div class="content-caption">{{{covid_processes_auction_caption}}}</div>
+              </div>
+              
+              <div class="content-images">
+                <div class="img-arrows">
+                <img style="margin-bottom: -55px;" src="https://files.outfit.io/media_library_items/183728/Line%25201Artboard%25201.svg" />
+                <img style="margin-top: 30px;" src="https://files.outfit.io/media_library_items/183727/Line%25202Artboard%25201.svg"/>
+                <img style="margin-top: -20px;" src="https://files.outfit.io/media_library_items/183724/Line%25203Artboard%25201.svg"/>
+                </div>
+                
+                <div class="img-icons">
+                  <img src="https://files.outfit.io/media_library_items/183722/Icon%25201Artboard%25201.svg" />
+                <img src="https://files.outfit.io/media_library_items/183723/Icon%25202Artboard%25201.svg"/>
+                <img src="https://files.outfit.io/media_library_items/183725/Icon%25203Artboard%25201.svg"/>
+                </div>
+              </div>
+              
+              <div class="content-descriptions">
+                <div class="description">{{covid_processes_auction_description_1}}</div>
+                <div class="description">{{covid_processes_auction_description_2}}</div>
+                 <div class="description">{{covid_processes_auction_description_3}}</div>
+              </div>
+              
+              
+            </div>
+            
+            <div class="inspection-content">
+              
+               <div class="content-header">
+                <h2>Inspections</h2>
+                <div class="content-caption">{{{covid_processes_inspection_caption}}}</div>
+              </div>
+              
+               <div class="content-images">
+                <div class="img-arrows">
+                <img style="margin-bottom: -55px;" src="https://files.outfit.io/media_library_items/183728/Line%25201Artboard%25201.svg" />
+                <img style="margin-top: 30px;" src="https://files.outfit.io/media_library_items/183727/Line%25202Artboard%25201.svg"/>
+                <img style="margin-top: -20px;" src="https://files.outfit.io/media_library_items/183724/Line%25203Artboard%25201.svg"/>
+                </div>
+                
+                <div class="img-icons">
+                  <img src="https://files.outfit.io/media_library_items/183729/Icon%25204Artboard%25201.svg" />
+                <img src="https://files.outfit.io/media_library_items/183726/Icon%25205Artboard%25201.svg"/>
+                <img src="https://files.outfit.io/media_library_items/183730/Icon%25206Artboard%25201.svg"/>
+                </div>
+              </div>
+              
+              <div class="content-descriptions">
+                <div class="description">{{covid_processes_inspection_description_1}}</div>
+                <div class="description">{{covid_processes_inspection_description_2}}</div>
+                 <div class="description">{{covid_processes_inspection_description_3}}</div>
+              </div>
+              
+            </div>
+            
+            <div class="appraisal-content">
+              
+               <div class="content-header">
+                <h2>Appraisals</h2>
+                <div class="content-caption">{{{covid_processes_appraisal_caption}}}</div>
+              </div>
+              
+               <div class="content-images">
+                <div class="img-arrows">
+                <img style="margin-bottom: -55px;" src="https://files.outfit.io/media_library_items/183728/Line%25201Artboard%25201.svg" />
+                <img style="margin-top: 30px;" src="https://files.outfit.io/media_library_items/183727/Line%25202Artboard%25201.svg"/>
+                <img style="margin-top: -20px;" src="https://files.outfit.io/media_library_items/183724/Line%25203Artboard%25201.svg"/>
+                </div>
+                
+                <div class="img-icons">
+                  <img src="https://files.outfit.io/media_library_items/183729/Icon%25204Artboard%25201.svg" />
+                <img src="https://files.outfit.io/media_library_items/183726/Icon%25205Artboard%25201.svg"/>
+                <img src="https://files.outfit.io/media_library_items/183730/Icon%25206Artboard%25201.svg"/>
+                </div>
+              </div>
+              
+              <div class="content-descriptions">
+                <div class="description">{{covid_processes_appraisal_description_1}}</div>
+                <div class="description">{{covid_processes_appraisal_description_2}}</div>
+                 <div class="description">{{covid_processes_appraisal_description_3}}</div>
+              </div>
+              
+            </div>
+          </div>
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/custom-rich-text.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/text-fit-min.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+      {{ #placeholder-toggle-new }}document.body.classList.add("u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}"); {{ /placeholder-toggle-new }}
+      {{ #placeholder-validation }}document.body.classList.add("placeholder__validation--{{placeholder-validation}}"){{ /placeholder-validation }}
+    </script>
+    <script>
+      
+      console.clear();
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+      
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+      
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+      
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+
+    </script>
+
+
+  </body>
+</html>
