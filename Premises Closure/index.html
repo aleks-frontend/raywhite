@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html data-sign="OSM">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      /*
+      {{show-crop}}
+      {{ placeholder-opacity }}
+      {{ placeholder-image-1 }} 
+      {{ placeholder-toggle-new }}
+      {{placeholder-validation}}
+      {{{RW_layout--pc}}}
+      */
+
+      @import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i');
+
+      :root {
+        --grey: #939598;
+        --black: {{{account.colors.secondary}}};
+        --yellow: {{{account.colors.brand-color}}};
+      }
+
+      html {
+        font-family: 'Lato';
+        font-size: 11pt;
+        font-weight: 300;
+        color: #000;
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .body {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        flex: 1 0 0%;
+        text-align: center;
+        color: var(--black);
+      }
+
+      .layout--social-tile .body--socialTile,
+      .layout--social-tile-2 .body--socialTile2 {
+        display: flex;
+      }
+
+      .body--socialTile { padding: 170pt 0pt 100pt; }
+      .body--socialTile2 { padding-top: 132pt; }
+
+      .heading { z-index: 1; }
+
+      .heading--socialTile {
+        font-size: 50.1pt;
+        line-height: 1.2em;
+      }
+
+      .heading--socialTile2 {
+        font-size: 36pt;
+        line-height: 1.2em;
+      }
+
+      .subheading { line-height: 1.2em;}
+
+      .subheading--socialTile { font-size: 53.6pt; }
+
+      .subheading--socialTile2 {
+        margin-bottom: 47pt;
+        font-size: 34.8pt;
+      }
+
+      .copy {
+        font-size: 27pt;
+        line-height: 1.5em;
+      }
+
+      .open {
+        display: none;
+        position: relative;
+        background-image: url('https://files.outfit.io/media_library_items/178916/Open.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+
+      .layout--social-tile .open--socialTile {
+        width: 780pt;
+        height: 319pt;
+        margin: -20pt 0 9pt 5pt;
+      }
+
+      .layout--social-tile-2 .open--socialTile2 {
+        width: 523pt;
+        height: 213pt;
+        margin: -14pt 0 11pt 28pt;
+      }
+
+      .layout--social-tile .open--socialTile,
+      .layout--social-tile-2 .open--socialTile2 {
+        display: block;
+      }
+
+      .line {
+        position: absolute;
+        transform: rotate(45deg);
+        background-color: var(--yellow);
+        z-index: 2;
+      }
+
+      .line--socialTile {
+        width: 150pt;
+        height: 3pt;
+        top: 53pt;
+        right: 273pt;
+      }
+
+      .line--socialTile2  {
+        width: 103pt;
+        height: 2pt;
+        top: 37pt;
+        right: 180pt;
+      }
+
+      .preheading__container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 72pt;
+        font-size: 29.8pt;
+      }
+
+      .preheading {
+        font-size: 28.4pt;
+        line-height: 1.2em;
+      }
+
+      .preheading__decoration {
+        width: 464pt;
+        height: 43pt;
+        background-image: url(https://files.outfit.io/media_library_items/178025/RW-Premises%2520closure-ruler.svg);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        line-height: 1.2em;
+        font-size: 28.6pt;
+        padding: 7.5pt 0pt;
+      }
+
+
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" data-crop="{{show-crop}}" data-reduce-export-font-size-by-percent="0" data-reduce-firefox-font-size-by-percent="0" data-prevent-export-overflow="false"
+        class="layout--{{{RW_layout--pc}}}{{^RW_layout--pc}}social-tile{{/RW_layout--pc}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+
+          <div class="body body--socialTile">
+            <div class="heading heading--socialTile">Our premises might be closed<br>but we're still</div><!--copy-->
+            <div class="open open--socialTile">
+              <div class="line line--socialTile"></div><!--line-->
+            </div><!--open-->
+            <div class="subheading subheading--socialTile">for business.</div><!--copy-->
+          </div><!--body--socialTile-->
+          <div class="body body--socialTile2">
+            <div class="copy copy--top"></div><!--copy--top-->
+            <div class="preheading__container">
+              <div class="preheading">We're determined to make</div><!--decoration__heading-->
+              <div class="preheading__decoration"> long distance relationships work. </div><!--decoration__bottomText-->
+            </div><!--decoration-->
+            <div class="heading heading--socialTile2">Our premises might be closed but we're still</div><!--copy-->
+            <div class="open open--socialTile2">
+              <div class="line line--socialTile2"></div><!--line-->
+            </div><!--open-->
+            <div class="subheading subheading--socialTile2">for business.</div><!--copy-->
+            <div class="copy">Near, far, wherever you are,<br><b>we're just a call away.</b></div><!--copy--bottom-->
+          </div><!--body--socialTile-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/custom-rich-text.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/text-fit-min.js"></script>
+    <script src="js/fontfaceobserver.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+      {{ #placeholder-toggle-new }}document.body.classList.add("u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}"); {{ /placeholder-toggle-new }}
+      {{ #placeholder-validation }}document.body.classList.add("placeholder__validation--{{placeholder-validation}}"){{ /placeholder-validation }}
+    </script>
+    <script>
+      
+      console.clear();
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+      
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+      
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+      
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+      
+      // Calling text size restriction functions once the fonts are loaded
+      // All external font-families need to be added to 'fonts' array
+      document.addEventListener('DOMContentLoaded', function(event) {
+        const fonts = ['Lato'];
+        const fontObservers = [];
+
+        fonts.forEach(font => {
+          const obs = new FontFaceObserver(font);
+          fontObservers.push(obs.load())
+        });
+
+        Promise.all(fontObservers).then(() => {
+          maxLineCheck();
+          maxHeightCheck();
+          injectDynamicContent();
+          hideEmptyTitles();
+
+          document.dispatchEvent(new Event('printready'));
+        });
+      });      
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+
+    </script>
+
+
+  </body>
+</html>
