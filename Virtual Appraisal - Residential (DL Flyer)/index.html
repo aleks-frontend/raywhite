@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html data-sign="OSM">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      /*
+      {{show-crop}}
+      {{ placeholder-opacity }}
+      {{ placeholder-image-1 }} 
+      {{ placeholder-image-2 }}
+      {{ placeholder-toggle-new }}
+      {{placeholder-validation}}
+
+      {{{RW_layout--dlf}}}
+      {{{RW_body-copy--dlf}}}
+      {{RW_franchise--dlf}}
+      {{RW_street-address--dlf}}
+      {{RW_suburb--dlf}}
+      {{RW_phone-number--dlf}}
+      {{RW_office--dlf}}
+      {{#collection.RW_agent-details--dlf}}{{/collection.RW_agent-details--dlf}}
+      */
+
+      @import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i');
+      @import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i');
+
+      :root {
+        --light-grey: {{{account.colors.light-grey}}};
+        --grey: {{{account.colors.secondary}}};
+        --yellow: {{{account.colors.brand-color}}};
+      }
+
+      html {
+        font-family: 'Playfair Display';
+        font-size: 11pt;
+        color: #000;
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .page { display: none; }
+
+      .layout--front-page-home-value .page--frontPage,
+      .layout--front-page-property-worth .page--frontPage,
+      .layout--back-page-franchise .page--backPage,
+      .layout--back-page-agent-details .page--backPage{
+        display: block;
+      }
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .fit--frontPage { padding: 0pt 18pt 0pt; }
+      .fit--backPage { padding: 18pt; }
+
+      .fit__inner {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        background: var(--yellow);
+      }
+
+      .layout--back-page-franchise .fit__inner { padding: 25.5pt 25.5pt 24pt 25.5pt;}
+      .layout--back-page-agent-details .fit__inner { padding: 24pt 25.5pt; }
+
+
+      .header {
+        font-size: 0;
+        display: flex;
+        justify-content: center;
+      }
+
+      .logo__container {
+        height: 95pt;
+        width: 86pt;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        background-color: var(--yellow);
+      }
+
+      .logo { width: 100%; }
+
+      .body {
+        display: flex;
+        flex-direction: column;
+        color: var(--grey);
+      }
+
+      .body--front { 
+        flex: 1;
+        text-align: center;
+      }
+
+      .body--back {     
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .layout--back-page-franchise .body--back { height: 270pt; }
+      .layout--back-page-agent-details .body--back { height: 271pt;}
+
+      .content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 20pt 12pt 13pt;
+      }
+
+      .title__container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 27pt;
+      }
+
+      .title {
+        margin-bottom: 4pt;
+        font-size: 14.9pt;
+        line-height: 1.2em;      
+      }
+
+      .title__decoration {
+        width: 233pt;
+        height: 19.5pt;
+        font-size: 13.6pt;
+        line-height: 1.3em;
+        letter-spacing: 0.7pt;
+        background-image: url(https://files.outfit.io/media_library_items/178610/RW-Resi-DL_virtual-appraisals-ruler2.svg);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      .body__text {
+        display: none;
+        font-size: 12pt;
+        line-height: 1.4em;
+      }
+
+      .layout--front-page-home-value .body__text--homeValue,
+      .layout--front-page-property-worth .body__text--propertyWorth {
+        display: block;
+      }
+
+      .image__container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 197pt;
+        padding: 28pt 10pt;
+        background: var(--light-grey);
+      }
+
+      .image__preheading {
+        margin-bottom: 11pt;
+        font-size: 14pt;
+        line-height: 1.2em;
+      }
+
+      .image__heading {
+        width: 190pt;
+        margin-bottom: 8pt;
+        padding: 3pt 3pt 6pt;
+        font-size: 14.3pt;
+        font-weight: bold;
+        background: var(--yellow);
+        border-radius: 5px;
+      }
+
+      .image {
+        width: 207pt;
+        max-height: 100pt;
+        object-fit: contain;
+      }
+
+      .body__copy { font-family: 'Lato'; }
+
+      .body__copy p {
+        margin-bottom: 12pt;
+        font-size: 9.9pt;
+        line-height: 1.2em;
+      }
+
+      .body__copy ul { margin-bottom: 10pt; }
+
+      .body__copy li {
+        position: relative;
+        margin-bottom: 11.5pt;
+        padding-left: 18pt;
+        font-size: 9.7pt;
+      }
+
+      .body__copy li:before {
+        content: '\2022';
+        position: absolute;
+        left: 0;
+        font-size: 8pt;
+      }
+
+      .body__copy p:last-child,
+      .body__copy ul:last-child,
+      .body__copy li:last-child {
+        margin-bottom: 0;
+      }
+
+      .contact__heading {
+        font-size: 15.4pt;
+        line-height: 1.2em;
+      }
+
+      .info,
+      .agent__container {
+        display: none;
+        flex-direction: column;
+        font-family: 'Lato';
+      }
+
+      .layout--back-page-franchise .info,
+      .layout--back-page-agent-details .agent__container {
+        display: flex;
+      }
+
+      .info {
+        margin-top: 18pt;
+        font-size: 9pt;
+        line-height: 1.2em;
+      }
+
+      .info__heading {
+        margin-bottom: 5pt;
+        font-size: 9.8pt;
+        font-weight: 700;
+      }
+
+      .info__text {
+        margin-bottom: 3.6pt;
+        font-size: 9.7pt;
+      }
+
+      .info__text:last-child { margin-bottom: 0; }
+
+      .agent__container { margin-top: 14pt; }
+      .one-agent-variant .agent__container { margin-top: 27pt; }
+
+      .agent {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10.4pt;
+      }
+
+      .one-agent-variant .agent { 
+        flex-direction: column;
+        align-items: flex-start; 
+      }
+
+      .agent__image {
+        width: 48pt;
+        height: 48pt;
+        background-size: cover;
+        background-color: var(--grey); 
+        margin-right: 8pt;
+        border-radius: 50%;
+      }
+
+      .one-agent-variant .agent__image {
+        width: 54pt;
+        height: 54pt;
+        margin-bottom: 7pt;
+      }
+
+      .agent__info { line-height: 1.2em; }
+
+      .agent__heading {
+        margin-bottom: 3pt;
+        font-size: 9.9pt;
+        line-height: 1.3em;
+        font-weight: 700;
+      }
+
+      .agent__text {
+        margin-bottom: 2pt;
+        font-size: 9.7pt;
+        line-height: 1.2em;
+      }
+
+      .one-agent-variant .agent__text { margin-bottom: 2.8pt; }
+
+      .agent:last-child,
+      .agent__text:last-child { 
+        margin-bottom: 0;
+      }
+
+      .franchise {
+        font-family: 'Lato';
+        font-size: 9.8pt;
+        line-height: 1.2em;
+        font-weight: 700;
+        text-transform: lowercase;
+      }
+
+      .layout--back-page-franchise .franchise {  margin-top: 24pt; }
+      .layout--back-page-agent-details .franchise { margin-top: 20.7pt; }  
+      .one-agent-variant.layout--back-page-agent-details .franchise { margin-top: 9pt; }
+
+      .footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        color: var(--grey); 
+      }
+
+      .footer--front {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        /* margin-top: 48pt; */
+        height: 122pt;
+        padding: 31pt 10pt 18pt;
+      }
+
+      .footer--back {
+        flex: 1; 
+        padding-top: 20pt;
+      }
+
+      .footer__text {
+        display: none;
+        font-size: 14.3pt;
+        line-height: 1.2em;
+      }
+
+      .layout--front-page-property-worth .footer__text--propertyWorth { padding-bottom: 16pt; }
+
+      .layout--front-page-home-value .footer__text--homeValue,
+      .layout--front-page-property-worth .footer__text--propertyWorth {
+        display: block;
+      }
+
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" data-crop="{{show-crop}}" data-reduce-export-font-size-by-percent="0" data-reduce-firefox-font-size-by-percent="0" data-prevent-export-overflow="false"
+        class="layout--{{{RW_layout--dlf}}}{{^RW_layout--dlf}}front-page-home-value{{/RW_layout--dlf}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-2 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page page--frontPage">
+
+      <div class="bleed">
+
+        <div class="container fit fit--frontPage">
+
+          <div class="header">
+            <div class="logo__container">
+              <img class="logo" src="{{{account.logos.primary}}}">
+            </div><!--logo__container-->
+          </div><!--header-->
+          <div class="body body--front">
+            <div class="content">
+              <div class="title__container">
+                <div class="title">We're determined to make</div><!--title-->
+                <div class="title__decoration">long distance relationships work.</div><!--title__decoration-->
+              </div><!--title__container-->
+              <div class="body__text body__text--homeValue">Though we're apart, understanding your<br>home's value is as important as ever.</div><!--body__text-->
+              <div class="body__text body__text--propertyWorth">In uncertain times, it's worth knowning<br>what your property's worth.</div><!--body__text-->
+            </div><!--content-->
+            <div class="image__container">
+              <div class="image__preheading">Introducing</div><!--image__preheading-->
+              <div class="image__heading">virtual property appraisals</div><!--image__heading-->
+              <img class="image" src="https://files.outfit.io/media_library_items/178602/RW-Resi-DL_virtual-appraisals-image1.svg">
+            </div><!--image__container-->
+          </div><!--body-->
+          <div class="footer footer--front">
+            <div class="footer__text footer__text--homeValue">It doesn't hurt to know... babe.</div><!--footer__text--homeValue-->
+            <div class="footer__text footer__text--propertyWorth">We're here to help.</div><!--footer__text--propertyWorth-->
+          </div><!--footer-->
+
+        </div><!--fit--frontPage-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+    <div class="page page--backPage">
+
+      <div class="bleed">
+
+        <div class="container fit fit--backPage">
+
+          <div class="fit__inner">
+            <div class="body body--back">
+              {{#RW_body-copy--dlf}}
+              <div class="body__copy" data-max-height="dynamic">{{{RW_body-copy--dlf}}}</div><!--body__copy-->
+              {{/RW_body-copy--dlf}}
+            </div><!--body-->
+            <div class="footer footer--back">
+              <div class="contact" data-max-height="dynamic">
+                <div class="contact__heading">Contact us to find out more.</div><!--contact__heading-->
+                <div class="info">
+                  {{#RW_franchise--dlf}}
+                  <div class="info__heading">Ray White {{{RW_franchise--dlf}}}</div><!--info__heading-->
+                  {{/RW_franchise--dlf}}
+                  {{#RW_street-address--dlf}}
+                  <div class="info__text">{{{RW_street-address--dlf}}}</div><!--info__text-->
+                  {{/RW_street-address--dlf}}
+                  {{#RW_suburb--dlf}}
+                  <div class="info__text">{{{RW_suburb--dlf}}}</div><!--info__text-->
+                  {{/RW_suburb--dlf}}
+                  {{#RW_phone-number--dlf}}
+                  <div class="info__text">{{{RW_phone-number--dlf}}}</div><!--info__text-->
+                  {{/RW_phone-number--dlf}}
+                  {{#RW_office--dlf}}
+                  <div class="info__text">{{RW_office--dlf}}@raywhite.com</div><!--info__text-->
+                  {{/RW_office--dlf}}
+                </div><!--info-->
+                <div class="agent__container">
+                  {{#collection.RW_agent-details--dlf}}
+                  <div class="agent">
+                    <div class="agent__image" style="background-image: url({{RW_agent-image--dlf}})"></div><!--agent__image-->
+                    <div class="agent__info">
+                      <div class="agent__heading">{{{RW_agent-name--dlf}}}</div><!--agent__heading-->
+                      <div class="agent__text">{{{RW_agent-phone-number--dlf}}}</div><!--agent__text-->
+                      <div class="agent__text">{{{RW_agent-email-address--dlf}}}</div><!--agent__text-->
+                    </div><!--agent__info-->
+                  </div><!--agent-->
+                  {{/collection.RW_agent-details--dlf}}
+                </div><!--agent__container-->
+                {{#RW_franchise--dlf}}
+                <div class="franchise">raywhite{{{RW_franchise--dlf}}}.com</div><!--frachise-->
+                {{/RW_franchise--dlf}}
+              </div><!--contact-->
+            </div><!--footer-->
+          </div><!--fit__inner-->
+
+        </div><!--fit--back-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/custom-rich-text.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/text-fit-min.js"></script>
+    <script src="js/fontfaceobserver.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+      {{ #placeholder-toggle-new }}document.body.classList.add("u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}"); {{ /placeholder-toggle-new }}
+      {{ #placeholder-validation }}document.body.classList.add("placeholder__validation--{{placeholder-validation}}"){{ /placeholder-validation }}
+    </script>
+    <script>
+
+      console.clear();
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      // All external font-families need to be added to 'fonts' array
+      document.addEventListener('DOMContentLoaded', function(event) {
+        const fonts = ['Playfair Display', 'Lato'];
+        const fontObservers = [];
+
+        fonts.forEach(font => {
+          const obs = new FontFaceObserver(font);
+          fontObservers.push(obs.load())
+        });
+
+        Promise.all(fontObservers).then(() => {
+          maxLineCheck();
+          maxHeightCheck();
+          injectDynamicContent();
+          hideEmptyTitles();
+
+          document.dispatchEvent(new Event('printready'));
+        });
+      });      
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+
+      // Agent Counter
+
+      function agentCounter() {
+        const agentContainer = document.querySelector('.agent__container');
+        const agent = agentContainer.querySelectorAll('.agent');
+        if (agent.length < 2) {
+          document.body.classList.add('one-agent-variant');
+        }
+      }
+      agentCounter();
+
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+
+    </script>
+
+
+  </body>
+</html>
