@@ -1,0 +1,28 @@
+<!doctype html>
+<!-- VERSION: 0.1.0 -->
+<html lang="en" async>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Page with Big Quote</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <article class="document">
+      <section class="page-A4 page-with-margins">
+        <div class="page__content justify-content-center h-100">
+          <hgroup class="quote">
+            <h3 class="quote__text">{{ quote }}</h3>
+            {{# quote_author }}<h5 class="quote__author text-right">&mdash; {{ quote_author }}</h5>{{/ quote_author }}
+          </hgroup>
+        </div>
+      </section>
+    </article>
+  </body>
+</html>
