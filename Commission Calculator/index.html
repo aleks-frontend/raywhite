@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" async>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="version" content="0.0.0">
+    <title>Commission Calculator</title>
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <article class="document">
+      <section class="page-A4 page-with-margins">
+        <div class="h-100 d-flex flex-column" id="wrapper">
+          <div class="flex-none">
+            <h2>Commission Calculator</h2>
+          </div>
+          <div class="flex-fill" id="app"></div>
+        </div>
+      </section>
+    </article>
+    <script type="text/javascript" src="index.js"></script>
+    <script>
+      // Extract state in separate tag, protects against syntax errors
+      var INPUTS = {
+        comm: +'{{ commission__rate }}',
+        baseFee: +'{{ commission__base_fee }}',
+        threshold: +'{{ commission__threshold }}',
+      };
+    </script>
+    <script>
+      var wrapper = document.getElementById("wrapper");
+
+      RW.init({
+        inputs: window.INPUTS || {},
+        el: document.getElementById('app'),
+      })
+      .catch(function () {
+        document.body.innerHTML = '<h1>FAILED</h1>';
+      })
+      .then(function () {
+        wrapper.addEventListener("overflow", function(event) {
+          console.log( event );
+        }, false);
+      });
+
+    </script>
+  </body>
+</html>
