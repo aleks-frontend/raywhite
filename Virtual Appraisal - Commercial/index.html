@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html data-sign="OSR">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i');
+      @import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i');
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Oswald/stylesheet.css');
+
+      :root {
+        --yellow: {{{account.colors.brand-color}}};
+        --light-grey: #ececed;
+        --dark-grey: #58585a;
+      }
+
+      /* Inputs Order
+
+      {{show-crop}}
+      {{placeholder-opacity}}
+      {{placeholder-image-1}}
+      {{placeholder-toggle-new}}
+      {{placeholder-validation}}
+      {{RW_layout-choice--va}}
+      */
+
+      html {
+        font-family: 'Lato';
+        color: var(--dark-grey);
+        word-break: break-word;
+      }
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .layoutChoice--a3-format .fit,
+      .layoutChoice--a4-format .fit {
+        padding: 1.28rem 0.77rem 0.79rem 0.77rem;
+      }
+
+      .layoutChoice--social-square-1 .fit {
+        padding-bottom: 128pt;
+      }
+
+      .layoutChoice--social-square-2 .fit,
+      .layoutChoice--social-square-3 .fit,
+      .layoutChoice--social-story-2 .fit {
+        padding: 38pt;
+      }
+
+      .layoutChoice--banner .fit {
+        padding: 24pt;
+      }
+
+      .body {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+
+      .body__top {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .layoutChoice--a3-format .body__top,
+      .layoutChoice--a4-format .body__top,
+      .layoutChoice--social-square-1 .body__top,
+      .layoutChoice--social-story-1 .body__top {
+        display: flex;
+      }
+
+      .layoutChoice--a3-format .body__top,
+      .layoutChoice--a4-format .body__top {
+        height: 9.34rem;
+      }
+
+      .layoutChoice--social-square-1 .body__top {
+        height: 362pt;
+        padding: 76pt 92pt 59pt 92pt;
+      }
+
+      .layoutChoice--social-story-1 .body__top {
+        height: 434pt;
+        padding: 81pt 20pt 20pt 20pt;
+      }
+
+      .logo {
+        display: none;
+        width: 2.43rem;
+        max-height: 2.43rem;
+        object-fit: contain;
+        object-position: top;
+        margin-bottom: 1.24rem;
+        font-size: 0;
+      }
+
+      .layoutChoice--a3-format .logo,
+      .layoutChoice--a4-format .logo {
+        display: block;
+      }
+
+      .heading__container {
+        position: relative;
+      }
+
+      .layoutChoice--a4-format .heading__container {
+        margin-bottom: 0.72rem;
+      }
+
+      .layoutChoice--a3-format .heading__container {
+        margin-bottom: 0.85rem;
+      }
+
+      .layoutChoice--social-square-1 .heading__container {
+        margin-bottom: 33pt;
+      }
+
+      .layoutChoice--social-story-1 .heading__container {
+        margin-bottom: 43pt;
+      }
+
+      .heading__decoration {
+        position: absolute;
+        bottom: 3pt;
+        left: 0;
+        width: 100%;
+        background-image: url(https://files.outfit.io/media_library_items/178025/RW-Premises%2520closure-ruler.svg);
+      }
+
+      .layoutChoice--a3-format .heading__decoration,
+      .layoutChoice--a4-format .heading__decoration {
+        height: 0.86rem;
+      }
+
+      .layoutChoice--social-square-1 .heading__decoration {
+        height: 53pt;
+      }
+
+      .layoutChoice--social-story-1 .heading__decoration {
+        height: 60pt;
+      }
+
+      .heading {
+        position: relative;
+        padding: 0 10pt;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 400;
+        font-family: 'Oswald';
+      }
+
+      .layoutChoice--a3-format .heading,
+      .layoutChoice--a4-format .heading {
+        font-size: 0.61rem;
+        line-height: 1.5em;
+      }
+
+      .layoutChoice--social-square-1 .heading {
+        font-size: 30pt;
+        line-height: 1.7em;
+      }
+
+      .layoutChoice--social-story-1 .heading {
+        font-size: 36pt;
+        line-height: 1.7em;
+      }
+
+      .copy {
+        text-align: center;
+        line-height: 1.2em;
+        font-weight: 400;
+      }
+
+      .layoutChoice--a3-format .copy,
+      .layoutChoice--a4-format .copy {
+        font-size: 0.51rem;
+      }
+
+      .layoutChoice--social-square-1 .copy {
+        font-size: 30pt;
+      }
+
+      .layoutChoice--social-story-1 .copy {
+        font-size: 36pt;
+      }
+
+      .info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 1;
+        background: var(--light-grey);
+      }
+
+      .layoutChoice--a4-format .info {
+        padding: 0.98rem;
+      }
+
+      .layoutChoice--a3-format .info {
+        padding: 1.15rem 1rem 0;
+      }
+
+      .layoutChoice--social-square-1 .info {
+        padding: 45pt 20pt;
+      }
+
+      .layoutChoice--social-square-2 .info {
+        padding: 222pt 20pt;
+      }
+
+      .layoutChoice--social-square-3 .info {
+        padding: 124pt 20pt 95pt;
+      }
+
+      .layoutChoice--social-story-1 .info {
+        padding: 84pt 91pt 50pt;
+      }
+
+      .layoutChoice--social-story-2 .info {
+        padding: 151pt 20pt 100pt;
+      }
+
+      .layoutChoice--banner .info {
+        padding: 26pt 30pt;
+      }
+
+      .info__intro {
+        display: none;
+        line-height: 1.2em;
+      }
+
+      .layoutChoice--a3-format .info__intro,
+      .layoutChoice--a4-format .info__intro {
+        display: block;
+        margin-bottom: 0.37rem;
+        font-size: 0.58rem;
+      }
+
+      .info__heading {
+        text-transform: uppercase;
+        font-weight: 400;
+        font-family: 'Oswald';
+        background-color: var(--yellow);
+      }
+
+      .layoutChoice--a3-format .info__heading,
+      .layoutChoice--a4-format .info__heading {
+        font-size: 0.65rem;
+        padding: 0.23rem 0.35rem;
+        border-radius: 0.23rem;
+      }
+
+      .layoutChoice--a4-format .info__heading {
+        margin-bottom: 0.28rem;
+      }
+
+      .layoutChoice--a3-format .info__heading {
+        margin-bottom: 0.37rem;
+      }
+
+      .layoutChoice--social-square-1 .info__heading {
+        margin-bottom: 13pt;
+        font-size: 34pt;
+        padding: 16pt 22pt;
+        border-radius: 10pt;
+      }
+
+      .layoutChoice--social-square-2 .info__heading,
+      .layoutChoice--social-square-3 .info__heading {
+        margin-bottom: 19pt;
+        font-size: 38pt;
+        padding: 22pt 20pt;
+        border-radius: 10pt;
+      }
+
+      .layoutChoice--social-story-1 .info__heading,
+      .layoutChoice--social-story-2 .info__heading {
+        font-size: 38pt;
+        padding: 26pt 27pt;
+        border-radius: 10pt;
+      }
+
+      .layoutChoice--social-story-1 .info__heading {
+        margin-bottom: 43pt;
+      }
+
+      .layoutChoice--social-story-2 .info__heading {
+        margin-bottom: 90pt;
+      }
+
+      .layoutChoice--banner .info__heading {
+        margin-bottom: 37pt;
+        font-size: 28pt;
+        padding: 16pt 20pt;
+        border-radius: 10pt;
+      }
+
+      .info__image {
+        display: none;
+      }
+
+      .layoutChoice--a4-format .info__image--a4,
+      .layoutChoice--a3-format .info__image--a3,
+      .layoutChoice--social-square-1 .info__image--one,
+      .layoutChoice--social-square-2 .info__image--one,
+      .layoutChoice--social-square-3 .info__image--one,
+      .layoutChoice--social-story-1 .info__image--four,
+      .layoutChoice--social-story-2 .info__image--two,
+      .layoutChoice--banner .info__image--three {
+        display: block;
+      }
+
+      .layoutChoice--a3-format .info__image--a3 {
+        width: 9.18rem;
+      }
+
+      .layoutChoice--a4-format .info__image--a4 {
+        width: 9.18rem;
+      }
+
+      .layoutChoice--social-square-1 .info__image--one {
+        width: 516pt;
+      }
+
+      .layoutChoice--social-square-2 .info__image--one {
+        width: 645pt;
+      }
+
+      .layoutChoice--social-square-3 .info__image--one {
+        margin-bottom: 146pt;
+        width: 645pt;
+      }
+
+      .layoutChoice--social-story-2 .info__image--two {
+        margin-bottom: 133pt;
+      }
+
+      .layoutChoice--banner .info__image--three {
+        width: 501pt;
+      }
+
+      .info__text {
+        display: none;
+        font-size: 50pt;
+        line-height: 1.2em;
+      }
+
+      .layoutChoice--social-square-3 .info__text--primary,
+      .layoutChoice--social-story-1 .info__text--tertiary,
+      .layoutChoice--social-story-2 .info__text--secondary {
+        display: block;
+      }
+
+      .layoutChoice--social-story-2 .info__text--secondary {
+        font-size: 45pt;
+      }
+
+      .layoutChoice--social-story-1 .info__text--tertiary {
+        height: 208pt;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" 
+        class="layoutChoice--{{{RW_layout-choice--va}}}{{^RW_layout-choice--va}}a3{{/RW_layout-choice--va}}"
+        data-crop="{{show-crop}}" data-reduce-export-font-size-by-percent="0" data-reduce-firefox-font-size-by-percent="0" data-prevent-export-overflow="false">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          <div class="body">
+            <div class="body__top">
+              <img class="logo" src="https://files.outfit.io/media_library_items/159532/Ray%2520White-logo2.svg"><!--logo-->
+              <div class="heading__container">
+                <div class="heading__decoration"></div><!--heading__decoration-->
+                <div class="heading">we're determined to make<br>long distance relationships work.</div><!--heading-->
+              </div><!--heading__container-->
+              <div class="copy">Though we're apart, understanding<br>your commercial property's value<br>is as important as ever.</div><!--copy-->
+            </div><!--body__top-->
+            <div class="info">
+              <div class="info__intro">Introducing</div><!--info__intro-->
+              <div class="info__heading">virtual property appraisals</div><!--info__heading-->
+              <img src="https://files.outfit.io/media_library_items/178608/RW-Virtual-appraisals-1-A3_Flyer_commercial-image1.svg" class="info__image info__image--a3"><!--info__image--one-->
+              <img src="https://files.outfit.io/media_library_items/178607/RW-Virtual-appraisals-1-A4_Flyer_commercial-image.svg" class="info__image info__image--a4"><!--info__image--one-->
+              <img src="https://files.outfit.io/media_library_items/178586/Virtual-appraisals-social-comercial-image3.svg" class="info__image info__image--one"><!--info__image--one-->
+              <img src="https://files.outfit.io/media_library_items/178585/Virtual-appraisals-social-comercial-image5.svg" class="info__image info__image--two"><!--info__image--two-->
+              <img src="https://files.outfit.io/media_library_items/178583/Virtual-appraisals-social-comercial-image6.svg" class="info__image info__image--three"><!--info__image--three-->
+              <img src="https://files.outfit.io/media_library_items/178606/RW-Virtual_appraisals_social_commercial-image.svg" class="info__image info__image--four"><!--info__image--three-->
+              <div class="info__text info__text--primary">It doesn't hurt to know.</div>
+              <div class="info__text info__text--secondary">It doesn't hurt to know.</div>
+            </div><!--info-->
+          </div><!--body-->
+          <div class="info__text info__text--tertiary"></div>
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/custom-rich-text.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/text-fit-min.js"></script>
+    <script src="js/fontfaceobserver.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+      {{ #placeholder-toggle-new }}document.body.classList.add("u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}"); {{ /placeholder-toggle-new }}
+      {{ #placeholder-validation }}document.body.classList.add("placeholder__validation--{{placeholder-validation}}"){{ /placeholder-validation }}
+    </script>
+    <script>
+
+      console.clear();
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      // All external font-families need to be added to 'fonts' array
+      document.addEventListener('DOMContentLoaded', function(event) {
+        const fonts = ['Circular'];
+        const fontObservers = [];
+
+        fonts.forEach(font => {
+          const obs = new FontFaceObserver(font);
+          fontObservers.push(obs.load())
+        });
+
+        Promise.all(fontObservers).then(() => {
+          maxLineCheck();
+          maxHeightCheck();
+          injectDynamicContent();
+          hideEmptyTitles();
+
+          document.dispatchEvent(new Event('printready'));
+        });
+      });      
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+
+    </script>
+
+
+  </body>
+</html>
