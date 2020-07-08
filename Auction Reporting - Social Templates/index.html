@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="version" content="0.1.0">
+    <title>Social Boilerplate</title>
+    
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="index.css" />
+
+    <script type="text/javascript" src="index.js"></script>
+  </head>
+  <body>
+    <main class="tile background--{{# auction_tile_theme }}{{ auction_tile_theme }}{{/ auction_tile_theme }}{{^ auction_tile_theme }}darkGrey{{/ auction_tile_theme }}">
+      <picture class="tile__background">{{{ auction_tile_map_svg }}}</picture>
+      <hgroup class="tile__hgroup">
+        <h2>{{{ auction_tile_label }}}</h2>
+        <h1 id="bigNumber" class="big-number">{{ auction_tile_number }}</h1>
+      </hgroup>
+      <footer class="tile__disclaimer">{{ auction_tile_disclaimer }}</footer>
+    </main>
+    <script type="text/javascript">
+      RW.init(function () {
+        return RW.pf.Promise.all([
+          RW.fitty('#bigNumber',{
+            maxSize: 288,
+          }),
+        ]);
+      })
+      .then(function () {
+        return new RW.pf.Promise(function (resolve) { setTimeout(resolve, 500) });
+      })
+      .then(function () { document.dispatchEvent(new Event('printready')) });
+    </script>
+  </body>
+</html>
