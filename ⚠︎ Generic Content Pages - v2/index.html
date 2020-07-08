@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en" async>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="version" content="1.0.0">
+    <title>Generic Content Pages</title>
+    
+    {{{ account.snippets.tagmanager_script }}}
+    
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <article class="document">
+      {{# collection.generic_content_pages }}
+
+        {{# block.page_with_big_photo }}
+          <section class="page-A4 page-with-margins" data-page-name="Page with big photo">
+            <div class="row justify-content-center align-items-center h-100">
+              <div class="col-12">
+                <figure>
+                  <picture class="aspect--four-thirds">{{{ resizable_background_image }}}</picture>
+                  {{# image_caption }}
+                    <figcaption>{{ image_caption }}</figcaption>
+                  {{/ image_caption }}
+                </figure>
+              </div>
+            </div>
+          </section>
+        {{/ block.page_with_big_photo }}
+
+        {{# block.page_with_medium_photo }}
+          <section class="page-A4 page-with-margins" data-page-name="Page with medium photo">
+            <div class="row justify-content-center align-items-center h-100">
+              <div class="col-10">
+                <figure>
+                  <picture class="aspect--four-thirds">{{{ resizable_background_image }}}</picture>
+                  {{# image_caption }}
+                    <figcaption>{{ image_caption }}</figcaption>
+                  {{/ image_caption }}
+                </figure>
+              </div>
+            </div>
+          </section>
+        {{/ block.page_with_medium_photo }}
+
+        {{# block.page_with_small_photo }}
+          <section class="page-A4 page-with-margins" data-page-name="Page with small photo">
+            <div class="row justify-content-center align-items-center h-100">
+              <div class="col-6">
+                <figure>
+                  <picture class="aspect--four-thirds">{{{ resizable_background_image }}}</picture>
+                  {{# image_caption }}
+                    <figcaption>{{ image_caption }}</figcaption>
+                  {{/ image_caption }}
+                </figure>
+              </div>
+            </div>
+          </section>
+        {{/ block.page_with_small_photo }}
+
+        {{# block.page_with_image_grid }}
+          <section class="page-A4 page-with-margins" data-page-name="Page with image grid">
+            <div class="row h-100 justify-content-center align-items-between">
+              <div class="col-12 h-70">
+                <div class="grid grid-2x2">
+                  {{# collection.resizable_background_images }}
+                    <picture class="image">{{{ resizable_background_image }}}</picture>
+                  {{/ collection.resizable_background_images }}
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="captions">
+                  {{# collection.resizable_background_images }}
+                    <figcaption>{{ image_caption }}</figcaption>
+                  {{/ collection.resizable_background_images }}
+                </div>
+              </div>
+            </div>
+          </section>
+        {{/ block.page_with_image_grid }}
+
+        {{# block.page_with_big_quote }}
+          <section class="page-A4 page-with-margins" data-page-name="Page with big quote">
+            <div class="row h-80 justify-content-center align-items-center">
+              <div class="col-10">
+                <hgroup>
+                  <h3 class="big-quote"><b>{{ quote }}</b></h3>
+                  {{# quote_author }}<h5 class="quote-author">&mdash; {{ quote_author }}</h5>{{/ quote_author }}
+                </hgroup>
+              </div>
+            </div>
+          </section>
+        {{/ block.page_with_big_quote }}
+
+        {{# block.page_with_quote_and_columns }}
+          <section class="page-A4 page-with-margins" data-page-name="Page with quote and columns">
+            <div class="row h-100 justify-content-center align-items-center">
+              <div class="col-10">
+                <hgroup class="text-center">
+                  <h4 class="quote"><b>{{ quote }}</b></h4>
+                  {{# quote_author }}<h6 class="quote-author">&mdash; {{ quote_author }}</h6>{{/ quote_author }}
+                </hgroup>
+                <div class="copy text-col-2">{{{ formatted_text }}}</div>
+                <div class="aspect--one-tenth"></div>
+              </div>
+            </div>
+          </section>
+        {{/ block.page_with_quote_and_columns }}
+
+        {{# block.page_with_title_and_columns }}
+          <section class="page-A4 page-with-margins" data-page-name="Page with title and two columns">
+            <div class="row h-100 justify-content-center align-items-center">
+              <div class="col-11">
+                <hgroup>
+                  {{# section_title }}<h6><span class="highlight">{{ section_title }}</span></h6>{{/ section_title }}
+                  <h2>{{ title }}</h2>
+                </hgroup>
+                <div class="copy text-col-2">{{{ formatted_text }}}</div>
+              </div>
+            </div>
+          </section>
+        {{/ block.page_with_title_and_columns }}
+
+        {{# block.page_with_title_and_content }}
+          <section class="page-A4 page-with-margins" data-page-name="Page with title and content">
+            <div class="row h-100 align-items-center">
+              <div class="col-10">
+                <hgroup>
+                  <h2 class="overblock">{{ title }}</h2>
+                  {{# subtitle }}<h4 class="subtitle">{{ subtitle }}</h4>{{/ subtitle }}
+                </hgroup>
+
+                {{# formatted_text }}<div class="copy">{{{ formatted_text }}}</div>{{/ formatted_text }}
+              </div>
+            </div>
+          </section>
+        {{/ block.page_with_title_and_content }}
+
+        {{# block.page_with_two_columns }}
+          <section class="page-A4 page-with-margins" data-page-name="Page with two columns">
+            <div class="row h-100 justify-content-start align-items-start">
+              <div class="col-12">
+                <hgroup>
+                  {{# section_title }}<h6><span class="highlight">{{ section_title }}</span></h6>{{/ section_title }}
+                  <h3>{{ title }}</h3>
+                </hgroup>
+              </div>
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-6">
+                    <div class="copy">{{{ formatted_text }}}</div>
+                  </div>
+                  <div class="col-6">
+                    <div class="grid grid-1x4 images">
+                      {{# collection.resizable_background_images }}
+                        <figure>
+                          <picture>{{{ resizable_background_image }}}</picture>
+                          {{# image_caption }}<figcaption class="caption-inset">{{ image_caption }}</figcaption>{{/ image_caption }}
+                        </figure>
+                      {{/ collection.resizable_background_images }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        {{/ block.page_with_two_columns }}
+
+        {{# block.page_with_photo_and_columns }}
+          <section class="page-A4 page-with-margins" data-page-name="Page with photo and two columns">
+            <div class="row h-100 flex-column">
+              <div class="col flex-none">
+                <hgroup>
+                  {{# section_title }}<h6><span class="highlight">{{ section_title }}</span></h6>{{/ section_title }}
+                  <h3>{{ title }}</h3>
+                </hgroup>
+                <div class="copy text-col-2">{{{ formatted_text }}}</div>
+              </div>
+              <div class="col" style="padding-top: 2rem;">
+                <figure class="h-100">
+                  <picture class="h-100">{{{ resizable_background_image }}}</picture>
+                  {{# image_caption }}
+                    <figcaption class="caption-inset flex-none">{{ image_caption }}</figcaption>
+                  {{/ image_caption }}
+                </figure>
+              </div>
+            </div>
+          </section>
+        {{/ block.page_with_photo_and_columns }}
+
+        {{# block.page_with_text_grid }}
+          <section class="page-A4 page-with-margins" data-page-name="Page with text grid">
+            <div class="row h-100 align-items-stretch">
+              <div class="col-12 align-self-start">
+                <h2 class="overblock">{{ title }}</h2>
+                {{# subtitle }}<h4>{{ subtitle }}</h4>{{/ subtitle }}
+              </div>
+
+              <div class="col-12">
+                <div class="grid grid-2x2 h-100">
+                  {{# collection.grid_items }}
+                    <div class="cell">
+                      <h4>{{ grid_title }}</h4>
+                      <div>
+                        {{# grid_subtitle }}<h6>{{ grid_subtitle }}</h6>{{/ grid_subtitle }}
+                        {{# formatted_text }}<div>{{{ formatted_text }}}</div>{{/ formatted_text }}
+                      </div>
+                    </div>
+                  {{/ collection.grid_items }}
+                  <div class="cell background--cover background--mediumGrey" style="background-image: url('{{{ background_image }}}')"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+        {{/ block.page_with_text_grid }}
+
+      {{/ collection.generic_content_pages }}
+    </article>
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+</html>
