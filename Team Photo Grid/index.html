@@ -1,0 +1,112 @@
+<!doctype html>
+<!-- VERSION: 0.0.0 -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Agent and Team - {{ external_office_name }}</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <article class="document">
+      <section class="page-A4 page-with-margins">
+        <div class="row h-100">
+          <div class="col-12 align-self-start">
+            <header class="page__header">
+              <hgroup>
+                <h6><span class="highlight">Who we are</span></h6>
+                <h3>Local experts, working for you.</h3>
+              </hgroup>
+            </header>
+          </div>
+          <div class="col-12 align-self-center">
+            <div class="team-grid row no-gutters">
+              {{# collection.team_members }}
+                <div class="col">
+                  <figure class="team-grid__item">
+                    <picture class="aspect--fifteen-sixteenths">
+                      {{{ team_member_resizable_image }}}
+                    </picture>
+                    {{# _team_member_name }}
+                      <figcaption>
+                        <hgroup class="team-grid__hgroup">
+                          <h6 class="team-grid__name"><b>{{ _team_member_name }}</b></h6>
+                          {{# team_member_job_title }}
+                            <div class="truncate">{{ team_member_job_title }}</div>
+                          {{/ team_member_job_title }}
+                        </hgroup>
+                      </figcaption>
+                    {{/ _team_member_name }}
+                  </figure>
+                </div>
+              {{/ collection.team_members }}
+            </div>
+          </div>
+          <div class="col-12 align-self-end">
+            <footer class="page__footer">
+              <div class="row">
+                <div class="col">
+                  <b>{{ external_office_name }}</b>
+                </div>
+                {{# external_office_licence_code }}
+                  <div class="col text-right">
+                    <small class="muted">Business Licence: </small>
+                    <small class="muted">{{ external_office_licence_code }}</small>
+                  </div>
+                {{/ external_office_licence_code }}
+                <div class="col-12"><hr class="spacer" /></div>
+                <div class="col-6">
+                  {{ external_office_address_1 }}&nbsp; | &nbsp;
+                  {{# external_office_address_2 }}{{ external_office_address_2 }}<br/>{{/ external_office_address_2 }}
+                  {{ external_office_address_suburb }}{{# external_office_address_state_code }}, {{ external_office_address_state_code }} {{/ external_office_address_state_code }}{{ external_office_address_postcode }}
+                </div>
+                <div class="col-6">
+                  <div class="row">
+                    <div class="col text-right">
+                      {{# use_international_phone_format }}
+                        {{# external_office_phone_international }}<a href="tel:{{ external_office_phone_international }}">{{ external_office_phone_international }}</a>{{/ external_office_phone_international }}
+                      {{/ use_international_phone_format }}
+                      {{^ use_international_phone_format }}
+                        {{# external_office_phone_local }}<a href="tel:{{ external_office_phone_local }}">{{ external_office_phone_local }}</a>{{/ external_office_phone_local }}
+                      {{/ use_international_phone_format }}
+                    </div>
+                    {{# external_office_website_display }}
+                    <div class="col text-right"><a href="{{ external_office_website_url }}">{{ external_office_website_display }}</a></div>
+                    {{/ external_office_website_display }}
+                  </div>
+                </div>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </section>
+    </article>
+    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript">
+      console.log('main script started');
+
+      RW.init(function () {
+        return RW.pf.Promise.all([
+          RW.fitty('.team-grid__name', {
+            multiLine: true,
+            maxSize: 12,
+            minSize: 9,
+          })
+        ])
+      }).then(function () {
+        return new RW.pf.Promise(function (resolve) {
+          setTimeout(resolve, 500);
+        });
+      })
+      .then(function () {
+        console.log('dispatching print ready');
+        document.dispatchEvent(new Event('printready'));
+      });
+    </script>
+  </body>
+</html>
