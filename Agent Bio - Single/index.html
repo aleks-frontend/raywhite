@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Agent Bio – {{ external_agent__name }}</title>
+    
+    {{{ account.snippets.tagmanager_script }}}
+
+    <meta name="version" content="0.2.0">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <article class="document">
+      <section class="page-A4 page-with-margins justify-content-stretch">
+        <div class="background--lighterGrey container-with-padding page-content">
+          <div id="bioContainer" class="row h-100 align-items-start overflow-hidden">
+            <div class="col-12">
+              <hgroup>
+                <h6><span class="highlight">Meet your agent</span></h6>
+                <h2>{{ external_agent__name }}</h2>
+                {{# external_agent__job_title }}
+                  <h6>{{ external_agent__job_title }}</h6>
+                {{/ external_agent__job_title }}
+              </hgroup>
+            </div>
+            <div class="col-12 align-self-stretch">
+              <div class="text-col-2">
+                {{# agent_leadin_paragraph }}
+                  <p class="leadin">{{ agent_leadin_paragraph }}</p>
+                {{/ agent_leadin_paragraph }}
+                <div class="copy">
+                  <div id="agentBio">
+                  {{# editable_agent__bio_html }}<div>{{{ editable_agent__bio_html }}}</div>{{/ editable_agent__bio_html }}
+                  {{^ editable_agent__bio_html }}<div>{{{ external_agent__bio_html }}}</div>{{/ editable_agent__bio_html }}
+                  </div>
+                  {{# external_agent__awards_html }}
+                  <div class="awards">
+                    <b>Awards &amp; Accolades</b>
+                    {{{ external_agent__awards_html }}}
+                  </div>
+                  {{/ external_agent__awards_html }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <picture class="agent-image" style="background-image: url('{{{ external_agent__image_lifestyle }}}?width=2480&scale=both')">
+          {{{ agent_resizable_image_lifestyle }}}
+        </picture>
+      </section>
+    </article>
+    <script type="text/javascript" src="index.js"></script>
+    <script id="agentBioExternal" type="text/template">{{{ external_agent__bio_html }}}</script>
+    <script id="agentBioEditable" type="text/template">{{{ editable_agent__bio_html }}}</script>
+    <script type="text/javascript">
+      RW.outfit.applyEditableDefaults(window, [
+        {
+          id: 'agentBio',
+          editable: RW.dom.text(window, 'agentBioEditable'),
+          external: RW.dom.html(window, 'agentBioExternal'),
+        },
+      ]);
+    </script>
+  </body>
+</html>
