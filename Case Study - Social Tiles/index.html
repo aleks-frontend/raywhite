@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html data-sign="OSR">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i');
+      @import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i');
+
+      :root {
+        --white: {{{account.colors.white}}};
+        --yellow: {{{account.colors.brand-color}}};
+        --grey: {{{account.colors.secondary}}};
+      }
+
+      /* Inputs Order
+
+      {{show-crop}}
+      {{RW_template-type--st}}
+      {{RW_layout-choice--st}}
+      {{RW_feature-image--st}}
+      {{{RW_property-address--st}}}
+      {{RW_inspections--st}}
+      {{RW_buyers--st}}
+      {{RW_days-on-market--st}}
+      {{RW_price--st}}
+      */
+
+      html {
+        font-family: 'Playfair Display';
+        color: var(--white);
+        word-break: break-word;
+      }
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+        top: 3mm;
+        bottom: 3mm;
+        left: 3mm;
+        right: 3mm;
+      }
+
+      .templateType--facebook.layoutChoice--portrait .fit,
+      .templateType--linkedin.layoutChoice--portrait .fit {
+        flex-direction: row;
+      }
+
+      .hero__container {
+        position: relative;
+        flex: 1;
+        background: var(--grey);
+      }
+
+      .hero {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+      
+      .no-feature-image .hero {
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+      
+      .templateType--facebook.layoutChoice--portrait.no-feature-image .hero,
+      .templateType--linkedin.layoutChoice--portrait.no-feature-image .hero {
+        background-image: url('https://files.outfit.io/media_library_items/171810/RW_CaseStudy_SocialTile_FB-image.jpg');
+      }
+      
+      .templateType--facebook.layoutChoice--landscape.no-feature-image .hero,
+      .templateType--linkedin.layoutChoice--landscape.no-feature-image .hero {
+        background-image: url('https://files.outfit.io/media_library_items/174918/RW-CasweStady-Socialile-LinkedIn-image.jpg');
+      }
+      
+      .templateType--instagram.no-feature-image .hero {
+        background-image: url('https://files.outfit.io/media_library_items/174916/RW-CaseStady-SocialTile-Insta-image.jpg');
+      }
+      
+      .templateType--instagram-story.no-feature-image .hero {
+        background-image: url('https://files.outfit.io/media_library_items/174917/RW-CaseStady-SocialTile-InstaStory-image.jpg');
+      }
+
+      .section {
+        display: flex;
+        background: var(--grey);
+      }
+
+      .templateType--instagram .section,
+      .templateType--instagram-story .section {
+        text-align: center;
+      }
+
+      .templateType--instagram .section {
+        padding: 25pt 70pt;
+      }
+
+      .templateType--instagram-story .section {
+        padding: 54pt 50pt;
+      }
+
+      .templateType--facebook.layoutChoice--landscape .section,
+      .templateType--linkedin.layoutChoice--landscape .section {
+        height: 157pt;
+        padding: 16pt 20pt 16pt 38pt;
+      }
+
+      .templateType--facebook.layoutChoice--portrait .section,
+      .templateType--linkedin.layoutChoice--portrait .section {
+        flex-direction: column;
+        justify-content: center;
+        width: 300pt;
+        padding: 80pt 22pt;
+      }
+
+      .section__inner {
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .templateType--facebook.layoutChoice--landscape .section__inner,
+      .templateType--linkedin.layoutChoice--landscape .section__inner,
+      .templateType--instagram .section__inner,
+      .templateType--instagram-story .section__inner {
+        flex: 1;
+      }
+
+      .templateType--facebook.layoutChoice--landscape .section__inner,
+      .templateType--linkedin.layoutChoice--landscape .section__inner {
+        flex-direction: row;
+      }
+
+      .title {
+        font-size: 49.6pt;
+        line-height: 1em;
+        font-style: italic;
+        color: var(--yellow);
+      }
+
+      .templateType--facebook.layoutChoice--landscape .title,
+      .templateType--linkedin.layoutChoice--landscape .title {
+        align-self: center;
+        margin-right: 18pt;
+        padding-bottom: 22pt;
+      }
+
+      .templateType--instagram .title {
+        margin-bottom: 18pt;
+      }
+
+      .templateType--instagram-story .title {
+        margin-bottom: 15pt;
+        font-size: 59pt;
+      }
+
+      .separator {
+        display: none;
+      }
+
+      .templateType--facebook.layoutChoice--landscape .separator,
+      .templateType--linkedin.layoutChoice--landscape .separator {
+        position: relative;
+        display: block;
+        width: 2pt;
+        max-height: 200pt;
+        border-right: 2pt solid var(--white);
+      }
+
+      .content {
+         display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+
+      .templateType--facebook.layoutChoice--portrait .content,
+      .templateType--linkedin.layoutChoice--portrait .content {
+        margin-top: 3pt;
+      }
+
+      .templateType--facebook.layoutChoice--landscape .content,
+      .templateType--linkedin.layoutChoice--landscape .content {
+        justify-content: center;
+        margin-left: 16pt;
+      }
+
+      .address {
+        display: none;
+        font-size: 19.6pt;
+        line-height: 1.2em;
+      }
+
+      .templateType--facebook.layoutChoice--landscape .address--primary,
+      .templateType--linkedin.layoutChoice--landscape .address--primary,
+      .templateType--instagram .address--primary,
+      .templateType--facebook.layoutChoice--portrait .address--secondary,
+      .templateType--linkedin.layoutChoice--portrait .address--secondary,
+      .templateType--instagram-story .address--secondary {
+        display: block;
+      }
+
+      .no-address .address {
+        display: none !important;
+      }
+
+      .templateType--instagram-story .address {
+        font-size: 24pt;
+      }
+
+      .templateType--facebook.layoutChoice--landscape .address,
+      .templateType--linkedin.layoutChoice--landscape .address {
+        margin-bottom: 23pt;
+      }
+
+      .templateType--facebook.layoutChoice--landscape .address:last-child,
+      .templateType--linkedin.layoutChoice--landscape .address:last-child,
+      .templateType--instagram .address:last-child {
+        margin-bottom: 0;
+      }
+
+      .info__container {
+        display: flex;
+      }
+
+      .no-inspections.no-buyers.no-days-on-market .info__container {
+        display: none;
+      }
+
+      .templateType--facebook.layoutChoice--portrait .info__container,
+      .templateType--linkedin.layoutChoice--portrait .info__container {
+        flex-direction: column;
+        margin-top: 11pt;
+      }
+
+      .templateType--facebook.layoutChoice--landscape .info__container,
+      .templateType--linkedin.layoutChoice--landscape .info__container {
+        margin-bottom: 25pt;
+      }
+
+      .templateType--instagram .info__container,
+      .templateType--instagram-story .info__container {
+        justify-content: center;
+      }
+
+
+      .templateType--instagram .info__container {
+        margin-top: 35pt;
+      }
+
+      .templateType--instagram-story .info__container {
+        margin-top: 85pt;
+      }
+
+      .templateType--facebook.layoutChoice--landscape .info__container:last-child,
+      .templateType--linkedin.layoutChoice--landscape .info__container:last-child {
+        margin-bottom: 0;
+      }
+
+      .info {
+        display: flex;
+        font-family: 'Lato';
+        font-size: 19.5pt;
+        line-height: 1.2em;
+        font-weight: 300;
+      }
+
+      .templateType--instagram-story .info {
+        margin-right: 86pt;
+        font-size: 26pt;
+      }
+
+      .templateType--facebook.layoutChoice--landscape .info,
+      .templateType--linkedin.layoutChoice--landscape .info {
+        font-size: 20.7pt;
+      }
+
+      .templateType--facebook.layoutChoice--portrait .info,
+      .templateType--linkedin.layoutChoice--portrait .info {
+        margin-bottom: 10pt;
+      }
+
+      .templateType--facebook.layoutChoice--landscape .info,
+      .templateType--linkedin.layoutChoice--landscape .info {
+        margin-right: 68pt;
+      }
+
+      .templateType--instagram .info {
+        margin-right: 120pt;
+      }
+
+      .templateType--facebook.layoutChoice--landscape .info:last-child,
+      .templateType--linkedin.layoutChoice--landscape .info:last-child,
+      .templateType--instagram .info:last-child,
+      .templateType--instagram-story .info:last-child {
+        margin-right: 0;
+      }
+
+      .templateType--facebook.layoutChoice--portrait .info:last-child,
+      .templateType--linkedin.layoutChoice--portrait .info:last-child {
+        margin-bottom: 0;
+      }
+
+      .info__label + .info__value {
+        margin-left: 5.2pt;
+      }
+
+      .price {
+        font-family: 'Lato';
+        font-size: 29pt;
+        line-height: 1em;
+        color: var(--yellow);
+      }
+
+      .no-price .price {
+        display: none;
+      }
+
+      .templateType--facebook.layoutChoice--portrait .price,
+      .templateType--linkedin.layoutChoice--portrait .price {
+        margin-top: 31pt;
+      }
+
+      .templateType--instagram-story .price {
+        margin-top: 90pt;
+        font-size: 38pt;
+      }
+
+      .templateType--instagram .price {
+        margin-top: 44pt;
+      }
+
+      .templateType--instagram.no-inspections.no-buyers.no-days-on-market.no-address .price,
+      .templateType--instagram-story.no-inspections.no-buyers.no-days-on-market.no-address .price {
+        margin-top: 0;
+      }
+
+      .templateType--facebook.layoutChoice--portrait .info__label.overflow:after {
+        right: -132pt;
+        max-height: 140%;
+      }
+
+      .templateType--linkedin.layoutChoice--landscape .info__label.overflow:after,
+      .templateType--instagram .info__label.overflow:after {
+        right: -140pt;
+        max-height: 160%;
+      }
+      
+      .templateType--instagram-story .info__label.overflow:after {
+        right: -182pt;
+        max-height: 160%;
+      }
+
+      .templateType--facebook.layoutChoice--portrait .price.overflow:before,
+      .templateType--linkedin.layoutChoice--portrait .price.overflow:before,
+      .templateType--facebook.layoutChoice--portrait .price.overflow:after,
+      .templateType--linkedin.layoutChoice--portrait .price.overflow:after {
+        font-size: 0.6em;
+      } 
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" data-crop="{{show-crop}}" class="templateType--{{{RW_template-type--st}}}
+                                                                   layoutChoice--{{{RW_layout-choice--st}}}{{^RW_layout-choice--st}}portrait{{/RW_layout-choice--st}}
+                                                                   {{^RW_inspections--st}}no-inspections{{/RW_inspections--st}}
+                                                                   {{^RW_buyers--st}}no-buyers{{/RW_buyers--st}}
+                                                                   {{^RW_days-on-market--st}}no-days-on-market{{/RW_days-on-market--st}}
+                                                                   {{^RW_property-address--st}}no-address{{/RW_property-address--st}}
+                                                                   {{^RW_price--st}}no-price{{/RW_price--st}}
+                                                                   {{^RW_feature-image--st}}no-feature-image{{/RW_feature-image--st}}" 
+        data-reduce-export-font-size-by-percent="0" data-reduce-firefox-font-size-by-percent="0" data-prevent-export-overflow="false">
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          <div class="hero__container">
+            <div class="hero">
+              <div class="reposition-fix">{{{RW_feature-image--st}}}</div><!--reposition-fix-->
+            </div><!--hero-->
+          </div><!--hero__container-->
+          <div class="section">
+            <div class="section__inner">
+              <div class="title">Case study</div><!--title-->
+              <div class="separator"></div><!--separator-->
+              <div class="content">
+                <div class="address address--primary" data-max-line="1">{{{RW_property-address--st}}}</div><!--address--primary-->
+                <div class="address address--secondary" data-max-line="2">{{{RW_property-address--st}}}</div><!--address--secondary-->
+                <div class="info__container">
+                  {{#RW_inspections--st}}
+                  <div class="info">
+                    <div class="info__label" data-char-limit="3">{{RW_inspections--st}}</div><!--info__label-->
+                    <div class="info__value">inspections</div><!--info__value-->
+                  </div><!--info-->
+                  {{/RW_inspections--st}}
+                  {{#RW_buyers--st}}
+                  <div class="info">
+                    <div class="info__label" data-char-limit="3">{{RW_buyers--st}}</div><!--info__label-->
+                    <div class="info__value">buyers</div><!--info__value-->
+                  </div><!--info-->
+                  {{/RW_buyers--st}}
+                  {{#RW_days-on-market--st}}
+                  <div class="info">
+                    <div class="info__label" data-char-limit="3">{{RW_days-on-market--st}}</div><!--info__label-->
+                    <div class="info__value">days on market</div><!--info__value-->
+                  </div><!--info-->
+                  {{/RW_days-on-market--st}}
+                </div><!--info__container-->
+                {{#RW_price--st}}
+                <div class="price" data-max-line="1">$ {{RW_price--st}}</div><!--price-->
+                {{/RW_price--st}}
+              </div><!--content-->
+            </div><!--section__inner-->
+          </div><!--section-->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/custom-rich-text.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/text-fit-min.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      console.clear();
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+      });
+
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+
+    </script>
+
+
+  </body>
+</html>
