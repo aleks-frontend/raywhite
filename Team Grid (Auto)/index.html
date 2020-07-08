@@ -1,0 +1,82 @@
+<!doctype html>
+<!-- VERSION: 0.2.0 -->
+<html lang="en" async>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>{{ title }}</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div
+      id="app"
+      data-title="{{ title }}"
+      data-subtitle="{{ subtitle }}"
+      data-footer="{{# show_footer }}true{{/ show_footer }}{{^ show_footer }}false{{/ show_footer }}"
+    >
+    </div>
+    <script type="text/javascript" src="index.js"></script>
+    <script>
+      var decode = RW.entityDecoder(document)
+
+      // Extract state in separate tag, protects against syntax errors
+      var INPUTS = {
+        maxPerPage: +'{{ grid_max_items_per_page }}' || 12,
+        title: decode('{{ title }}'),
+        subtitle: decode('{{ subtitle }}'),
+        showEmail: !!'{{ show_email }}',
+        showPhone: !!'{{ show_phone }}',
+        showJobTitle: !!'{{ show_jobtitle }}',
+        useInternationalPhoneFormat: !!'{{ use_international_phone_format }}',
+        agents: [
+          {{# spreadsheet._agents }}
+            {
+              name: decode('{{ agent__name }}'),
+              email: decode('{{ agent__email }}'),
+              jobTitle: decode('{{ agent__job_title }}'),
+              imageHeadshot: decode('{{ agent__image_headshot }}'),
+              phoneLocal: decode('{{ agent__phone_local }}'),
+              phoneInternational: decode('{{ agent__phone_international }}'),
+            },
+          {{/ spreadsheet._agents }}
+        ],
+        {{# show_footer }}
+          office: {
+            name: '{{ _office__name }}',
+            addressStreet: decode('{{ _office__address_street }}'),
+            addressSuburb: decode('{{ _office__address_suburb }}'),
+            addressState: '{{ _office__address_state }}',
+            addressStateCode: '{{ _office__address_state_code }}',
+            addressPostcode: '{{ _office__address_postcode }}',
+            addressCountry: '{{ _office__address_country }}',
+            addressCountryCode: '{{ _office__address_country_code }}',
+            phoneInternational: '{{ _office__phone_international }}',
+            phoneLocal: '{{ _office__phone_local }}',
+            email: '{{ _office__email }}',
+            websiteUrl: '{{ _office__website_url }}',
+            websiteDisplay: '{{ _office__website_display }}',
+            licenceCode: decode('{{ _office__licence_code }}'),
+          },
+        {{/ show_footer }}
+      };
+    </script>
+    <script>
+      RW.init({
+        inputs: window.INPUTS || {},
+        el: document.getElementById('app'),
+      })
+      .catch(function (error) {
+        console.error(error)
+        document.body.innerHTML = '<h1>FAILED</h1>';
+      })
+      .then(function () {
+        document.dispatchEvent(new Event('printready'));
+      });
+    </script>
+  </body>
+</html>
