@@ -1,0 +1,93 @@
+<!doctype html>
+<!-- VERSION: 0.0.0 -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Process Chart</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <article class="document">
+      <section class="page-A4--landscape page-with-margins">
+        <div class="row h-100 justify-content-center align-items-center">
+          <div class="col-12 align-self-start">
+            <h2><b>{{ process_chart_title }}</b></h2>
+          </div>
+          <div class="col-12">
+            <div class="process-chart">
+              <div class="row no-gutters h-100">
+                {{# collection.process_chart_sections }}
+
+                  {{# block.section}}
+                    <div class="process-chart__section col flex-{{ section_flex }}{{^ section_flex }}1{{/ section_flex }} token-value-disabled">
+                      <hgroup class="process-chart__section-hgroup background--{{ section_bg_color }}{{^ section_bg_color }}lightGrey{{/ section_bg_color }}">
+                        <h5 class="process-chart__section-heading token-wrapper">{{ section_title }}</h5>
+                        <div class="process-chart__section-subheading token-wrapper">{{ section_subtitle }}{{^ section_subtitle }}&nbsp;{{/ section_subtitle }}</div>
+                      </hgroup>
+
+                      {{# collection.process_chart_subsections }}
+                        {{# block.subsection }}
+                          <div class="process-chart__subsection">
+                            <div class="row h-100">
+                              <div class="col" style="max-width: 90px;"><h6 class="process-chart__subsection-heading">{{ subsection_title }}</h6></div>
+                              <div class="col"><div class="process-chart__subsection-content">{{{ subsection_content }}}</div></div>
+                            </div>
+                          </div>
+                        {{/ block.subsection }}
+                      {{/ collection.process_chart_subsections }}
+
+                    </div>
+                  {{/  block.section }}
+
+                {{/ collection.process_chart_sections }}
+              </div>
+            </div>
+
+          </div>
+          <footer class="col-12 page__footer align-self-end">
+            <div class="row no-gutters">
+              <div class="col">
+                <b>{{ external_office__name }}</b>
+              </div>
+              {{# external_office__licence_code }}
+                <div class="col text-right">
+                  <small class="muted">Business Licence: </small>
+                  <small class="muted">{{ external_office__licence_code }}</small>
+                </div>
+              {{/ external_office__licence_code }}
+              <div class="col-12"><hr class="spacer" /></div>
+              <div class="col-6">
+                {{ external_office__address_1 }}&nbsp; | &nbsp;
+                {{# external_office__address_2 }}{{ external_office__address_2 }}<br/>{{/ external_office__address_2 }}
+                {{ external_office__address_suburb }}{{# external_office__address_state_code }}, {{ external_office__address_state_code }} {{/ external_office__address_state_code }}{{ external_office__address_postcode }}
+              </div>
+              <div class="col-6">
+                <div class="row no-gutters">
+                  <div class="col text-right">
+                    {{# use_international_phone_format }}
+                      {{# external_office__phone_international }}<a href="tel:{{ external_office__phone_international }}">{{ external_office__phone_international }}</a>{{/ external_office__phone_international }}
+                    {{/ use_international_phone_format }}
+                    {{^ use_international_phone_format }}
+                      {{# external_office__phone_local }}<a href="tel:{{ external_office__phone_local }}">{{ external_office__phone_local }}</a>{{/ external_office__phone_local }}
+                    {{/ use_international_phone_format }}
+                  </div>
+                  {{# external_office__website_display }}
+                  <div class="col text-right"><a href="{{ external_office__website_url }}">{{ external_office__website_display }}</a></div>
+                  {{/ external_office__website_display }}
+                </div>
+              </div>
+            </div>
+          </footer>
+        </div>
+
+      </section>
+    </article>
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+</html>
