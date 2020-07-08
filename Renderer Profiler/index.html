@@ -1,0 +1,33 @@
+<!doctype html>
+<!-- VERSION: 0.0.0 -->
+<html lang="en" async>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Renderer Profiler</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <section class="page">
+      <div id="app"></div>
+    </section>
+    <script type="text/javascript" src="index.js"></script>
+    <script>
+      RW
+        .init({
+          el: document.getElementById('app'),
+        })
+        .catch(function () {
+          document.body.innerHTML = '<h1>FAILED</h1>';
+        })
+        .then(function () {
+          document.dispatchEvent(new Event('printready'));
+        });
+    </script>
+  </body>
+</html>
