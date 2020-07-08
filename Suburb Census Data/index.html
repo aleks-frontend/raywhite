@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="version" content="0.2.2">
+    <title>Census Data - {{ external_localities_names }}</title>
+    
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i|Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+    <script type="text/javascript" src="index.js"></script>
+  </head>
+  <body>
+    <article class="document">
+
+      <section class="page-A4 page-with-margins">
+        <div class="row h-100">
+          <div class="col-12">
+            <h2 class="heading">Did you know…</h2>
+
+            <div class="row align-items-center no-gutters">
+              <div class="col-6">
+                <h6>Annual Household Income in {{ external_localities_names }}</h6>
+                <div id="AnnualHouseholdIncome" class="aspect--three-fourths"></div>
+              </div>
+              <div class="col-5 offset-1">
+                <h6 class="text-center">Residents in {{ external_localities_names }}</h6>
+                <div id="AgeBreakdown" class="aspect--eight-ninths"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12"><hr/></div>
+          <div class="col-12">
+            <div class="row no-gutters">
+              <div class="col">
+                <h6 class="text-center">Property Ownership in {{ external_localities_names }}</h6>
+                <div id="OwnershipBreakdown" class="aspect--two-thirds"></div>
+              </div>
+              <div class="col">
+                <h6 class="text-center">Property Types in {{ external_localities_names }}</h6>
+                <div id="PropertyTypeBreakdown" class="aspect--two-thirds"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12"><hr/></div>
+          <div class="col-12">
+            <div class="row no-gutters">
+              <div class="col-7">
+                <h6 class="text-center">Property Sizes in {{ external_localities_names }}</h6>
+                <div id="PropertySizes" class="aspect--one-half"></div>
+              </div>
+              <div class="col-4 offset-1">
+                <div class="data-block h-100">
+                  {{# suburb_census_datablock_before }}<div class="data-block__desc data-block__before">{{ suburb_census_datablock_before }}</div>{{/ suburb_census_datablock_before }}
+                  <div class="data-block__title">{{ suburb_census_datablock_title }}</div>
+                  {{# suburb_census_datablock_after }}<div class="data-block__desc data-block__after">{{ suburb_census_datablock_after }}</div>{{/ suburb_census_datablock_after }}
+                  {{# suburb_census_datablock_source }}<div class="data-block__source">(Source: {{ suburb_census_datablock_source }})</div>{{/ suburb_census_datablock_source }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </article>
+    <script type="text/javascript">
+
+      RW.init(function () {
+        return RW.pf.Promise.all([
+          {{# external_census_data__annual_household_income_json }}
+          RW.annualHouseholdIncome('#AnnualHouseholdIncome', JSON.parse('{{{ external_census_data__annual_household_income_json }}}')),
+          {{/ external_census_data__annual_household_income_json }}
+
+          {{# external_census_data__age_breakdown_json }}
+          RW.ageBreakdown('#AgeBreakdown', JSON.parse('{{{ external_census_data__age_breakdown_json }}}')),
+          {{/ external_census_data__age_breakdown_json }}
+
+          {{# external_census_data__ownership_breakdown_json }}
+          RW.ownershipBreakdown('#OwnershipBreakdown', JSON.parse('{{{ external_census_data__ownership_breakdown_json }}}')),
+          {{/ external_census_data__ownership_breakdown_json }}
+
+          {{# external_census_data__property_type_breakdown_json }}
+          RW.propertyTypeBreakdown('#PropertyTypeBreakdown', JSON.parse('{{{ external_census_data__property_type_breakdown_json }}}')),
+          {{/ external_census_data__property_type_breakdown_json }}
+
+          {{# external_census_data__property_sizes_json }}
+          RW.propertySizes('#PropertySizes', JSON.parse('{{{ external_census_data__property_sizes_json }}}')),
+          {{/ external_census_data__property_sizes_json }}
+
+          RW.isLoaded,
+        ]);
+      })
+      .then(function () {
+        return new RW.pf.Promise(function (resolve) {
+          setTimeout(resolve, 500);
+        });
+      })
+      .then(function () {
+        document.dispatchEvent(new Event('printready'));
+      });
+    </script>
+  </body>
+</html>
