@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en" async>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="version" content="0.4.0">
+    <title>Market Report - {{ market_report_localities_area_name }}</title>
+    
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700">
+    <link media="all" rel="stylesheet" href="index.css" />
+    <script type="text/javascript" src="index.js"></script>
+  </head>
+  <body>
+    <article class="document">
+      <script>
+        var propertyTypes = '{{ residential_property_types }}' || 'combined';
+        document.body.classList.add('property-types-' + propertyTypes);
+        {{# debug }}
+        document.addEventListener('printready', function () {
+          log('detected printready event');
+        })
+        {{/ debug }}
+      </script>
+      <section id="Page3" class="page-A4 page-with-margins">
+        <div class="row no-gutters">
+          <div class="col-9">
+            <h3 class="heading">Median <span class="show-units">unit </span><span class="show-houses">house </span>sale prices by suburb in the last 3 years</h3>
+          </div>
+          <div class="col-4">
+            <h6>
+              Median Change
+              <span data-formatter="dfns.format" data-format="YYYY">{{ external_market_stats_date_from }}</span>
+              -
+              <span data-formatter="dfns.format" data-format="YYYY">{{ external_market_stats_date_to }}</span>
+            </h6>
+
+            <table class="table--brand show-combined">
+              <thead>
+                <tr>
+                  <th>Houses</th>
+                  <th>&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{# spreadsheet.external_localities }}
+                <tr>
+                  <td>{{ locality_name }}</td>
+                  <td class="text-right" id="change_houses_{{ locality_id }}"></td>
+                </tr>
+                {{/ spreadsheet.external_localities }}
+              </tbody>
+            </table>
+            <table class="table--bold show-combined">
+              <thead>
+                <tr>
+                  <th>Units / Townhouses</th>
+                  <th>&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{# spreadsheet.external_localities }}
+                <tr>
+                  <td>{{ locality_name }}</td>
+                  <td class="text-right" id="change_units_{{ locality_id }}"></td>
+                </tr>
+                {{/ spreadsheet.external_localities }}
+              </tbody>
+            </table>
+
+            <table class="table--brand show-houses">
+              <thead>
+                <tr>
+                  <th>Houses</th>
+                  <th>&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{# spreadsheet.external_localities }}
+                <tr>
+                  <td>{{ locality_name }}</td>
+                  <td class="text-right" id="change_houses_{{ locality_id }}_alt"></td>
+                </tr>
+                {{/ spreadsheet.external_localities }}
+              </tbody>
+            </table>
+            <table class="table--brand show-units">
+              <thead>
+                <tr>
+                  <th>Units / Townhouses</th>
+                  <th>&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{# spreadsheet.external_localities }}
+                <tr>
+                  <td>{{ locality_name }}</td>
+                  <td class="text-right" id="change_units_{{ locality_id }}_alt"></td>
+                </tr>
+                {{/ spreadsheet.external_localities }}
+              </tbody>
+            </table>
+
+            <small>
+              <b>About median values</b><br/>
+              <p>Please note that figures relate to sales of individual residential properties only, and exclude sales of multiple dwellings in single transactions (e.g. blocks of units), vacant land, and commercial real estate. The data on these pages also includes Valuer General data and because of the delay in receiving it, data from more recent periods may be incomplete. Also be aware that if any area has aparticularly low number of sales during any period, this may unfairly influence the trend. Whilst every care has been taken to confirm the accuracy of the information presented, neither the authors, editors or publishers can be responsible for errors or omissions or for any consequences from application of the information given.</p>
+            </small>
+          </div>
+          <div class="col-7 offset-1">
+            <ul class="legend show-combined">
+              <li class="legend__label">Houses</li>
+              <li class="legend__label">Units / Townhouses</li>
+            </ul>
+            {{# spreadsheet.external_localities }}
+            <h6>{{ locality_name }}</h6>
+            <div class="row no-gutters">
+              <div id="MedianPricesForLocality_{{ locality_id }}" class="aspect--one-third"></div>
+            </div>
+            {{/ spreadsheet.external_localities }}
+          </div>
+        </div>
+      </section>
+    </article>
+    <script type="text/javascript">
+      // Ensure needed vars are defined
+      var marketStats = [],
+          localityIds = [];
+    </script>
+    <script type="text/javascript">
+      // Attempt to process inputs into defined vars
+      marketStats = JSON.parse('{{{ external_multi_aligned_partial_annual_sales_volume_json }}}' || '[]');
+      localityIds = [
+      {{# spreadsheet.external_localities }}
+        {{ locality_id }},
+      {{/ spreadsheet.external_localities }}
+      ];
+    </script>
+    <script type="text/javascript">
+      // Call out to bundled JS with all required data
+      RW.init({
+        window: window,
+        localityIds: localityIds,
+        propertyTypes,
+        marketStats: marketStats,
+      })
+      .then(function () {
+        document.dispatchEvent(new Event('printready'));
+      });
+    </script>
+  </body>
+</html>
