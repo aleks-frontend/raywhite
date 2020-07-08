@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Raywhite Now</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link
+      media="all"
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i"
+    />
+    <link
+      media="all"
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i"
+    />
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <main class="tile">
+      <div
+        class="tile__featured-image"
+        style="background-image: url({{featured_image}});"
+      >
+        <div class="tile__content">
+          <div></div>
+          <div style="align-self: end; margin-bottom: 50px; padding-bottom: 20px; background-color: rgba(0,0,0, 0.6);">
+            <div class="tile__header {{raywhite_now_header_color}}">
+              <span class="agent-name {{show_agent}}">{{_opt_agent__name}}<br/></span>
+              {{_office__name}}
+            </div>
+
+            <div class="tile__caption {{raywhite_now_header_color}}">
+              {{raywhite_now_page_caption}}
+            </div>
+            <hr/>
+            <div class="tile__stats {{stats_style}}">
+              {{#collection.stats_collection---max-4}}
+              <div class="stat"><p>{{stats_}}</p>
+                <p style="vertical-align:{{label_position}};" class="stats-label">{{stats_label}}<hr class="stat-hr"/></p>
+              </div>
+              {{/collection.stats_collection---max-4}}
+            </div>
+            <hr/>
+
+
+          </div>
+
+        </div>
+      </div>
+    </main>
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+</html>
