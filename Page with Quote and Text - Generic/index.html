@@ -1,0 +1,35 @@
+<!doctype html>
+<!-- VERSION: 0.1.0 -->
+<html lang="en" async>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Page with Quote with Text</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <article class="document" data-office-type="{{ _office__sub_type_code }}">
+      <section class="page-A4 page-with-margins">
+        <div class="page__content h-100 justify-content-start">
+
+          <div class="quote">
+            <hgroup class="text-center">
+              <h4 class="quote__text"><b>{{ quote }}</b></h4>
+              {{# quote_author }}<h6 class="quote__author text-center">&mdash; {{ quote_author }}</h6>{{/ quote_author }}
+            </hgroup>
+          </div>
+
+          <div class="quote__content flex-fill">
+            <div class="copy text-col-2">{{{ formatted_text }}}</div>
+          </div>
+        </div>
+      </section>
+    </article>
+  </body>
+</html>
