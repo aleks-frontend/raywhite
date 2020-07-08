@@ -1,0 +1,36 @@
+<!doctype html>
+<!-- VERSION: 0.0.0 -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Social Boilerplate</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="index.css" />
+
+    <style type="text/css">
+      .tile {
+        {{# sticker_align }}
+          align-items: {{ sticker_align }} !important;
+        {{/ sticker_align }}
+
+        {{# background_image }}
+          background-image: url('{{{ background_image }}}');
+        {{/ background_image }}
+        {{^ background_image }}
+          background-image: url('{{{ external_listing_all__image_url }}}');
+        {{/ background_image }}
+      }
+    </style>
+  </head>
+  <body>
+    <main class="tile">
+      <h1 class="tile__sticker">SOLD</h1>
+    </main>
+  </body>
+  <script type="text/javascript" src="index.js"></script>
+</html>
