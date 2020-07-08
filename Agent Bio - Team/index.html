@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="version" content="0.2.0">
+    <title>Team Bio – {{ external_team__name }}</title>
+    
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <article class="document">
+      <section class="page-A4 page-with-margins">
+        <picture class="agent-image" style="background-image: url('{{{ external_team__image_lifestyle }}}?width=2480&scale=both')">
+          {{{ team_resizable_image }}}
+        </picture>
+
+        <div class="background--lighterGrey container-with-padding page-content">
+          <hgroup>
+            <h6><span class="highlight">Meet your agents</span></h6>
+            <div class="row">
+              <div class="col-11" id="teamName">
+                {{# editable_team__name }}<h2>{{ editable_team__name }}</h2>{{/ editable_team__name}}
+                {{^ editable_team__name }}<h2>{{ external_team__name }}</h2>{{/ editable_team__name}}
+              </div>
+            </div>
+          </hgroup>
+          <div class="text-col-2 align-self-end">
+            {{# team_leadin_paragraph }}
+              <p class="leadin">{{ team_leadin_paragraph }}</p>
+            {{/ team_leadin_paragraph }}
+            <div class="copy">
+              <div id="teamBio">
+                {{# editable_team__bio_html }}<div>{{{ editable_team__bio_html }}}</div>{{/ editable_team__bio_html }}
+                {{^ editable_team__bio_html }}<div>{{{ external_team__bio_html }}}</div>{{/ editable_team__bio_html }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </article>
+    <script type="text/javascript" src="index.js"></script>
+
+    <script id="teamBioExternal" type="text/template">{{{ external_team__bio_html }}}</script>
+    <script id="teamBioEditable" type="text/template">{{{ editable_team__bio_html }}}</script>
+    <script id="teamNameExternal" type="text/template">{{ external_team__name }}</script>
+    <script id="teamNameEditable" type="text/template">{{ editable_team__name }}</script>
+    <script type="text/javascript">
+      RW.outfit.applyEditableDefaults(window, [
+        {
+          id: 'teamBio',
+          editable: RW.dom.text(window, 'teamBioEditable'),
+          external: RW.dom.html(window, 'teamBioExternal'),
+        },
+        {
+          id: 'teamName',
+          editable: RW.dom.text(window, 'teamNameEditable'),
+          external: RW.dom.html(window, 'teamNameExternal'),
+        },
+      ]);
+    </script>
+  </body>
+</html>
