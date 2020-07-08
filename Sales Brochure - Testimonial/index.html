@@ -1,0 +1,102 @@
+<!doctype html>
+<!-- VERSION: 0.1.0 -->
+<html lang="en" async>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Sales Brochure - Testimonial</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,500,500i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+    <script type="text/javascript" src="index.js"></script>
+  </head>
+  <body class="testimonial">
+    <article class="document">
+      <section style="display: grid; grid-template-rows: 480px 450px 1fr;" class="page-A4 page-with-margins">
+
+        <div class="grid">
+        {{# spreadsheet.external_agents }}
+          <div class="grid__item">
+
+            {{#agent_image_lifestyle}}
+            <div class="grid__image" style="background-image: url('{{{ agent_image_lifestyle }}}')"></div>
+            <div class="grid__image-blurred" style="background-image: url('{{{ agent_image_lifestyle }}}')"></div>
+            {{/agent_image_lifestyle}}
+            {{^agent_image_lifestyle}}
+            <div class="grid__image" style="background-image: url('https://files.outfit.io/media_library_items/83722/agent-lifestyle-F-04.jpg')"></div>
+            <div class="grid__image-blurred" style="background-image: url('https://files.outfit.io/media_library_items/83722/agent-lifestyle-F-04.jpg')"></div>
+            {{/agent_image_lifestyle}}
+
+            <div class="grid__content">
+              <h3>{{{ agent_name }}}</h3>
+
+              <h5 style="font-family: 'Lato';">{{{ agent_job_title }}}<br/>
+                {{agent_phone_local}}
+              </h5>
+            </div>
+          </div>
+        {{/ spreadsheet.external_agents }}
+        </div>
+
+        <div class="agent-testimonial">
+          {{# collection.salesbrochure_testimonials---max-3 }}
+          <div class="testimonial">
+            <h4>{{testimonial_header}}</h4>
+            <div class="testimonial__wrap">
+              <div class="testimonial__content">{{ agent_testimonial__content }} <br/>
+                <b>{{vendor_property_address}}</b>
+              </div>
+
+            </div>
+            <br/>
+            <hr/>
+          </div>
+
+        {{/ collection.salesbrochure_testimonials---max-3 }}
+        </div>
+
+        <div class="testimonial__footer row">
+          <div class="col-6 align-self-end">
+          <b>{{ _office__name }}</b><br />
+                  {{ _office__address_street }}
+                  {{ _office__address_suburb }}, {{ _office__address_state_code }}
+                  {{ _office__address_postcode }}<br />
+                  {{# use_international_phone_format }}
+                  <div>{{ external_office_phone_international }}</div>
+                  {{/ use_international_phone_format }}
+                  {{^ use_international_phone_format }}
+                  <div>{{ _office__phone_local }}</div>
+                  {{/ use_international_phone_format }}
+                </div>
+                <div class="col-6 text-right align-self-end">
+                  <h6>{{ _office__website_display }}</h6>
+                </div>
+        </div>
+
+      </section>
+    </article>
+
+    <script type="text/javascript">
+      RW.init(function () {
+        return RW.pf.Promise.all([
+          //
+          // Scripts go here
+          RW.sampleScript('{{ title }}'),
+          //
+          RW.isLoaded,
+        ]);
+      })
+      .then(function () {
+        return new RW.pf.Promise(function (resolve) {
+          setTimeout(resolve, 500);
+        });
+      })
+      .then(function () {
+        document.dispatchEvent(new Event('printready'));
+      });
+    </script>
+  </body>
+</html>
