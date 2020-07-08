@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html data-sign="OS?">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+    
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:300,300i,400,400i,500,500i,600,600i,700,700i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+
+    <style>
+
+      html {
+        font-family: "Playfair Display";
+        font-size: 11pt;
+        color: #595959;
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }
+      
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+      
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+      
+      /* Cabin Fever Office Data Styles */
+      
+      .container.grey{
+        background-color: rgb(235,235,235);
+        background-image: url("https://files.outfit.io/media_library_items/183282/White%2520houseArtboard%25201.svg");
+        background-size: 1000px;
+        background-position: bottom;
+        background-repeat: no-repeat;
+      }
+      
+      .container.white{
+        background-color: #fff;
+        background-image: url("https://files.outfit.io/media_library_items/183283/Grey%2520houseArtboard%25201.svg");
+        background-size: 1000px;
+        background-position: bottom;
+        background-repeat: no-repeat;
+      }
+      
+      .content{
+        display: grid;
+        grid-template-rows: 260px 600px 1fr;
+      }
+      
+      .header{
+        align-self: center;
+        text-align: center;
+        font-size: 105px; 
+      }
+      
+      .inner-content{
+        align-self: center;
+        display: grid;
+        grid-template-rows: 60px 150px;
+      }
+      
+      .inner-content p{
+        text-align: center;
+        font-size: 40px;
+      }
+      
+      .price-thermo{
+         height: 160px;
+         position: fixed;
+         left: 235px;
+         z-index: 2;
+         bottom: 233px;
+      }
+      
+      .content-price{
+         background-color: #FFE512;
+         width: 451px;
+        padding-left: 40px;
+         font-size: 65px;
+         height: 130px;
+         max-height: 130px;
+         position: absolute !important;
+         bottom: 259px;
+         left: 342px;
+         z-index: 1;
+         padding-top: 20px;
+        text-align: center;
+      }
+      
+      .footer{
+        justify-self: center;
+        align-self: center;
+        display: grid;
+        grid-template-rows: 70px;
+      }
+      
+      .footer-text{
+        font-size: 40px;
+        width: 600px;
+        max-height: 70px;
+        text-align: center;
+      }
+      
+      .footer span{
+        font-family:'Lato';
+        letter-spacing: 5px;
+        text-align: center;
+        font-size: 20px;
+      }
+      
+      
+       @media only screen and (min-height: 1920px) and (min-width: 1080px) {
+         
+         .content{
+           grid-template-rows:700px 765px 1fr
+         }
+         
+         .header{
+           align-self: center;
+           text-align: center;
+           font-size: 115px;
+           width: 600px;
+           justify-self: center;
+         }
+         
+         .inner-content p{
+           font-size: 45px;
+         }
+         
+        .container.grey{
+         background-size: 1140px;
+         background-position: center 650px; 
+        }
+      
+       .container.white{
+         background-size: 1140px;
+         background-position: center 650px; 
+       }
+         
+         .content-price{
+           bottom: 528px;
+           padding-left: 51px;
+           height: 158px;
+		   max-height: 158px;
+           padding-top: 30px;
+         }
+         
+         .price-thermo{
+           bottom: 500px;
+           height: 190px;
+           left: 220px;
+         }
+         
+         .footer-text{
+           font-size: 45px;
+         }
+         
+         .footer span{
+           font-family:'Lato';
+           letter-spacing: 5px;
+           text-align: center;
+           font-size: 25px;
+           position: absolute;
+           bottom: 200px;
+           left: 450px;
+         }
+      }
+      
+      @media only screen and (min-height: 628px) and (min-width: 1200px) {
+        .content{
+          grid-template-columns: 500px 1fr;
+          grid-template-rows: 550px;
+        }
+        
+        .container.grey{
+         background-size: 700px;
+         background-position: right;
+        }
+      
+       .container.white{
+         background-size: 700px;
+         background-position: right;
+       }
+        
+        .header{
+          font-size: 80px;
+          width: 420px;
+          text-align: left;
+          justify-self: center;
+        }
+        
+        .inner-content{
+          align-self: center;
+          display: grid;
+          grid-template-columns: 1fr;
+          margin-top: 100px;
+        }
+        .inner-content p{
+          font-size: 25px;
+        }
+        
+        .content-price{
+          width: 331px;
+          padding-left: 40px;
+          font-size: 40px;
+          height: 93px;
+          max-height: 93px; 
+          bottom: 168px;
+          left: 707px; 
+        }
+        
+        .price-thermo{
+          height: 113px;
+          left: 632px;
+          bottom: 147px;
+        }
+        
+        .footer-text{
+          position: absolute !important;
+          font-size: 25px;
+          left: 560px;
+          bottom: 100px;
+          max-height: 35px;
+        }
+        
+        .footer span{
+           text-align: center;
+           font-size: 13px;
+           position: absolute;
+           bottom: 36px;
+           left: 46px;
+           letter-spacing: 2px;
+         }
+      }
+      
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" data-crop="{{show-crop}}" data-reduce-export-font-size-by-percent="0" data-reduce-firefox-font-size-by-percent="0" data-prevent-export-overflow="false">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit {{{cabinfever_social_Theme_choice}}}">
+          <div class="content">
+            <div class="header">
+              {{{cabinfever_social_header_text}}}
+            </div>
+            
+            <div class="inner-content">
+              <p>
+                Homes of all sizes in <br/>
+                <span data-max-line="1">{{cabinfever_social_suburb_text}}</span> are finding <br/>
+                their perfect match at our <br/>
+                online auctions.
+              </p>
+               
+              <img class="price-thermo" src="https://files.outfit.io/media_library_items/183293/ThermoArtboard%25201.svg">
+              <div class="content-price" data-max-height="css">
+                {{cabinfever_social_price_text}}
+              </div>
+            </div>
+            
+            <div class="footer">
+              <div class="footer-text" data-max-height="css">{{cabinfever_social_footer_text}}</div>
+              <span>#RAYWHITE</span>
+            </div>
+          </div>
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/custom-rich-text.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/text-fit-min.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+      {{ #placeholder-toggle-new }}document.body.classList.add("u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}"); {{ /placeholder-toggle-new }}
+      {{ #placeholder-validation }}document.body.classList.add("placeholder__validation--{{placeholder-validation}}"){{ /placeholder-validation }}
+    </script>
+    <script>
+      
+      console.clear();
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+      
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+      
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+      
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+
+    </script>
+
+
+  </body>
+</html>
