@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="version" content="0.0.0">
+    <title>Property Marketing</title>
+    
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <article class="document">
+      {{# collection.property_marketing_pages }}
+        {{# block.product_page }}
+          <section class="page-A4 page-with-minimal-margins">
+            <div class="h-100 background--lighterGrey">
+              <div class="row h-100">
+                <div class="col-12">
+                  <hgroup class="page-with-margins">
+                    <h6><span class="highlight">Marketing Options</span></h6>
+                    <h2><b>{{ title }}</b></h2>
+                    <h5>{{ subtitle }}</h5>
+                  </hgroup>
+                </div>
+                <div class="col-12 align-self-end">
+                  <div class="position-relative aspect--square">
+                    <figure class="product__image">
+                      <picture class="h-100">{{{ resizable_product_image }}}</picture>
+                      {{# image_caption }}<figcaption class="product__caption product__caption--{{# caption_position }}{{ caption_position }}{{/ caption_position }}{{^ caption_position }}top-left{{/ caption_position }}">{{ image_caption }}</figcaption>{{/ image_caption}}
+                    </figure>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        {{/ block.product_page }}
+
+        {{# block.product_page_multiple }}
+          <section class="page-A4 page-with-minimal-margins">
+            <div class="h-100 background--lighterGrey">
+              <div class="row h-100">
+                <header class="col-12">
+                  <hgroup class="page-with-margins">
+                    <h6><span class="highlight">Marketing Options</span></h6>
+                    <h2><b>{{ title }}</b></h2>
+                    <h5>{{ subtitle }}</h5>
+                  </hgroup>
+                </header>
+                <div class="col-12">
+                  {{# collection.products }}
+                    <div class="row no-gutters product align-items-center justify-content-between">
+                      <div class="col-7">
+                        <picture class="product__image">{{{ resizable_product_image }}}</picture>
+                      </div>
+                      <div class="col-5">
+                        <div class="product__content">
+                          <h5 class="product__title">{{ product_title }}</h5>
+                          <div class="product__caption">{{ unformatted_text }}</div>
+                        </div>
+                      </div>
+                    </div>
+                  {{/ collection.products }}
+                </div>
+              </div>
+            </div>
+          </section>
+        {{/ block.product_page_multiple }}
+      {{/ collection.property_marketing_pages }}
+    </article>
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+</html>
