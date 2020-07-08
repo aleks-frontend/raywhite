@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Competition Creator</title>
+    
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,500,500i,700,700i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+    <script type="text/javascript" src="index.js"></script>
+  </head>
+  <body>
+    <main class="document">
+
+      <article id="Page1" class="page-A4 page-with-margins">
+        <div class="row h-100">
+          <div class="col-8 align-self-end">
+            <h1 class="underblock">{{ competition_creators_title }}</h1>
+          </div>
+          <div class="col-12">
+            <div class="row">
+              <div class="col-8">
+                <h5 class="subtitle">{{ competition_creators_subtitle }}</h5>
+                {{{ competition_creators_body }}}
+              </div>
+              <div class="col-4 align-self-end">
+                <dl class="feature-list">
+                  {{# spreadsheet.competition_creators_features }}
+                    <dt>{{ feature_title }}</dt>
+                    <dd>{{ feature_description }}</dd>
+                  {{/ spreadsheet.competition_creators_features }}
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article id="Page2" class="page-A4 page-with-minimal-margins">
+        <div class="page-with-margins background--lighterGrey h-100">
+          <div class="row h-100 align-items-center">
+
+            {{# collection.find_every_buyer_features }}
+
+              {{# block.photo_feature }}
+              <div class="col-4 text-center">
+                <figure class="circle-list">
+                  <div class="row no-gutters justify-content-center">
+                    <div class="col-10">
+                      <picture class="aspect--square picture--circle" style="background-image: url('{{{ photo_feature_image }}}')"></picture>
+                    </div>
+                  </div>
+                  <hgroup class="cicle-list__caption">
+                    <h5>{{ photo_feature_title }}</h5>
+                    <p>{{ photo_feature_caption }}</p>
+                  </hgroup>
+                </figure>
+              </div>
+              {{/ block.photo_feature }}
+
+              {{# block.headline }}
+              <div class="col-4 text-center">
+                <figure class="circle-list">
+                  <div class="row no-gutters justify-content-center align-items-center">
+                    <div class="col-12">
+                      <picture class="aspect--square picture--circle background--lightestGrey d-flex justify-content-center align-items-center">
+                        <h3>{{{ headline_title }}}</h3>
+                      </picture>
+                    </div>
+                    <hgroup class="cicle-list__caption">
+                      <h5>&nbsp;</h5>
+                      <p>&nbsp;</p>
+                    </hgroup>
+                  </div>
+                </figure>
+              </div>
+              {{/ block.headline }}
+
+            {{/ collection.find_every_buyer_features }}
+
+          </div>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>
