@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en" async>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="version" content="0.2.1">
+    <title>{{ title }}{{^ title }}Market Snapshot {{ external_localities_names }} {{ external_data_month_full }} {{ external_data_year_full }}{{/ title }}</title>
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Space+Mono">
+    <link media="all" rel="stylesheet" href="index.css" />
+    <script type="text/javascript">
+      var queue = [];
+      var start = new Date().getTime();
+      function log(msg) {
+        queue.push([msg, new Date().getTime()]);
+      }
+      log('head script');
+      window.addEventListener('unhandledrejection', function(event) {
+        log('unhandled rejection ' + event);
+        document.dispatchEvent(new Event('printready'));
+      });
+      window.onerror = function (message, source, lineno, colno, error) {
+        log(['unhandled error', message, source, lineno, colno, error].join(' \n'));
+        document.dispatchEvent(new Event('printready'));
+      };
+    </script>
+    <!--
+      Preload collection.block values so they inherit
+
+      "{{ external_market_stats_latest_interval_median_house_price }}"
+      "{{ external_market_stats_latest_interval_median_house_price_change_direction }}"
+      "{{ external_market_stats_latest_interval_median_house_price_change }}"
+
+      "{{ external_market_stats_latest_interval_median_unit_price }}"
+      "{{ external_market_stats_latest_interval_median_unit_price_change_direction }}"
+      "{{ external_market_stats_latest_interval_median_unit_price_change }}"
+    -->
+    {{{ account.snippets.tagmanager_script }}}
+    <script type="text/javascript" src="index.js"></script>
+  </head>
+  <body class="document crop-marks-{{# crop_marks }}{{ crop_marks }}{{/ crop_marks }}{{^ crop_marks }}false{{/ crop_marks }}">
+    <header class="deprecated-header">
+      <input class="deprecated-header__toggle" type="checkbox" id="showHeader" checked>
+      <div class="deprecated-header__content">
+        <div class="deprecated-header__inner">
+          <label class="deprecated-header__button" for="showHeader"><u>Dismiss</u></label>
+          <b class="text-uppercase">Deprecation Warning: </b>
+          A newer version of this document exists. Check out Market Snapshot V3
+        </div>
+      </div>
+    </header>
+    <article id="Page1" class="page">
+      <header class="photo-header">
+        <picture class="photo-header--image">
+          <img class="aspect--nine-sixteenths" src="" style="background-image: url('https://cdn1.ep.dynamics.net/s3/rwdev-media/docubuild/images/1aa6c25b-622a-4f15-a722-812fb62811ae.png'); {{# background_image }}background-image: url('{{ background_image }}'){{/ background_image }}"/>
+        </picture>
+        <svg class="photo-header--logo" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'>
+          <title>Ray White®</title>
+          <rect id='block' fill='#ffe512' width='120' height='120'/>
+          <g id='logomark' fill='#52524f'>
+            <path id='logomark--R' d='M21.26,100.13s-.22-.26.12-.31c2.52-.36,4.25-3,4.57-4.79a4.46,4.46,0,0,0-1.07-4.14c-1.29-1.4-2.48-1.38-4.7-1.31H15.7a.41.41,0,0,0-.4.34l-2.76,14.8a.27.27,0,0,0,.28.34h3a.41.41,0,0,0,.4-.34l.85-4.59h0s0,0,.22.28l3.24,4.37a.72.72,0,0,0,.54.28h3.77s.34,0,.13-.27Zm-2.14-3.29h-1a.26.26,0,0,1-.27-.34l.78-4.07H20c1.9.07,2.6,1,2.35,2.42C22.23,95.59,21.62,96.9,19.12,96.84Z'/>
+            <path id='logomark--a' d='M39.42,93.63H36.34L36,95.08a3,3,0,0,0-3-1.85,7.26,7.26,0,0,0-6.88,6.1c-.61,3.28,1,6.12,4.62,6.12a4.68,4.68,0,0,0,3.56-2l-.24,1.26a.27.27,0,0,0,.28.34H37.3a.43.43,0,0,0,.41-.34L39.7,94A.27.27,0,0,0,39.42,93.63Zm-4.13,5.7a3.56,3.56,0,0,1-3.41,2.93,2.32,2.32,0,0,1-2.31-2.89,3.55,3.55,0,0,1,3.37-2.94A2.28,2.28,0,0,1,35.29,99.33Z'/>
+            <path id='logomark--y' d='M52.26,93.63H49.39a.63.63,0,0,0-.51.29l-3,5.33s-.16.3-.23,0l-1-5.26a.42.42,0,0,0-.41-.33h-3A.26.26,0,0,0,41,94l2,9.87a1,1,0,0,1-.1.63l-2.17,3.83s-.17.3.17.3h2.81a.62.62,0,0,0,.51-.3l8.19-14.37S52.6,93.63,52.26,93.63Z'/>
+            <path id='logomark--W' d='M71.71,89.81H68.6a.55.55,0,0,0-.48.31L64.3,98.31s-.15.31-.16,0l-.45-8.13a.36.36,0,0,0-.36-.34H61a.53.53,0,0,0-.47.32l-3.49,8.18s-.13.31-.16,0l-.6-8.13a.36.36,0,0,0-.36-.34H53a.31.31,0,0,0-.32.34l1.06,14.57a.37.37,0,0,0,.37.34H57a.53.53,0,0,0,.47-.32l3.48-8.6s.12-.31.14,0l.29,8.54a.35.35,0,0,0,.36.35h3a.55.55,0,0,0,.48-.31L71.9,90.12S72.05,89.81,71.71,89.81Z'/>
+            <path id='logomark--h' d='M78.92,93.23a3.89,3.89,0,0,0-3.21,1.45h0s0,0,0-.34l.78-4.19a.27.27,0,0,0-.28-.34H73.49a.41.41,0,0,0-.4.34l-2.71,14.57a.27.27,0,0,0,.28.34H73.4a.42.42,0,0,0,.41-.34l1.11-6c.1-.55.45-2.51,2.37-2.51s1.46,2.08,1.36,2.63l-1.1,5.89a.27.27,0,0,0,.28.34h2.74a.41.41,0,0,0,.4-.34l1.13-6c.38-2,.46-3-.3-4.18A3.46,3.46,0,0,0,78.92,93.23Z'/>
+            <g id='logomark--i'>
+              <path d='M87.9,93.68H85.17a.42.42,0,0,0-.41.33l-2,10.76a.27.27,0,0,0,.28.34h2.73a.42.42,0,0,0,.41-.34l2-10.76A.27.27,0,0,0,87.9,93.68Z'/>
+              <path d='M88.61,89.86H85.87a.41.41,0,0,0-.4.34l-.36,1.93a.27.27,0,0,0,.28.33h2.74a.41.41,0,0,0,.4-.33l.36-1.93A.27.27,0,0,0,88.61,89.86Z'/>
+            </g>
+            <path id='logomark--t' d='M96.61,93.68h-1.3a.27.27,0,0,1-.28-.34l.58-3.14a.27.27,0,0,0-.28-.34H92.59a.41.41,0,0,0-.4.34l-.65,3.48H90.2a.42.42,0,0,0-.41.33l-.42,2.26h1.35a.27.27,0,0,1,.28.34l-1.51,8.16a.27.27,0,0,0,.28.34H92.5a.43.43,0,0,0,.41-.34l1.57-8.5h1.31a.41.41,0,0,0,.4-.33Z'/>
+            <path id='logomark--e' d='M103.41,93.36a7.58,7.58,0,0,0-7.11,6.06,4.89,4.89,0,0,0,4.93,6.06,6.24,6.24,0,0,0,3.44-.84,8.3,8.3,0,0,0,2.82-2.47s.18-.29-.16-.29h-3.46a2.45,2.45,0,0,1-2.11.79c-1.33,0-2.35-.69-2.3-2h8.23s.34,0,.38-.13a7.92,7.92,0,0,0,.24-1C109,96.05,106.9,93.36,103.41,93.36Zm1.35,5H99.91a3.2,3.2,0,0,1,3-2,2,2,0,0,1,2.22,1.61A.32.32,0,0,1,104.76,98.4Z'/>
+            <g id='logomark--registered'>
+              <path d='M110.17,104c0-.29-.17-.43-.52-.43h-.58v1.49h.24v-.64h.24l.41.64h.25l-.43-.66A.38.38,0,0,0,110.17,104Zm-.62.23h-.24v-.47h.3c.16,0,.33,0,.33.23S109.75,104.25,109.55,104.25Z'/>
+              <path d='M109.57,103.06a1.27,1.27,0,0,0-1.28,1.27,1.25,1.25,0,0,0,.37.91,1.28,1.28,0,0,0,2.19-.91A1.27,1.27,0,0,0,109.57,103.06Zm0,2.36a1.09,1.09,0,1,1,1.05-1.09A1,1,0,0,1,109.57,105.42Z'/>
+            </g>
+          </g>
+        </svg>
+        <div class="container-fluid">
+          <h1 class="photo-header--heading token-wrapper">
+            <span class="highlight">
+              {{ title }}
+              {{^ title }}
+                Market Snapshot {{ external_localities_names }} {{ external_data_month_full }} {{ external_data_year_full }}
+              {{/ title }}
+            </span>
+          </h1>
+        </div>
+      </header>
+
+      <div class="container-fluid">
+        <h4 class="token-wrapper">
+          {{ subtitle }}
+          {{^ subtitle }}
+            Market Snapshot provided by
+             {{# external_opt_agent_name }}{{ external_opt_agent_name }}{{/ external_opt_agent_name }}
+             {{^ external_opt_agent_name }}{{ external_office_name }}{{/ external_opt_agent_name }}
+          {{/ subtitle }}
+        </h4>
+        <div class="row">
+
+          <section id="SalesByQuarter" class="col-6">
+            <h6>Sales by Quarter</h6>
+            <table class="sales-table">
+              <thead class="sales-table--head">
+                <tr>
+                  <th>Year</th>
+                  <th>{{ external_market_stats_previous_interval_label }}</th>
+                  <th>{{ external_market_stats_latest_interval_label }}</th>
+                </tr>
+              </thead>
+              <tbody class="sales-table--body">
+                <tr>
+                  <th>{{ external_market_stats_latest_interval_year }}</th>
+                  <td>
+                    {{# external_market_stats_previous_interval_sales_count }}
+                    {{ external_market_stats_previous_interval_sales_count }}
+                    {{/ external_market_stats_previous_interval_sales_count }}
+                    {{^ external_market_stats_previous_interval_sales_count }}
+                    <span class="muted">—</span>
+                    {{/ external_market_stats_previous_interval_sales_count }}
+                  </td>
+                  <td>{{ external_market_stats_latest_interval_sales_count }}</td>
+                </tr>
+                <tr class="sales-table--change">
+                  <td></td>
+                  <td>
+                    {{# external_market_stats_previous_interval_year_change }}
+                    <span class="badge arrow-{{ external_market_stats_previous_interval_year_change_direction }}">{{ external_market_stats_previous_interval_year_change }}</span>
+                    {{/ external_market_stats_previous_interval_year_change }}
+                  </td>
+                  <td><span class="badge arrow-{{ external_market_stats_latest_interval_year_change_direction }}">{{ external_market_stats_latest_interval_year_change }}</span></td>
+                </tr>
+                <tr>
+                  <th>{{ external_market_stats_latest_interval_year_before }}</th>
+                  <td>{{ external_market_stats_previous_interval_year_before_sales_count }}</td>
+                  <td>{{ external_market_stats_latest_interval_year_before_sales_count }}</td>
+                </tr>
+                <tr class="sales-table--change">
+                  <td></td>
+                  <td><span class="badge arrow-{{ external_market_stats_previous_interval_2_year_change_direction }}">{{ external_market_stats_previous_interval_2_year_change }}</span></td>
+                  <td><span class="badge arrow-{{ external_market_stats_latest_interval_2_year_change_direction }}">{{ external_market_stats_latest_interval_2_year_change }}</span></td>
+                </tr>
+                <tr>
+                  <th>{{ external_market_stats_latest_interval_2_year_before }}</th>
+                  <td>{{ external_market_stats_previous_interval_2_year_before_sales_count }}</td>
+                  <td>{{ external_market_stats_latest_interval_2_year_before_sales_count }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section class="col-6">
+            {{# collection.market_stats_sections }}
+              {{# block.houses_section }}
+                <div class="card card-grey median-price">
+                  <div id="MedianPrice_Houses" class="median-price--graph"></div>
+                  <h6 class="median-price--heading">Median House Price</h6>
+                  <hgroup>
+                    <h3 class="median-price--amount">
+                      {{# external_market_stats_latest_interval_median_house_price }}
+                      <span class="small-caps">$</span>{{ external_market_stats_latest_interval_median_house_price }}
+                      {{/ external_market_stats_latest_interval_median_house_price }}
+                      {{^ external_market_stats_latest_interval_median_house_price }}
+                      <span class="small-caps">n/a</span>
+                      {{/ external_market_stats_latest_interval_median_house_price }}
+                    </h3>
+                    {{# external_market_stats_latest_interval_median_house_price }}
+                    <h6 class="median-price--change arrow-{{ external_market_stats_latest_interval_median_house_price_change_direction }} muted">{{ external_market_stats_latest_interval_median_house_price_change }}{{^ external_market_stats_latest_interval_median_house_price_change }}No {{/ external_market_stats_latest_interval_median_house_price_change }}change vs. last year</h6>
+                    {{/ external_market_stats_latest_interval_median_house_price }}
+                  </hgroup>
+                </div>
+              {{/ block.houses_section }}
+
+              {{# block.units_section }}
+                <div class="card card-grey median-price">
+                  <div id="MedianPrice_Units" class="median-price--graph"></div>
+                  <h6 class="median-price--heading">Median Unit Price</h6>
+                  <hgroup>
+                    <h3 class="median-price--amount">
+                      {{# external_market_stats_latest_interval_median_unit_price }}
+                      <span class="small-caps">$</span>{{ external_market_stats_latest_interval_median_unit_price }}
+                      {{/ external_market_stats_latest_interval_median_unit_price }}
+                      {{^ external_market_stats_latest_interval_median_unit_price }}
+                      <span class="small-caps">n/a</span>
+                      {{/ external_market_stats_latest_interval_median_unit_price }}
+                    </h3>
+                    {{# external_market_stats_latest_interval_median_unit_price }}
+                    <h6 class="median-price--change arrow-{{ external_market_stats_latest_interval_median_unit_price_change_direction }} muted">{{ external_market_stats_latest_interval_median_unit_price_change }}{{^ external_market_stats_latest_interval_median_unit_price_change }}No{{/ external_market_stats_latest_interval_median_unit_price_change }} change vs. last year</h6>
+                    {{/ external_market_stats_latest_interval_median_unit_price }}
+                  </hgroup>
+                </div>
+              {{/ block.units_section }}
+            {{/ collection.market_stats_sections }}
+          </section>
+
+          <section class="col-12 sales-by-price-range">
+            <hgroup class="chart-hgroup">
+              <h6>Sales By Price Range ({{ external_annual_sales_by_price_range_label }})</h6>
+            </hgroup>
+            <div id="SalesByPriceRange" class="aspect--one-fourth"></div>
+          </section>
+
+        </div>
+        <footer class="page--footer">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-7">
+                <small>Data disclaimer: <a href="https://www.raywhite.com/data-disclaimers/">raywhite.com/data-disclaimers</a></small>
+              </div>
+              <div class="col align-self-end text-right"><small>v0.1.0 / {{ external_data_timestamp }}</small></div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </article>
+    <!-- End page 1 -->
+
+
+    <article id="Page2" class="page">
+      <section class="container-fluid page--section">
+
+        <h4>{{ title }}</h4>
+        <div class="row no-gutters">
+
+          <div class="col-9">
+            <hgroup class="chart-hgroup">
+              <h6>Sold Median Price Trend</h6>
+            </hgroup>
+            <div id="MedianPriceTrend" class="aspect--three-fifths"></div>
+          </div>
+
+          <div class="col-3">
+            <section id="ContactCard" class="contact-card">
+              <picture class="contact-card--photo">
+                <img class="aspect--square" src="" style="background-image: url('{{ external_opt_agent_image_headshot }}?maxwidth=400&scale=both'); {{# agent_image_headshot }}background-image: url('{{ agent_image_headshot }}'){{/ agent_image_headshot }}"/>
+              </picture>
+              <div class="contact-card--body">{{{ market_snapshot_contact_message }}}</div>
+              <div class="contact-card--action token-wrapper">
+                {{# external_opt_agent_name }}
+                <div class="contact-card--name">{{ external_opt_agent_name }}</div>
+                {{# use_international_phone_format }}
+                <div class="contact-card--phone">{{^ external_opt_agent_phone_international }}{{ external_opt_agent_phone }}{{/ external_opt_agent_phone_international }}{{ external_opt_agent_phone_international }}</div>
+                {{/ use_international_phone_format }}
+                {{^ use_international_phone_format }}
+                <div class="contact-card--phone">{{^ external_opt_agent_phone_local }}{{ external_opt_agent_phone }}{{/ external_opt_agent_phone_local }}{{ external_opt_agent_phone_local }}</div>
+                {{/ use_international_phone_format }}
+                <div class="contact-card--email">{{ external_opt_agent_email }}</div>
+                {{/ external_opt_agent_name }}
+                {{^ external_opt_agent_name }}
+                <div class="contact-card--name">{{ external_office_name }}</div>
+                {{# use_international_phone_format }}
+                <div class="contact-card--phone">{{^ external_office_phone_international }}{{ external_office_phone_number }}{{/ external_office_phone_international }}{{ external_office_phone_international }}</div>
+                {{/ use_international_phone_format }}
+                {{^ use_international_phone_format }}
+                <div class="contact-card--phone">{{^ external_office_phone_local }}{{ external_office_phone_number }}{{/ external_office_phone_local }}{{ external_office_phone_local }}</div>
+                {{/ use_international_phone_format }}
+                <div class="contact-card--email">{{ external_office_email }}</div>
+                {{/ external_opt_agent_name }}
+              </div>
+            </section>
+          </div>
+
+        </div>
+      </section>
+
+      <section id="RecentSales" class="page--section recent-sales">
+        <div class="container-fluid">
+          <h6>Recent Sales in {{ external_localities_names }}</h6>
+          <div class="row no-gutters">
+            <div class="col-6">
+              <div class="card">
+                <table class="recent-sales--table">
+                  <thead>
+                    <tr>
+                      <th>No.</th>
+                      <th>Street Name</th>
+                      <th>Features</th>
+                      <th>Sold Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{# spreadsheet.external_sales_market }}
+                      <tr>
+                        <th>
+                          <div class="ref-marker">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                              <circle cx="10" cy="10" r="10" fill="#ffe512"/>
+                              <text x="10" y="14" width="20" text-anchor="middle" height="10" font-size="10" fill="#4b4b4b" font-family="Lato, san-serif" font-weight="800">{{ sale_market_index }}</text>
+                            </svg>
+                          </div>
+                        </th>
+                        <td><div class="truncate">{{ sale_market_address_street }}</div></td>
+                        <td><div class="truncate">{{ sale_market_property_features }}</div></td>
+                        <td><b>${{ sale_market_sold_price }}</b></td>
+                      </tr>
+                    {{/ spreadsheet.external_sales_market }}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-6">
+              <div id="RecentSalesMap" class="recent-sales--map"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="page--footer">
+        <div class="container-fluid">
+          <b>{{ external_office_name }}</b><br/>
+          <div class="row justify-content-space-between">
+            <div class="col-6 align-self-start">
+              {{ external_office_address_1 }}
+              <span class="muted"> | </span>
+              {{ external_office_address_suburb }}{{# external_office_address_state_code }}, {{ external_office_address_state_code }}{{/ external_office_address_state_code }}
+              {{ external_office_address_postcode }}
+            </div>
+            <div class="col align-self-end">
+              {{# use_international_phone_format }}
+              {{# external_office_phone_international }}<a href="tel:{{ external_office_phone_international }}">{{ external_office_phone_international }}</a>{{/ external_office_phone_international }}
+              {{/ use_international_phone_format }}
+              {{^ use_international_phone_format }}
+              {{# external_office_phone_local }}<a href="tel:{{ external_office_phone_local }}">{{ external_office_phone_local }}</a>{{/ external_office_phone_local }}
+              {{/ use_international_phone_format }}
+            </div>
+            <div class="col align-self-end">
+              {{# external_office_website_display }}<a href="{{ external_office_website_url }}">{{ external_office_website_display }}</a>{{/ external_office_website_display }}
+            </div>
+          </div>
+          {{# external_office_licence_code }}
+          <div class="row">
+            <div class="col align-self-end">
+              <small>
+                {{ external_office_licence_code }}
+              </small>
+            </div>
+          </div>
+          {{/ external_office_licence_code }}
+        </div>
+      </footer>
+
+    </article>
+    <!-- End page 2 -->
+    {{# debug }}
+    <div class="page">
+      <div id="logging-container" class="container-fluid" />
+    </div>
+    {{/ debug }}
+
+    <script type="text/javascript">
+      log('main script started');
+      var resolveMapLoaded;
+      var mapLoaded = new RW.pf.Promise(function (resolve) {
+        resolveMapLoaded = resolve;
+      }).then(function () { log('map loaded'); });
+
+      {{# debug }}
+      window.log = RW.getLogger(document, '#logging-container', {
+        start: start,
+        queue: queue
+      });
+      {{/ debug }}
+
+      RW.init(function () {
+        var medianYears = [{{# spreadsheet.external_median_price_trend }}+'{{ year }}' || 0, {{/ spreadsheet.external_median_price_trend }}];
+        var medianHouses = [{{# spreadsheet.external_median_price_trend }}+'{{ houses }}' || null, {{/ spreadsheet.external_median_price_trend }}];
+        var medianUnits = [{{# spreadsheet.external_median_price_trend }}+'{{ units }}' || null, {{/ spreadsheet.external_median_price_trend }}];
+
+        return RW.pf.Promise.all([
+          RW.salesByPriceRangeChart('#SalesByPriceRange', RW.stripEmptyRanges({
+            range: [{{# spreadsheet.external_annual_sales_by_price_range }}{ max: +'{{ max }}' || 0, min: +'{{ min }}' || 0 }, {{/ spreadsheet.external_annual_sales_by_price_range }}],
+            houses: [{{# spreadsheet.external_annual_sales_by_price_range }}+'{{ houses }}' || null, {{/ spreadsheet.external_annual_sales_by_price_range }}],
+            units: [{{# spreadsheet.external_annual_sales_by_price_range }}+'{{ units }}' || null, {{/ spreadsheet.external_annual_sales_by_price_range }}],
+          })).then(function () { log('sale range chart loaded'); }),
+          RW.medianPriceTrendLineChart('#MedianPriceTrend', RW.stripEmptyRanges({
+            years: medianYears,
+            houses: medianHouses,
+            units: medianUnits,
+          })).then(function () { log('price trend main chart loaded'); }),
+          mapLoaded,
+          RW.isLoaded.then(function () { log('page loaded'); }),
+        ]);
+      })
+      .then(function () {
+        return new RW.pf.Promise(function (resolve) {
+          log('all done waiting 500ms');
+          setTimeout(resolve, 500);
+        });
+      })
+      .then(function () {
+        log('dispatching print ready');
+        document.dispatchEvent(new Event('printready'));
+      });
+
+      var recentSales = [
+        {{# spreadsheet.external_sales_market }}
+        {
+          lat: {{# sale_market_lat }}{{ sale_market_lat }}{{/ sale_market_lat }}0,
+          lng: {{# sale_market_lng }}{{ sale_market_lng }}{{/ sale_market_lng }}0,
+          address: `{{ sale_market_address_street }}`,
+        },
+        {{/ spreadsheet.external_sales_market }}
+      ].slice(0, 10);
+
+      function initMap() {
+        RW.init(function () {
+          var styledMapType = new google.maps.StyledMapType(RW.STYLE_STANDARD);
+
+          // Create a map object and specify the DOM element for display.
+          var mapEl = document.getElementById('RecentSalesMap');
+          var markerCount = Math.max(recentSales.length, 10);
+          var pointCount = recentSales.slice(0, markerCount).filter(function (l) {
+            return l.lat && l.lng;
+          });
+          var map = new google.maps.Map(mapEl, {
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            maxZoom: pointCount > 2 ? null : 15,
+            disableDefaultUI: true,
+            keyboardShortcuts: false,
+            gestureHandling: 'none',
+            mapTypeControlOptions: {
+              mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain', 'styled_map']
+            }
+          });
+
+          var icon = RW.markerIcon(google.maps);
+          console.log(icon);
+          var markers = recentSales.slice(0, markerCount).map(function (location, idx) {
+            if (!location.lat || !location.lng) return;
+            return new google.maps.Marker({
+              position: new google.maps.LatLng(location.lat, location.lng),
+              icon: icon,
+              title: location.address,
+              label: '' + (idx + 1),
+              zIndex: markerCount - idx,
+              map: map
+            });
+          }).filter(Boolean);
+
+          if (markers.length) {
+            var bounds = markers.reduce(function (bounds, marker) {
+              return bounds.extend(marker.getPosition());
+            }, new google.maps.LatLngBounds());
+
+
+            // Trigger loaded once tiles loaded and idle, fallback five seconds
+            RW.onMapLoaded(map).then(resolveMapLoaded);
+
+            map.setCenter(bounds.getCenter());
+            map.fitBounds(bounds, 20);
+            map.mapTypes.set('styled_map', styledMapType);
+            map.setMapTypeId('styled_map');
+          } else {
+            // Corner case: no markers, no listings or none with location
+            const container = mapEl.parentNode.parentNode;
+            const sibling = container.children[0];
+            container.removeChild(mapEl.parentNode);
+            if (sibling) {
+              sibling.classList.remove('col-6');
+              sibling.classList.add('col-12');
+            }
+          }
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ account.snippets.google_maps_api_key }}&v=quarterly&callback=initMap" async defer></script>
+  </body>
+</html>
