@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html data-sign="OS?">
+
+<head>
+  <title>Outfit</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" type="text/css" href="./css/minireset.css">
+  <link rel="stylesheet" type="text/css" href="./css/main.css">
+
+
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i');
+    @import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i');
+    
+    /* Inputs Order
+    {{#AvsPT--treaty-left-text}}{{/AvsPT--treaty-left-text}}
+    {{#AvsPT--treaty-right-text}}{{/AvsPT--treaty-right-text}}
+    {{#AvsPT--auction-left-text}}{{/AvsPT--auction-left-text}}
+    {{#AvsPT--auction-right-text}}{{/AvsPT--auction-right-text}}
+    {{#AvsPT--treaty-clearance-number}}{{/AvsPT--treaty-clearance-number}}
+    {{#AvsPT--treaty-average-number}}{{/AvsPT--treaty-average-number}}
+    {{#AvsPT--auction-clearance-number}}{{/AvsPT--auction-clearance-number}}
+    {{#AvsPT--auction-average-number}}{{/AvsPT--auction-average-number}}
+    */
+
+    :root {
+      --yellow: {{{account.colors.brand-color}}};
+      --white: {{{account.colors.white}}};
+      --light-grey: {{{account.colors.light-grey}}};
+      --grey: {{{account.colors.secondary}}};
+      --black: #000000;
+    }
+
+    body {
+      font-family: "Lato";
+      font-size: 1rem;
+      color: var(--grey);
+      word-break: break-word;
+    }
+
+    .backgroundImage {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+    }
+
+    .backgroundImage div {
+      width: auto !important;
+      height: auto !important;
+      right: 0;
+      bottom: 0;
+    }
+
+    /* Helper classes */
+    .u-hide {
+      display: none;
+    }
+
+    /* Helper class for fixing Reposition tool bug */
+    .reposition-fix {
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+
+    .reposition-fix div {
+      top: 0 !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    .bg {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .bg-left,
+    .bg-right {
+      width: 50%;
+      height: 100%;
+      flex: 0 0 50%;
+      background-color: var(--light-grey);
+    }
+
+    .bg-right {
+      background-color: var(--yellow);
+    }
+
+    .wrapper {
+      position: absolute;
+      top: 3mm;
+      right: 3mm;
+      bottom: 3mm;
+      left: 3mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .intro {
+      width: 100%;
+      padding: 38pt 34pt;
+    }
+
+    .intro-box {
+      background: var(--white);
+      padding: 20pt 25pt;
+    }
+
+    .intro p {
+      font-family: 'Playfair Display';
+      font-weight: normal;
+      font-size: 20pt;
+      line-height: 1.2em;
+      letter-spacing: 0.01em;
+    }
+
+    .intro strong {
+      font-weight: 700;
+    }
+
+    .left,
+    .right {
+      width: 50%;
+      flex: 0 0 50%;
+    }
+
+    .ifs {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: center;
+      color: var(--grey);
+      text-align: center;
+      padding: 23pt 0;
+    }
+
+    .if h3 {
+      font-family: 'Lato';
+      font-weight: 300;
+      font-size: 20.45pt;
+      line-height: 1.2em;
+      margin-bottom: 1.1em;
+    }
+
+    .if p {
+      font-family: 'Lato';
+      font-weight: normal;
+      font-size: 9pt;
+      line-height: 1.25em;
+    }
+
+    .if.left .if-item {
+      color: var(--white);
+      background-color: var(--grey);
+    }
+
+    .if-items {
+      display: flex;
+      flex-direction: row;
+      flex-flow: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      align-content: flex-start;
+    }
+
+    .if-item {
+      width: 106.632pt;
+      height: 106.632pt;
+      border-radius: 50%;
+      background: var(--white);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 0 8pt;
+    }
+
+    .choosing {
+      width: 100%;
+      padding: 38pt 0;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: center;
+      text-align: center;
+      color: var(--grey);
+    }
+
+    .choice {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0 20pt;
+    }
+
+    .choosing h3 {
+      font-family: 'Lato';
+      font-weight: 300;
+      font-size: 18.25pt;
+      line-height: 1.2em;
+    }
+
+    .choice .icon {
+      height: 42pt;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 7pt;
+    }
+
+    .choice.left .icon img {
+      width: 54.5pt;
+    }
+
+    .choice.right .icon img {
+      width: 45pt;
+    }
+
+    .infos {
+      width: 100%;
+      padding: 10pt 0;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: center;
+      text-align: center;
+      color: var(--grey);
+    }
+
+    .infos .left,
+    .infos .right {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 0 22pt;
+    }
+
+    .infos h3 {
+      font-family: 'Lato';
+      font-weight: normal;
+      font-size: 17.42pt;
+      line-height: 1.4em;
+    }
+
+    .infos p {
+      font-family: 'Lato';
+      font-weight: normal;
+      font-size: 10.65pt;
+      line-height: 1.25em;
+    }
+
+    .infos .icon {
+      height: 48pt;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      margin-bottom: 3pt;
+    }
+
+    .infos .icon img {
+      width: 40pt;
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      width: 50%;
+      flex: 0 0 50%;
+      padding: 0 5pt;
+    }
+
+    .copyright {
+      position: absolute;
+      left: 14pt;
+      bottom: 14pt;
+    }
+
+    .copyright p {
+      font-family: 'Lato';
+      font-weight: normal;
+      font-size: 6pt;
+      line-height: 1.2em;
+    }
+  </style>
+</head>
+
+<body style="background: white" data-crop="{{show-crop}}">
+ 
+  <div class="page">
+
+    <div class="bleed">
+
+      <div class="container fit">
+        <div class="bg">
+          <div class="bg-left"></div>
+          <div class="bg-right"></div>
+        </div>
+        <div class="wrapper">
+          <div class="intro">
+            <div class="intro-box">
+              <p>
+                There are plenty of different terms used to describe property campaigns, but there are really only two
+                ways of marketing - <strong>private treaty</strong> and <strong>auction</strong>. Choosing the
+                <strong>right one</strong> for you is easy.
+              </p>
+            </div>
+          </div>
+          <div class="ifs">
+            <div class="if left">
+              <h3>If you...</h3>
+              <div class="if-items">
+                <div class="if-item">
+                  <p>...aren&rsquo;t in a<br /> hurry and don&rsquo;t<br /> want to feel any<br /> time pressure.</p>
+                </div>
+                <div class="if-item">
+                  <p>...want<br /> to dissuade<br /> inspections from<br /> buyers who have<br /> searched in a<br />
+                    different price<br /> bracket.</p>
+                </div>
+                <div class="if-item">
+                  <p>...don&rsquo;t<br /> mind the<br /> prospect of<br /> opening your home<br /> for more
+                    inspections<br /> over a longer<br /> period.</p>
+                </div>
+              </div>
+            </div>
+            <div class="if right">
+              <h3>If you...</h3>
+              <div class="if-items">
+                <div class="if-item">
+                  <p>...are keen to<br /> compress the time<br /> it takes to finalise a<br /> sale.</p>
+                </div>
+                <div class="if-item">
+                  <p>...want to attract<br /> all possible buyers,<br /> regardless of their<br /> original budget.</p>
+                </div>
+                <div class="if-item">
+                  <p>...are willing to<br /> create time<br /> pressure for buyers<br /> to increase<br /> competition.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="choosing">
+            <div class="choice left">
+              <h3>Then choose to market your property via <strong>private treaty</strong>.</h3>
+              <div class="icon">
+                <img src="https://files.outfit.io/media_library_items/174543/auction-1.svg" />
+              </div>
+            </div>
+            <div class="choice right">
+              <h3>Then choose to market your property via <strong>auction</strong>.</h3>
+              <div class="icon">
+                <img src="https://files.outfit.io/media_library_items/174542/auction-2.svg" />
+              </div>
+            </div>
+          </div>
+          <div class="infos">
+            <div class="left">
+              <div class="info">
+                <div class="icon">
+                  <img src="https://files.outfit.io/media_library_items/174545/auction-3.svg" />
+                </div>
+                <p data-max-line="1">{{AvsPT--treaty-left-text}}{{^AvsPT--treaty-left-text}}Clearance by day 40{{/AvsPT--treaty-left-text}}</p>
+                {{#AvsPT--treaty-clearance-number}}
+                <h3 data-char-limit="3">{{AvsPT--treaty-clearance-number}}%</h3>
+                {{/AvsPT--treaty-clearance-number}}
+                {{^AvsPT--treaty-clearance-number}}
+                <h3>&lt;XX%&gt;</h3>
+                {{/AvsPT--treaty-clearance-number}}
+              </div>
+              <div class="info">
+                <div class="icon">
+                  <img src="https://files.outfit.io/media_library_items/174539/auction-4.svg" />
+                </div>
+                <p data-max-line="1">{{AvsPT--treaty-right-text}}{{^AvsPT--treaty-right-text}}Average days on market{{/AvsPT--treaty-right-text}}</p>
+                {{#AvsPT--treaty-average-number}}
+                <h3 data-char-limit="3">{{AvsPT--treaty-average-number}}</h3>
+                {{/AvsPT--treaty-average-number}}
+                {{^AvsPT--treaty-average-number}}
+                <h3>&lt;XXX&gt;</h3>
+                {{/AvsPT--treaty-average-number}}
+              </div>
+            </div>
+            <div class="right">
+              <div class="info">
+                <div class="icon">
+                  <img src="https://files.outfit.io/media_library_items/174545/auction-3.svg" />
+                </div>
+                <p data-max-line="1">{{AvsPT--auction-left-text}}{{^AvsPT--auction-left-text}}Clearance by day 40{{/AvsPT--auction-left-text}}</p>
+                {{#AvsPT--auction-clearance-number}}
+                <h3 data-char-limit="3">{{AvsPT--auction-clearance-number}}%</h3>
+                {{/AvsPT--auction-clearance-number}}
+                {{^AvsPT--auction-clearance-number}}
+                <h3 data-char-limit="3">&lt;XX%&gt;</h3>
+                {{/AvsPT--auction-clearance-number}}
+              </div>
+              <div class="info">
+                <div class="icon">
+                  <img src="https://files.outfit.io/media_library_items/174539/auction-4.svg" />
+                </div>
+                <p data-max-line="1">{{AvsPT--auction-right-text}}{{^AvsPT--auction-right-text}}Average days on market{{/AvsPT--auction-right-text}}</p>
+                {{#AvsPT--auction-average-number}}
+                <h3 data-char-limit="3">{{AvsPT--auction-average-number}}</h3>
+                {{/AvsPT--auction-average-number}}
+                {{^AvsPT--auction-average-number}}
+                <h3>&lt;XXX&gt;</h3>
+                {{/AvsPT--auction-average-number}}
+              </div>
+            </div>
+          </div>
+          <div class="copyright">
+            <p>&copy; [Ray White official trading name] Australia [2020] Version [1]</p>
+          </div>
+        </div>
+      </div>
+      <!--container fit-->
+
+    </div>
+    <!--bleed-->
+
+  </div>
+  <!--page-->
+
+  <script>
+    window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+  </script>
+  <script src="js/main.js"></script>
+  <script src="js/prefixfree.js"></script>
+  <script src="js/check-export-mode.js"></script>
+  <script src="js/dynamic-inject.js"></script>
+  <script src="js/char-limit.js"></script>
+  <script src="js/max-line-check.js"></script>
+  <script src="js/max-height-check.js"></script>
+  <script src="js/textfit.js"></script>
+  <script src="js/utils.js"></script>
+ 
+  <script>
+
+    console.clear();
+
+    // Tracking text changes and firing text restriction functions (mutationObserver)
+    const overflowObserver = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        maxLineCheck();
+        maxHeightCheck();
+        charLimit();
+      });
+    });
+
+    const injectObserver = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        injectDynamicContent();
+      });
+    });
+
+    const injectSources = document.querySelectorAll('[data-target-id]');
+
+    overflowObserver.observe(document.body, {
+      attributes: false,
+      characterData: true,
+      childList: true,
+      subtree: true,
+      attributeOldValue: false,
+      characterDataOldValue: true
+    });
+
+    if (injectSources.length > 0) {
+      injectSources.forEach(src => {
+        injectObserver.observe(src, {
+          attributes: false,
+          characterData: true,
+          childList: true,
+          subtree: true,
+          attributeOldValue: false,
+          characterDataOldValue: true
+        });
+      });
+    }
+
+    // Calling text size restriction functions once the fonts are loaded
+    document.fonts.ready.then(() => {
+      maxLineCheck();
+      maxHeightCheck();
+      charLimit();
+      injectDynamicContent();
+    });
+
+    checkCrop();
+    checkExport();
+
+    // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+    TextFit.fit({
+      selector: '.lockup',
+      alignItems: 'center',
+    });
+
+  </script>
+</body>
+
+</html>
