@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="version" content="0.0.0">
+    <title>Document Title – {{ title }}</title>
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+    <link media="all" rel="stylesheet" href="index.css" />
+    <script type="text/javascript" src="index.js"></script>
+  </head>
+  <body class="background--darkestGrey">
+    <article class="document">
+      <section class="page-A4 page-landscape page-with-margins background--darkGrey">
+        <div id="chart" class="h-100"></div>
+      </section>
+    </article>
+
+    <script type="text/javascript">
+      const annotations = [
+        {{# collection.chart_annotations }}
+        {
+          {{# label }}label: '{{ label }}', {{/ label }}{{# start }}start: '{{ start }}', {{/ start }}{{# end }}end: '{{ end }}',{{/ end }}
+        },
+        {{/ collection.chart_annotations }}
+      ]
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", async function() {
+        // Bail if not in editor iframe
+        if (!RW.isInEditorIframe(window)) return;
+
+        const data = await fetch('/users?sort_by=name.asc').then(res => res.json())
+        const teams = data.teams
+        const pages = data.total_pages
+
+        const getOffices = fetch("https://raywhiteapi.ep.dynamics.net/v1/organisations", {
+          body: JSON.stringify({
+            id: [...new Set(teams.map(t => +t.provider_group_id.split(':')[0]))].filter(id => id > 0),
+            statusCode: null,
+            public: null,
+          }),
+          headers: {
+            Accept: "application/json",
+            "Cache-Control": "no-cache",
+            "Content-Type": "application/json",
+            "Postman-Token": "b18c58eb-c319-4a7d-b606-b5d511f1c63e",
+            "X-Apikey": "FB889BB8-4AC9-40C2-829A-DD42D51626DE"
+          },
+          method: "POST"
+        })
+
+        const offices = (await getOffices.then(res => res.json())).data
+
+        // Load way less in dev mode so that iteration is faster
+        const allPages = '{{ dev_mode }}'
+          ? await Promise.all([fetch(`/users?sort_by=updated_at.asc&page=1`).then(res => res.json())])
+          : await Promise.all([...new Array(pages)].map((_, idx) => fetch(`/users?sort_by=updated_at.asc&page=${idx + 1}`).then(res => res.json())))
+        const users = [].concat(...allPages.map(p => p.users))
+          .filter(u => u.email && u.email.indexOf('@outfit.io') === -1)
+
+        document.body.classList.remove('loading');
+
+        RW.init(function () {
+          return RW.pf.Promise.all([
+            RW.rampupChart({
+              dates: RW.users.dates,
+              users: RW.users.total,
+              teams: RW.teams,
+              annotations: annotations
+            }),
+            RW.isLoaded,
+          ]);
+        })
+        .then(function () {
+          return new RW.pf.Promise(function (resolve) {
+            setTimeout(resolve, 500);
+          });
+        })
+        .then(function () {
+          document.dispatchEvent(new Event('printready'));
+        });
+      });
+    </script>
+  </body>
+</html>
