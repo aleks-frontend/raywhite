@@ -1,0 +1,125 @@
+<!doctype html>
+<!-- VERSION: 0.1.0 -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Property Showcase</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <main class="tile {{page_caption}} {{^page_caption}}month{{/page_caption}}">
+
+      <div class="tile__property-image {{image_show}}">
+        {{#featured_image}}
+        <div class="image custom" style="background-image: url('{{{ featured_image }}}')"></div>
+        {{/featured_image}}
+
+        {{^featured_image}}
+          <div class="image custom" style="background-color: #595959; height: 100%;"></div>
+        {{/featured_image}}
+
+        {{# spreadsheet._listings---all}}
+            {{#listing__image_url_1}}
+            <div class="image listing_1" style="background-image: url('{{{ listing__image_url_1 }}}')"></div>
+            {{/listing__image_url_1}}
+            {{^listing__image_url_1}}
+            <div class="image listing_1 image-unavailable"><span>IMAGE 1 IS NOT AVAILABLE FOR THIS LISTING</span></div>
+            {{/listing__image_url_1}}
+
+            {{#listing__image_url_2}}
+            <div class="image listing_2" style="background-image: url('{{{ listing__image_url_2 }}}')"></div>
+            {{/listing__image_url_2}}
+            {{^listing__image_url_2}}
+            <div class="image listing_2 image-unavailable"><span>IMAGE 2 IS NOT AVAILABLE FOR THIS LISTING</span></div>
+            {{/listing__image_url_2}}
+
+            {{#listing__image_url_3}}
+            <div class="image listing_3" style="background-image: url('{{{ listing__image_url_3 }}}')"></div>
+            {{/listing__image_url_3}}
+            {{^listing__image_url_3}}
+            <div class="image listing_3 image-unavailable"><span>IMAGE 3 IS NOT AVAILABLE FOR THIS LISTING</span></div>
+            {{/listing__image_url_3}}
+
+            {{#listing__image_url_4}}
+            <div class="image listing_4" style="background-image: url('{{{ listing__image_url_4 }}}')"></div>
+            {{/listing__image_url_4}}
+            {{^listing__image_url_4}}
+            <div class="image listing_4 image-unavailable"><span>IMAGE 4 IS NOT AVAILABLE FOR THIS LISTING</span></div>
+            {{/listing__image_url_4}}
+
+            {{#listing__image_url_5}}
+            <div class="image listing_5" style="background-image: url('{{{ listing__image_url_5 }}}')"></div>
+            {{/listing__image_url_5}}
+            {{^listing__image_url_5}}
+            <div class="image listing_5 image-unavailable"><span>IMAGE 5 IS NOT AVAILABLE FOR THIS LISTING</span></div>
+            {{/listing__image_url_5}}
+
+            {{#listing__image_url_6}}
+            <div class="image listing_6" style="background-image: url('{{{ listing__image_url_6 }}}')"></div>
+            {{/listing__image_url_6}}
+            {{^listing__image_url_6}}
+            <div class="image listing_6 image-unavailable"><span>IMAGE 6 IS NOT AVAILABLE FOR THIS LISTING</span></div>
+            {{/listing__image_url_6}}
+
+            {{#listing__image_url_7}}
+            <div class="image listing_7" style="background-image: url('{{{ listing__image_url_7 }}}')"></div>
+            {{/listing__image_url_7}}
+            {{^listing__image_url_7}}
+            <div class="image listing_7 image-unavailable"><span>IMAGE 7 IS NOT AVAILABLE FOR THIS LISTING</span></div>
+            {{/listing__image_url_7}}
+
+            {{#listing__image_url_8}}
+            <div class="image listing_8" style="background-image: url('{{{ listing__image_url_8 }}}')"></div>
+            {{/listing__image_url_8}}
+            {{^listing__image_url_8}}
+            <div class="image listing_8 image-unavailable"><span>IMAGE 8 IS NOT AVAILABLE FOR THIS LISTING</span></div>
+            {{/listing__image_url_8}}
+
+            {{#listing__image_url_9}}
+            <div class="image listing_9" style="background-image: url('{{{ listing__image_url_9 }}}')"></div>
+            {{/listing__image_url_9}}
+            {{^listing__image_url_9}}
+            <div class="image listing_9 image-unavailable"><span>IMAGE 9 IS NOT AVAILABLE FOR THIS LISTING</span></div>
+            {{/listing__image_url_9}}
+
+            {{#listing__image_url_10}}
+            <div class="image listing_10" style="background-image: url('{{{ listing__image_url_10 }}}')"></div>
+            {{/listing__image_url_10}}
+            {{^listing__image_url_10}}
+            <div class="image listing_10 image-unavailable"><span>IMAGE 10 IS NOT AVAILABLE FOR THIS LISTING</span></div>
+            {{/listing__image_url_10}}
+
+
+        {{/ spreadsheet._listings---all}}
+      </div>
+
+
+
+
+      <div class="tile__footer {{page_theme}} {{^page_theme}}Base{{/page_theme}} month">
+        <span><em>PROPERTY</em></span>
+        <div style="margin-top: 20px; z-index: 2;">OF THE MONTH</div>
+        <img src="{{footer_image}}" />
+      </div>
+
+      <div class="tile__footer {{page_theme}} {{^page_theme}}Base{{/page_theme}} week">
+        <span><em>PROPERTY</em></span>
+        <div style="margin-top: 20px; z-index: 2;">OF THE WEEK</div>
+        <img src="{{footer_image}}" />
+      </div>
+
+      <div class="tile__footer {{page_theme}} {{^page_theme}}Base{{/page_theme}} feature">
+        <span><em>FEATURE</em></span>
+        <div style="margin-top: 20px; z-index: 2;">PROPERTY</div>
+        <img src="{{footer_image}}" />
+      </div>
+    </main>
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+</html>
