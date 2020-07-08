@@ -1,0 +1,68 @@
+<!doctype html>
+<!-- VERSION: 0.2.0 -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Landlord Night</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <main class="tile">
+      <div class="{{content_position}}" style="background-image: url({{featured_image}}); background-size: cover; background-position: center; height: 100vh;">
+       <!-- Center -->
+        <div class="tile__center">
+          <span class="office-name">{{_office__name}}</span><br/>
+          <span class="investor-night">INVESTOR NIGHT</span>
+          <hr/>
+          <span class="date-time">
+            <span data-formatter="dfns.format"  data-format="dddd D MMMM">{{date}}</span><br/>
+            {{time}}<br/>
+            {{location}}
+          </span>
+        </div>
+
+        <!-- top-bottom -->
+        <div class="tile__non-center">
+          <div class="top">
+          <span class="office-name">{{_office__name}}</span><br/>
+          <span class="investor-night">Investor Night</span>
+          </div>
+
+          <div class="bottom">
+          <span class="date-time">
+            <span data-formatter="dfns.format"  data-format="dddd D MMMM">{{date}}</span> | {{time}} <br/>
+            {{location}}
+          </span>
+        </div>
+        </div>
+      </div>
+    </main>
+    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript">RW.reformat(window)</script>
+    <script type="text/javascript">
+      RW.init(function () {
+        return RW.pf.Promise.all([
+          //
+          // Scripts go here
+          RW.sampleScript('{{ title }}'),
+          //
+          RW.isLoaded,
+        ]);
+      })
+      .then(function () {
+        return new RW.pf.Promise(function (resolve) {
+          setTimeout(resolve, 500);
+        });
+      })
+      .then(function () {
+        document.dispatchEvent(new Event('printready'));
+      });
+    </script>
+  </body>
+</html>
