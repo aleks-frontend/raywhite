@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html data-sign="OSR">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i');
+
+      :root {
+        --white: {{{account.colors.white}}};
+      }
+
+      /* Inputs Order
+
+      {{show-crop}}
+      {{RW_layout--iwd}}
+      {{RW_background-image--iwd}}
+      {{RW_heading--iwd}}
+      */
+
+      html {
+        font-family: 'Playfair Display';
+        word-break: break-word;
+        color: var(--white);
+      }
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+
+      .layout--1080x1080 .fit {
+        padding: 0 422px 27px 49px;
+      }
+
+      .layout--1200x628 .fit {
+        padding: 0 550px 37px 49px;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .borderImage {
+        position: absolute;
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
+
+      .layout--1080x1080 .borderImage {
+        top: 61px;
+        right: 52px;
+        left: 63px;
+        bottom: 52px;
+      }
+
+      .heading--she-inspires-me.layout--1080x1080 .borderImage {
+        background-image: url('https://files.outfit.io/media_library_items/166283/RW-she%2520inspires%2520me1.svg');
+      } 
+
+      .heading--she-inspires-us.layout--1080x1080 .borderImage {
+        background-image: url('https://files.outfit.io/media_library_items/166284/RW-she%2520inspires%2520us1.svg');
+      } 
+
+      .heading--they-inspire-me.layout--1080x1080 .borderImage {
+        background-image: url('https://files.outfit.io/media_library_items/166280/RW-they%2520inspire%2520me1.svg');
+      } 
+
+      .heading--they-inspire-us.layout--1080x1080 .borderImage {
+        background-image: url('https://files.outfit.io/media_library_items/166285/RW-they%2520inspire%2520us.svg');
+      } 
+
+      .layout--1200x628 .borderImage {
+        top: 59px;
+        right: 55px;
+        left: 56px;
+        bottom: 59px;
+      }
+
+      .heading--she-inspires-me.layout--1200x628 .borderImage {
+        background-image: url('https://files.outfit.io/media_library_items/166278/RW-she%2520inspires%2520me2.svg');
+      } 
+
+      .heading--she-inspires-us.layout--1200x628 .borderImage {
+        background-image: url('https://files.outfit.io/media_library_items/166281/RW-she%2520inspires%2520us2.svg');
+      } 
+
+      .heading--they-inspire-me.layout--1200x628 .borderImage {
+        background-image: url('https://files.outfit.io/media_library_items/166282/RW-they%2520inspire%2520me2.svg');
+      } 
+
+      .heading--they-inspire-us.layout--1200x628 .borderImage {
+        background-image: url('https://files.outfit.io/media_library_items/166279/RW-they%2520inspire%2520us2.svg');
+      } 
+
+      .logoImage {
+        position: absolute;
+      } 
+
+      .layout--1080x1080 .logoImage {
+        top: 21px;
+        right: 21px;
+        width: 202px;
+      }
+
+      .layout--1200x628 .logoImage {
+        top: 27px;
+        right: 27px;
+        width: 149px;
+      }
+
+      .heading {
+        position: relative;
+        display: none;
+        font-size: 87px;
+        line-height: 1.2em;
+      }
+
+      .heading--she-inspires-me .heading--first,
+      .heading--she-inspires-us .heading--second, 
+      .heading--they-inspire-me .heading--third,
+      .heading--they-inspire-us .heading--fourth {
+        display: block;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" data-crop="{{show-crop}}" data-reduce-export-font-size-by-percent="0" data-reduce-firefox-font-size-by-percent="0" class="heading--{{{RW_heading--iwd}}}{{^RW_heading--iwd}}she-inspires-us{{/RW_heading--iwd}}
+  layout--{{{RW_layout--iwd}}}">
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          <div class="backgroundImage">
+            <div class="reposition-fix">{{{RW_background-image--iwd}}}</div><!--reposition-fix-->
+          </div><!--backgroundImage-->
+          <div class="borderImage"></div><!--borderImage-->
+          <img class="logoImage" src="https://files.outfit.io/media_library_items/166273/ReyWhite-circle%2520arrow.svg"><!--logoImage-->
+          <div class="heading__container">
+            <div class="heading heading--first">She <i>inspires</i> me</div><!--heading--first-->
+            <div class="heading heading--second">She <i>inspires</i> us</div><!--heading--second-->
+            <div class="heading heading--third">They <i>inspire</i> me</div><!--heading--third-->
+            <div class="heading heading--fourth">They <i>inspire</i> us</div><!--heading--fourth-->
+          </div><!--heading__container-->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/custom-rich-text.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/text-fit-min.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      console.clear();
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+      });
+
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+
+    </script>
+
+
+  </body>
+</html>
