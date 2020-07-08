@@ -1,0 +1,52 @@
+<!doctype html>
+<!-- VERSION: 0.0.0 -->
+<html lang="en" async>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Page with Title and Columns</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <article class="document" data-office-type="{{ _office__sub_type_code }}">
+      <section class="page-A4 page-with-margins" data-page-name="Page with image grid">
+        <div class="page__content h-100">
+          {{# multiline_title }}<h2 class="page__title underblock flex-none">{{{ multiline_title }}}</h2>{{/ multiline_title }}
+
+          <div class="no-gutters row{{^ collection.page_blocks.length }} flex-fill{{/ collection.page_blocks.length }}">
+            <div class="col-{{# subtitle_width }}{{ subtitle_width }}{{/ subtitle_width }}{{^ subtitle_width }}6{{/ subtitle_width }}">
+              <hgroup class="page__caption">
+                <h5>{{{ multiline_text }}}</h5>
+              </hgroup>
+            </div>
+          </div>
+
+          {{# collection.page_blocks }}
+
+            {{# block.image_block }}
+              <figure class="page__image flex-fill">
+                <picture class="h-100">{{{ resizable_background_image }}}</picture>
+                {{# image_caption }}<figcaption class="image__caption">{{ image_caption }}</figcaption>{{/ image_caption }}
+              </figure>
+            {{/ block.image_block }}
+
+            {{# block.text_block }}
+              <div class="page__text background--lightestGrey flex-fill">
+                <div class="copy text-col-{{# column_count }}{{ column_count }}{{/ column_count }}{{^ column_count }}2{{/ column_count }}">
+                  {{{ formatted_text }}}
+                </div>
+              </div>
+            {{/ block.text_block }}
+
+          {{/ collection.page_blocks }}
+        </div>
+      </section>
+    </article>
+  </body>
+</html>
