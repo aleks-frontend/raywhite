@@ -1,0 +1,50 @@
+<!doctype html>
+<!-- VERSION: 0.1.0 -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>New Recruit - Agent</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body data-office-type="{{ _office__sub_type_code }}">
+    <main class="tile">
+      <picture class="tile__image" style="{{# _agent__image_lifestyle }}background-image: url('{{{ _agent__image_lifestyle }}}'){{/ _agent__image_lifestyle }}">
+        {{{ resizable_background_image }}}
+        {{^ resizable_background_image }}
+          <!-- THIS IS HERE TO MAKE OUTFIT HAPPY -->
+          {{^ _agent__image_lifestyle }}
+            <div class="tile__error-message">
+              <h2>Agent image not found</h2>
+              <p>
+                Please upload your own image by selecting
+                <br />
+                "Resizable Background Image" from the side menu
+              </p>
+            </div>
+          {{/ _agent__image_lifestyle }}
+        {{/ resizable_background_image }}
+      </picture>
+      <div class="tile__text">
+        <h1 class="tile__title">
+          <span class="highlight">
+            {{{ multiline_text }}}
+          </span>
+        </h1>
+        <h3 class="tile__subtitle">
+          {{ _agent__name }}
+          is now part of the team
+          <br />
+          at {{ _office__name }}
+        </h3>
+      </div>
+    </main>
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+</html>
