@@ -1,0 +1,79 @@
+<!doctype html>
+<!-- VERSION: 0.0.0 -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Finding your buyer</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,500,500i,700,700i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+    <script type="text/javascript" src="index.js"></script>
+  </head>
+  <body>
+    <article class="document">
+      <section class="page-A4 page-with-minimal-margins">
+        <div class="h-100 background--lightestGrey page-with-margins">
+          <div class="row h-100">
+            <div class="col-12">
+              <header class="page__header">
+                <h2 class="underblock">Finding your buyer</h2>
+                <p>With the team from {{ external_office_name }}, you can be sure we have proven strategies in place to deliver the best results possible for your home. Put simply, we want to find a single buyer willing to pay the most and through negotiation achieve the best outcome for you.</p>
+              </header>
+            </div>
+
+            <div class="col-12">
+              <div class="grid grid-4x3 h-100">
+                {{# collection.find_every_buyer_features }}
+                  <figure class="feature">
+                    <picture class="feature__icon">{{{ feature_icon }}}</picture>
+                    <figcaption class="feature__caption">
+                      <h6>{{ feature_title }}</h6>
+                      <p>{{ feature_caption }}</p>
+                    </figcaption>
+                  </figure>
+                {{/ collection.find_every_buyer_features }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="page-A4 page-with-margins">
+        <div class="row h-100">
+          <div class="col-12">
+            <h2>Who is looking to buy<br/> in your area?</h2>
+          </div>
+          <div class="col-12">
+            <div class="h-100 grid grid-2x4">
+              <div class="leadin">
+                <h4 class="leadin__title">Our experience shows us that there are two distinct types of people in today’s property market.</h4>
+                <div class="leadin__content align-self-end">
+                  <h6>Dedicated property hunters</h6>
+                  <p>These potential purchasers are actively looking to buy in your area and are always on the lookout for available properties. They will often be in close competition with similar purchasers in their demographic.</p>
+
+                  <h6>Spontaneous property buyers</h6>
+                  <p>These potential purchasers are not actively looking, however, when the right property grabs their attention they are suddenly interested.</p>
+                </div>
+              </div>
+              {{# collection.buyer_types }}
+                <div class="buyer d-flex flex-wrap">
+                  <div>
+                    <h4 class="buyer__title">{{ buyer_title }}</h4>
+                    <ul class="buyer__list">
+                      {{# collection.buyer_list }}
+                      <li>{{ buyer_list_item }}</li>
+                      {{/ collection.buyer_list }}
+                    </ul>
+                  </div>
+                </div>
+              {{/ collection.buyer_types }}
+            </div>
+          </div>
+        </div>
+      </section>
+    </article>
+  </body>
+</html>
