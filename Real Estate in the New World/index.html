@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html data-sign="OSR">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i');
+      @import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i');
+
+      :root {
+        --light-grey: #acacac;
+        --dark-grey: #585959;
+      }
+
+      /* Inputs Order
+
+      {{show-crop}}
+      {{placeholder-opacity}}
+      {{placeholder-image-1}}
+      {{placeholder-toggle-new}}
+      {{placeholder-validation}}
+      {{RW_layout-choice--rwnw}}
+      */
+
+      html {
+        font-family: 'Playfair Display';
+        font-weight: bold;
+        word-break: break-word;
+      }
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+        top: 3mm;
+        bottom: 3mm;
+        left: 3mm;
+        right: 3mm;
+        padding: 97pt 0;
+      }
+
+      .layoutChoice--layout-1 .fit,
+      .layoutChoice--layout-6 .fit {
+        padding: 90pt 0;
+      }
+
+      .layoutChoice--layout-2 .fit,
+      .layoutChoice--layout-7 .fit {
+        padding: 118pt 0;
+      }
+
+      .layoutChoice--layout-3 .fit,
+      .layoutChoice--layout-8 .fit {
+        padding: 88pt 0 55pt;
+      }
+
+      .layoutChoice--layout-4 .fit,
+      .layoutChoice--layout-9 .fit {
+        padding: 104pt 0;
+      }
+
+      .layoutChoice--layout-5 .fit,
+      .layoutChoice--layout-10 .fit {
+        padding: 103pt 0;
+      }
+
+      .body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+      }
+
+      .layoutChoice--layout-3 .body,
+      .layoutChoice--layout-8 .body {
+        justify-content: flex-start;
+      }
+
+      .text {
+        display: none;
+        text-align: center;
+        font-size: 45pt;
+        line-height: 1.2em;
+      }
+
+      .text--top {
+        display: none;
+        color: var(--light-grey);
+      }
+
+      .layoutChoice--layout-3 .text--top,
+      .layoutChoice--layout-8 .text--top {
+        margin-bottom: 47pt;
+      }
+
+      .text--bottom {
+        display: none;
+        color: var(--dark-grey);
+      }
+
+      .layoutChoice--layout-3 .text--bottom,
+      .layoutChoice--layout-8 .text--bottom {
+        margin-bottom: 52pt;
+      }
+
+      .layoutChoice--layout-1 .text--top.text--businessAsUsual1,
+      .layoutChoice--layout-1 .text--bottom.text--businessAsUsual1,
+      .layoutChoice--layout-2 .text--top.text--businessAsUsual2,
+      .layoutChoice--layout-2 .text--bottom.text--businessAsUsual2,
+      .layoutChoice--layout-3 .text--top.text--businessAsUsual3,
+      .layoutChoice--layout-3 .text--bottom.text--businessAsUsual3,
+      .layoutChoice--layout-4 .text--top.text--businessAsUsual4,
+      .layoutChoice--layout-4 .text--bottom.text--businessAsUsual4,
+      .layoutChoice--layout-5 .text--top.text--businessAsUsual5,
+      .layoutChoice--layout-5 .text--bottom.text--businessAsUsual5,
+      .layoutChoice--layout-6 .text--top.text--businessAsUsual6,
+      .layoutChoice--layout-6 .text--bottom.text--businessAsUsual6,
+      .layoutChoice--layout-7 .text--top.text--businessAsUsual7,
+      .layoutChoice--layout-7 .text--bottom.text--businessAsUsual7,
+      .layoutChoice--layout-8 .text--top.text--businessAsUsual8,
+      .layoutChoice--layout-8 .text--bottom.text--businessAsUsual8,
+      .layoutChoice--layout-9 .text--top.text--businessAsUsual9,
+      .layoutChoice--layout-9 .text--bottom.text--businessAsUsual9,
+      .layoutChoice--layout-10 .text--top.text--businessAsUsual10,
+      .layoutChoice--layout-10 .text--bottom.text--businessAsUsual10 {
+        display: block;
+      }
+
+      .image {
+        display: none;
+      }
+
+      .layoutChoice--layout-1 .image--businessAsUsual1,
+      .layoutChoice--layout-6 .image--businessAsUsual6 {
+        display: block;
+        width: 635pt;
+        margin-top: 85pt;
+        margin-bottom: 90pt;
+      }
+
+      .layoutChoice--layout-2 .image--businessAsUsual2,
+      .layoutChoice--layout-7 .image--businessAsUsual7 {
+        display: block;
+        width: 613pt;
+        margin-top: 60pt;
+        margin-bottom: 99pt;
+      }
+
+      .layoutChoice--layout-3 .image--businessAsUsual3,
+      .layoutChoice--layout-8 .image--businessAsUsual8 {
+        display: block;
+        width: 205pt;
+        margin-bottom: 51pt;
+      }
+
+      .layoutChoice--layout-4 .image--businessAsUsual4,
+      .layoutChoice--layout-9 .image--businessAsUsual9 {
+        display: block;
+        width: 456pt;
+        margin-top: 80pt;
+        margin-bottom: 88pt;
+      }
+
+      .layoutChoice--layout-5 .image--businessAsUsual5,
+      .layoutChoice--layout-10 .image--businessAsUsual10 {
+        display: block;
+        width: 459pt;
+        margin-top: 80pt;
+        margin-bottom: 88pt;
+      }
+
+      .contact {
+        display: none;
+        font-family: 'Lato';
+        font-weight: 300;
+      }
+
+      .layoutChoice--layout-3 .contact,
+      .layoutChoice--layout-8 .contact {
+        display: block;
+        font-size: 33pt;
+        line-height: 1.2em;
+        color: var(--dark-grey);
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" 
+        class="layoutChoice--{{{RW_layout-choice--rwnw}}}{{^RW_layout-choice--rwnw}}layout-1{{/RW_layout-choice--rwnw}}"
+        data-crop="{{show-crop}}" data-reduce-export-font-size-by-percent="0" data-reduce-firefox-font-size-by-percent="0" data-prevent-export-overflow="false">
+    <div class="placeholderMaster" data-opacity="{{placeholder-opacity}}">
+      <div class="placeholderMaster__item" data-bg="{{placeholder-image-1}}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          <div class="body">
+            <div class="text text--top text--businessAsUsual1">Although the process<br>has changed,</div><!--text--top text--businessAsUsual1-->
+            <div class="text text--top text--businessAsUsual2">Although the process has<br>changed, our commitment to our<br>customers remains the same.</div><!--text--top text--businessAsUsual2-->
+            <div class="text text--top text--businessAsUsual3">Although the process has<br>changed, our commitment to our<br>customers remains the same.</div><!--text--top text--businessAsUsual3-->
+            <div class="text text--top text--businessAsUsual4">Although the process has<br>changed, our commitment to our<br>customers remains the same.</div><!--text--top text--businessAsUsual4-->
+            <div class="text text--top text--businessAsUsual5">Although the environment has<br>changed, our commitment to our<br>customers remains the same.</div><!--text--top text--businessAsUsual5-->
+            <div class="text text--top text--businessAsUsual6">Although the process<br>has changed,</div><!--text--top text--businessAsUsual6-->
+            <div class="text text--top text--businessAsUsual7">Although the process has<br>changed, getting great results<br>remains the same.</div><!--text--top text--businessAsUsual7-->
+            <div class="text text--top text--businessAsUsual8">Although the process has<br>changed, getting great results<br>remains the same.</div><!--text--toptext--businessAsUsual8-->
+            <div class="text text--top text--businessAsUsual9">Although the process has<br>changed, getting great results<br>remains the same.</div><!--text--top text--businessAsUsual9-->
+            <div class="text text--top text--businessAsUsual10">Although the environment has<br>changed, getting great results<br>remains the same.</div><!--text--top text--businessAsUsual10-->
+            <img src="https://files.outfit.io/media_library_items/178040/RW-Real%2520estate%2520in%2520the%2520new%2520world-image1.svg" class="image image--businessAsUsual1 image--businessAsUsual6"><!--image--businessAsUsual1 image--businessAsUsual6-->
+            <img src="https://files.outfit.io/media_library_items/178038/RW-Real%2520estate%2520in%2520the%2520new%2520world-image2.svg" class="image image--businessAsUsual2 image--businessAsUsual7"><!--image--businessAsUsual2 image--businessAsUsual7-->
+            <img src="https://files.outfit.io/media_library_items/178604/RW-Real%2520estate%2520in%2520the%2520new%2520world-image3.svg" class="image image--businessAsUsual3 image--businessAsUsual8"><!--image--businessAsUsual3 image--businessAsUsual8-->
+            <img src="https://files.outfit.io/media_library_items/178384/RW-Real-estate-in-the-new-world-image7.svg" class="image image--businessAsUsual4 image--businessAsUsual9"><!--image--businessAsUsual4 image--businessAsUsual9-->
+            <img src="https://files.outfit.io/media_library_items/178037/RW-Real%2520estate%2520in%2520the%2520new%2520world-image6.svg" class="image image--businessAsUsual5 image--businessAsUsual10"><!--image--businessAsUsual5 image--businessAsUsual10-->
+            <div class="text text--bottom text--businessAsUsual1">our commitment to our<br>customers remains the same.</div><!--text--bottom text--businessAsUsual1-->
+            <div class="text text--bottom text--businessAsUsual2">We're determined to make long<br>distance relationships work.</div><!--text--bottom text--businessAsUsual2-->
+            <div class="text text--bottom text--businessAsUsual3">Understanding your home's<br>value is as important as ever.</div><!--text--bottom text--businessAsUsual3-->
+            <div class="text text--bottom text--businessAsUsual4">We're now holding online<br>inspections and auctions.</div><!--text--bottom text--businessAsUsual4-->
+            <div class="text text--bottom text--businessAsUsual5">We're now holding<br>private inspections.</div><!--text--bottom text--businessAsUsual5-->
+            <div class="text text--bottom text--businessAsUsual6">getting great results<br>remains the same.</div><!--text--bottom text--businessAsUsual6-->
+            <div class="text text--bottom text--businessAsUsual7">We're determined to make long<br>distance relationships work.</div><!--text--bottom text--businessAsUsual7-->
+            <div class="text text--bottom text--businessAsUsual8">Understanding your home's<br>value is as important as ever.</div><!--text--bottom text--businessAsUsual8-->
+            <div class="text text--bottom text--businessAsUsual9">We're now holding online<br>inspections and auctions.</div><!--text--bottom text--businessAsUsual9-->
+            <div class="text text--bottom text--businessAsUsual10">We're now holding<br>private inspections.</div><!--text--bottom text--businessAsUsual10-->
+            <div class="contact">Contact us today for an online appraisal.</div><!--contact-->
+          </div><!--body-->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/custom-rich-text.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/text-fit-min.js"></script>
+    <script src="js/fontfaceobserver.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+      {{ #placeholder-toggle-new }}document.body.classList.add("u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}"); {{ /placeholder-toggle-new }}
+      {{ #placeholder-validation }}document.body.classList.add("placeholder__validation--{{placeholder-validation}}"){{ /placeholder-validation }}
+    </script>
+    <script>
+
+      console.clear();
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      // All external font-families need to be added to 'fonts' array
+      document.addEventListener('DOMContentLoaded', function(event) {
+        const fonts = ['Circular'];
+        const fontObservers = [];
+
+        fonts.forEach(font => {
+          const obs = new FontFaceObserver(font);
+          fontObservers.push(obs.load())
+        });
+
+        Promise.all(fontObservers).then(() => {
+          maxLineCheck();
+          maxHeightCheck();
+          injectDynamicContent();
+          hideEmptyTitles();
+
+          document.dispatchEvent(new Event('printready'));
+        });
+      });      
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+
+    </script>
+
+
+  </body>
+</html>
