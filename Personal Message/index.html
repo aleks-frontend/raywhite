@@ -1,0 +1,76 @@
+<!doctype html>
+<!-- VERSION: 0.1.0 -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Personal Message</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body class="document">
+    <section class="page-A4 page-with-margins">
+      <div class="row align-items-center h-100">
+        <div class="col">
+          <div class="row">
+            <div class="col-4">
+              <picture class="agent__image">
+                <img class="aspect--square" src="" style="background-image: url('{{ external_agent_image_headshot }}?maxwidth=400&scale=both'); {{# agent_image_headshot }}background-image: url('{{ agent_image_headshot }}'){{/ agent_image_headshot }}"/>
+              </picture>
+              <div class="agent-contact-details">
+                <h5 class="agent__name">{{ external_agent_name }}</h5>
+                <ul class="agent-contact-list">
+                  <li class="agent-contact-list--item agent-contact-list--phone">
+                    {{# use_international_phone_format }}
+                      {{^ external_agent_phone_international }}{{ external_agent_phone }}{{/ external_agent_phone_international }}{{ external_agent_phone_international }}
+                    {{/ use_international_phone_format }}
+                    {{^ use_international_phone_format }}
+                      {{^ external_agent_phone_local }}{{ external_agent_phone }}{{/ external_agent_phone_local }}{{ external_agent_phone_local }}
+                    {{/ use_international_phone_format }}
+                  </li>
+                  {{# external_agent_email }}<li class="agent-contact-list--item agent-contact-list--email">{{ external_agent_email }}</li>{{/ external_agent_email }}
+                </ul>
+                <hr/>
+                <div class="office-address">
+                  <b>{{ external_office_name }}</b>
+                  <div>
+                    {{ external_office_address_1 }}
+                    {{# external_office_address_2 }}<br/>{{ external_office_address_2 }}{{/ external_office_address_2 }}<br/>
+                    {{ external_office_address_suburb }}, {{ external_office_address_state_code }} {{ external_office_address_postcode }}
+                  </div>
+                </div>
+                {{# external_office_licence_code }}
+                <hr/>
+                <div>
+                  <small><b>Business Licence: </b></small> <br/>
+                  <small>{{ external_office_licence_code }}</small>
+                </div>
+                {{/ external_office_licence_code }}
+              </div>
+            </div>
+            <div class="col-8">
+              <h1 class="overblock headline">{{{ personal_message_headline }}}</h1>
+              <p class="token-wrapper">{{ custom_greeting }},</p>
+              <div class="message">
+                {{{ personal_message_content }}}
+              </div>
+              <div class="token-wrapper">
+                {{# signature_image }}
+                  <div class="signature__image aspect--one-fourth">{{{ signature_image }}}</div>
+                {{/ signature_image }}
+                {{^ signature_image }}
+                  <div class="signature{{^ print_signature }} d-none{{/ print_signature }}">{{ external_agent_name }}</div>
+                {{/ signature_image }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+</html>
