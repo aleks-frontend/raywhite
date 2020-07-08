@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html data-sign="OS?">
+
+<head>
+  <title>Outfit</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" type="text/css" href="./css/minireset.css">
+  <link rel="stylesheet" type="text/css" href="./css/main.css">
+  <link rel="stylesheet" type="text/css" href="./css/placeholder-controller.css">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i');
+    @import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i');
+    
+    /* Inputs Order
+    {{#AvsPT-Socials--type}}{{/AvsPT-Socials--type}}
+    {{#AvsPT-Socials--case}}{{/AvsPT-Socials--case}}
+    {{#background-image-repositionable}}{{/background-image-repositionable}}
+    {{#AvsPT-Socials--background-overlay}}{{/AvsPT-Socials--background-overlay}}
+    {{#AvsPT-Socials--left-text}}{{/AvsPT-Socials--left-text}}
+    {{#AvsPT-Socials--right-text}}{{/AvsPT-Socials--right-text}}
+    {{#AvsPT-Socials--clearance-number}}{{/AvsPT-Socials--clearance-number}}
+    {{#AvsPT-Socials--average-number}}{{/AvsPT-Socials--average-number}}
+    */
+
+    :root {
+      --yellow: {{{account.colors.brand-color}}};
+      --white: {{{account.colors.white}}};
+      --light-grey: {{{account.colors.light-grey}}};
+      --grey: {{{account.colors.secondary}}};
+      --black: #000000;
+    }
+
+    body {
+      font-family: "Lato";
+      font-size: 1rem;
+      color: var(--white);
+      word-break: break-word;
+    }
+
+    .backgroundImage {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+    }
+
+    .backgroundImage div {
+      width: auto !important;
+      height: auto !important;
+      right: 0;
+      bottom: 0;
+    }
+
+    /* Helper classes */
+    .u-hide {
+      display: none;
+    }
+
+    /* Helper class for fixing Reposition tool bug */
+    .reposition-fix {
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+
+    .reposition-fix div {
+      top: 0 !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    .backgroundColor {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #414042;
+      opacity: {{AvsPT-Socials--background-overlay}}{{^AvsPT-Socials--background-overlay}}80{{/AvsPT-Socials--background-overlay}}%;
+      mix-blend-mode: multiply;
+    }
+
+    .wrapper {
+      position: absolute;
+      top: 3mm;
+      right: 3mm;
+      bottom: 3mm;
+      left: 3mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 128px 0;
+    }
+
+    .choosing {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .choice {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .choosing h3 {
+      font-family: 'Lato';
+      font-weight: 300;
+      font-size: 76.44px;
+      line-height: 1.2em;
+    }
+
+    .choosing h3 em {
+      font-family: 'Playfair Display';
+      font-weight: normal;
+      color: var(--yellow);
+    }
+    
+    .choosing h3 span {
+      white-space: nowrap;
+    }
+
+    .choice .icon {
+      height: 140px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 58px;
+    }
+
+    .choice .icon img {
+      height: 110px;
+    }
+    
+    .case-auction .choice .icon img {
+      height: 135px;
+    }
+
+    .infos {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+      text-align: center;
+      margin-top: 115px;
+    }
+
+    .infos h3 {
+      font-family: 'Lato';
+      font-weight: bold;
+      font-size: 91.42px;
+      line-height: 1.2em;
+    }
+
+    .infos p {
+      font-family: 'Lato';
+      font-weight: normal;
+      font-size: 35.16px;
+      line-height: 1.2em;
+    }
+
+    .infos .icon {
+      height: 148px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      margin-bottom: 5px;
+    }
+
+    .infos .icon img {
+      height: 148px;
+    }
+
+    .info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      max-width: 50%;
+      padding: 0 40px;
+    }
+    
+    .page:not(.case-auction) [data-show="auction"],
+    .page:not(.case-private-treaty) [data-show="private-treaty"] {
+      display: none !important;
+    }
+    
+    @media (min-height: 1200px) {
+      .wrapper {
+        justify-content: center;
+      }
+      
+      .choosing {
+        max-width: 850px;
+      }
+      
+      .choosing h3 {
+        font-size: 93.91px;
+      }
+      
+      .choice .icon {
+        height: 145px;
+        margin-top: 50px;
+      }
+      
+      .choice .icon img {
+        height: 106.5px;
+      }
+
+      .case-auction .choice .icon img {
+        height: 135px;
+      }
+      
+      .infos {
+        margin-top: 192px;
+      }
+      
+      .infos h3 {
+        font-size: 91.42px;
+      }
+      
+      .infos p {
+        font-size: 35.16px;
+      }
+      
+      .infos .icon img {
+        height: 148px;
+      }
+    }
+    
+    @media (max-height: 1000px) {
+      .wrapper {
+        padding: 54px 110px;
+      }
+      
+      .choosing {
+        max-width: 760px;
+      }
+      
+      .choosing h3 {
+        font-size: 64px;
+      }
+      
+      .choice .icon {
+        height: 90px;
+        margin-top: 5px;
+      }
+      
+      .choice .icon img {
+        height: 64px;
+      }
+
+      .case-auction .choice .icon img {
+        height: 90px;
+      }
+      
+      .infos {
+        margin-top: 20px;
+      }
+      
+      .infos h3 {
+        font-size: 62.32px;
+      }
+      
+      .infos p {
+        font-size: 23.97px;
+      }
+      
+      .infos .icon img {
+        height: 101px;
+      }
+    }
+  </style>
+</head>
+
+<body style="background: white" data-crop="{{show-crop}}">
+  <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+    <div class="placeholderMaster__item" data-bg="{{ placeholder-image }}"></div>
+  </div><!-- end placeholderMaster -->
+  <div class="page type-{{AvsPT-Socials--type}} case-{{AvsPT-Socials--case}}{{^AvsPT-Socials--case}}auction{{/AvsPT-Socials--case}}">
+
+    <div class="bleed">
+
+      <div class="container fit">
+        <div class="backgroundImage">{{{background-image-repositionable}}}</div>
+        <div class="backgroundColor"></div>
+        <div class="wrapper">
+          <div class="choosing">
+            <div class="choice">
+              <h3 data-show="auction">Looking to market your property <span>via <em>auction</em>?</span></h3>
+              <h3 data-show="private-treaty">Looking to market your property <span>via <em>private treaty</em>?</span></h3>
+              <div class="icon">
+                <img data-show="auction" src="https://files.outfit.io/media_library_items/174561/auction-6.svg" />
+                <img data-show="private-treaty" src="https://files.outfit.io/media_library_items/174559/auction-5.svg" />
+              </div>
+            </div>
+          </div>
+          <div class="infos">
+            <div class="info">
+              <div class="icon">
+                <img src="https://files.outfit.io/media_library_items/174562/auction-7.svg" />
+              </div>
+              <p data-max-line="1">{{AvsPT-Socials--left-text}}{{^AvsPT-Socials--left-text}}Clearance by day 40{{/AvsPT-Socials--left-text}}</p>
+              {{#AvsPT-Socials--clearance-number}}
+              <h3 data-char-limit="4">{{AvsPT-Socials--clearance-number}}%</h3>
+              {{/AvsPT-Socials--clearance-number}}
+              {{^AvsPT-Socials--clearance-number}}
+              <h3>&lt;XX%&gt;</h3>
+              {{/AvsPT-Socials--clearance-number}}
+            </div>
+            <div class="info">
+              <div class="icon">
+                <img src="https://files.outfit.io/media_library_items/174560/auction-8.svg" />
+              </div>
+              <p data-max-line="1">{{AvsPT-Socials--right-text}}{{^AvsPT-Socials--right-text}}Average days on market{{/AvsPT-Socials--right-text}}</p>
+              {{#AvsPT-Socials--average-number}}
+              <h3 data-char-limit="5">{{AvsPT-Socials--average-number}}</h3>
+              {{/AvsPT-Socials--average-number}}
+              {{^AvsPT-Socials--average-number}}
+              <h3>&lt;XXX&gt;</h3>
+              {{/AvsPT-Socials--average-number}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--container fit-->
+
+    </div>
+    <!--bleed-->
+
+  </div>
+  <!--page-->
+
+  <script>
+    window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+  </script>
+  <script src="js/main.js"></script>
+  <script src="js/prefixfree.js"></script>
+  <script src="js/placeholder-controller.js"></script>
+  <script src="js/check-export-mode.js"></script>
+  <script src="js/dynamic-inject.js"></script>
+  <script src="js/char-limit.js"></script>
+  <script src="js/max-line-check.js"></script>
+  <script src="js/max-height-check.js"></script>
+  <script src="js/textfit.js"></script>
+  <script src="js/utils.js"></script>
+  <script>
+      {{ #placeholder-toggle }}document.body.classList.add("u-placeholder-{{ placeholder-toggle }}{{^placeholder-toggle}}hide{{/placeholder-toggle}}"); {{ /placeholder-toggle }}
+  </script>
+  <script>
+
+    console.clear();
+
+    // Tracking text changes and firing text restriction functions (mutationObserver)
+    const overflowObserver = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        maxLineCheck();
+        maxHeightCheck();
+        charLimit();
+      });
+    });
+
+    const injectObserver = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        injectDynamicContent();
+      });
+    });
+
+    const injectSources = document.querySelectorAll('[data-target-id]');
+
+    overflowObserver.observe(document.body, {
+      attributes: false,
+      characterData: true,
+      childList: true,
+      subtree: true,
+      attributeOldValue: false,
+      characterDataOldValue: true
+    });
+
+    if (injectSources.length > 0) {
+      injectSources.forEach(src => {
+        injectObserver.observe(src, {
+          attributes: false,
+          characterData: true,
+          childList: true,
+          subtree: true,
+          attributeOldValue: false,
+          characterDataOldValue: true
+        });
+      });
+    }
+
+    // Calling text size restriction functions once the fonts are loaded
+    document.fonts.ready.then(() => {
+      maxLineCheck();
+      maxHeightCheck();
+      charLimit();
+      injectDynamicContent();
+    });
+
+    placeholderController();
+    checkCrop();
+    checkExport();
+
+    // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+    TextFit.fit({
+      selector: '.lockup',
+      alignItems: 'center',
+    });
+
+  </script>
+</body>
+
+</html>
