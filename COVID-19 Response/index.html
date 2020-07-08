@@ -1,0 +1,115 @@
+<!doctype html>
+<!-- VERSION: 1.0.0 -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Office Bio – {{ external_office__name }}</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+
+    <style>
+      .placeholder {
+        background-image: url('https://files.outfit.io/media_library_items/170699/Ray%2520White%2520response%2520to%2520COVID-19.png');
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity:0.5;
+        z-index: 5;
+        pointer-events: none;
+      }
+
+      body{
+        height: 100%;
+        width: 100%;
+        padding: 2.7rem;
+      }
+
+      .logo{
+        height: 10.9rem;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .logo img{
+        width: 10.5rem;
+        margin-right: 0.2rem;
+      }
+
+      .copy{
+        padding: 5.4rem 3.3rem;
+      }
+
+      .copy h1{
+        font-size: 1.46rem;
+        line-height: 1.4;
+        margin: 0;
+        margin-top: -0.24rem;
+        margin-bottom: 3.22rem;
+      }
+
+      .copy p,
+      .copy li{
+        font-size: 0.789rem;
+        margin-left: 0.1rem;
+        line-height: 1.5;
+        margin-bottom: 0.8rem;
+      }
+
+      .copy li{
+        line-height: 1.26;
+        margin-bottom: 0.8rem;
+      }
+
+      .copy ul li:before{
+        content: "•";
+        margin-right: 1.2rem;
+      }
+
+    </style>
+  </head>
+  <body>
+    <section class="logo">
+      <img src="{{{account.logos.primary}}}">
+    </section>
+    <section class="copy">
+      <h1> {{ external_office__name }} {{^external_office__name }}[Office name]{{/external_office__name }} response to COVID-19 </br> <em>A message to our clients</em></h1>
+    <p> The health and wellbeing of our members and our customers is of paramount importance to our company.</p><p> Although we do not believe there is any reason to panic, it’s clear that the Coronavirus (COVID-19) is spreading globally, especially over the past six weeks. It’s important that we take measures to mitigate the spread of the virus to ensure the safety of our communities, particularly the elderly 
+    <br>and immunocompromised.</p>
+    <p>The following summarises the steps we are taking in response to the challenge of the coronavirus, and doing all we can to provide a clean and safe environment for our members and customers</p>
+    <ul>
+      <li>Where the Australian Government recommends voluntary isolation for staff returning from overseas, we will have them work from home for the recommended isolation period.</li>
+      <li> We will ask clients on entering our business, open homes and OFIs if they have been overseas in <br>the last two weeks. Clients who have travelled to any high-risk areas will be asked not to attend our business or open homes for 14 days. Before attending tenancies for routine inspections, we will make inquiries. </li>
+      <li> 	Our staff will wash hands and sanitise A-frames, flags and digital devices between open homes. </li>
+      <li> 	Hand sanitiser (where we can access) will be available throughout our business and open homes and all bathrooms will be stocked with disinfectant hand wash/soap.</li>
+      <li> 	Signs will be put up in open homes discouraging physical contact and suggesting norms of conduct.</li>
+      <li>	In our office, all door handles, phones, reception desks, water filters and common areas will be wiped with sanitisers regularly throughout the day.</li>
+      <li> 	We work on the run much of the time so are used to using technology to stay in touch - we will prioritise these types of communication given the COVID-19 circumstances.</li>
+
+    </ul>
+    <p>We look forward to continuing to provide our customers with great service and excellent outcomes in the weeks and months ahead.</p>
+
+
+    </section>
+
+
+
+  <script type="text/javascript" src="index.js"></script>
+  <script>   RW.outfit.applyEditableDefaults(window, [
+      {
+        id: 'officeBio',
+        editable: RW.dom.text(window, 'officeBioEditable'),
+        external: RW.dom.html(window, 'officeBioExternal'),
+      },
+    ]);
+  </script>
+  </body>
+</html>
