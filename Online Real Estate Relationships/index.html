@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html data-sign="OSM">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      /*
+      {{show-crop}}
+      {{ placeholder-opacity }}
+      {{ placeholder-image-1 }} 
+      {{ placeholder-toggle-new }}
+      {{placeholder-validation}}
+      {{RW_layout--orer}}
+      */
+
+      @import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i');
+
+      :root {
+        --grey: #939598;
+        --black: {{{account.colors.secondary}}};
+      }
+
+      html {
+        font-family: 'Playfair Display';
+        font-size: 11pt;
+        color: #000;
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+      /* End Helper class for fixing Reposition tool bug */
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+        padding: 35pt;
+      }
+      
+      .layout--digital-auction .fit { padding-top: 12pt; }
+
+      .body {
+        display: flex;
+        flex-direction: column;
+        flex: 1 0 0%;
+      }
+
+      .layout--digital-auction .body { flex-direction: column-reverse; }
+
+      .body__image {
+        display: none;
+        height: 436pt;
+        background-size: contain;
+        background-position: top center;
+        background-repeat: no-repeat;
+      }
+
+      .body__image--inspection,
+      .body__image--auction,
+      .body__image--perfectMatch {
+        background-image: url('https://files.outfit.io/media_library_items/178016/RW-OnlineRelationshipSocial-image.jpg');
+      }
+
+      .body__image--digitalAuction { background-image: url('https://files.outfit.io/media_library_items/178015/RW-OnlineRelationshipsSocial-image2.jpg'); }
+
+      .layout--inspection .body__image--inspection,
+      .layout--auction .body__image--auction,
+      .layout--perfect-match .body__image--perfectMatch,
+      .layout--digital-auction .body__image--digitalAuction {
+        display: block;
+      }
+
+      .body__text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1 0 0%;
+        text-align: center;
+        padding-top: 55pt;
+      }
+
+      .layout--auction .body__text { padding-top: 55pt; } 
+       .layout--perfect-match .body__text { padding-top: 60pt; } 
+      
+      .layout--digital-auction .body__text { padding-top: 0;}
+
+      .text {
+        display: none;
+        color: var(--grey);
+        font-size: 46.3pt;
+        line-height: 1.2em;
+      }
+
+      .layout--inspection .text--inspection,
+      .layout--auction .text--auction,
+      .layout--perfect-match .text--perfectMatch,
+      .layout--digital-auction .text--digitalAuction {
+        display: block;
+      }
+
+      .u-bold {
+        font-weight: 700;
+        color: var(--black); 
+      }
+
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" data-crop="{{show-crop}}" data-reduce-export-font-size-by-percent="0" data-reduce-firefox-font-size-by-percent="0" data-prevent-export-overflow="false"
+        class="layout--{{RW_layout--orer}}{{^RW_layout--orer}}inspection{{/RW_layout--orer}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+
+          <div class="body">
+            <div class="body__image body__image--inspection"></div><!--body__image-->
+            <div class="body__image body__image--auction"></div><!--body__image-->
+            <div class="body__image body__image--perfectMatch"></div><!--body__image-->
+            <div class="body__image body__image--digitalAuction"></div><!--body__image-->
+            <div class="body__text">
+              <div class="text text--inspection">Find your dream home via<br> <span class="u-bold">an online inspection.</span></div><!--text--inspection-->
+              <div class="text text--auction">Our auctions are now online<br><span class="u-bold">and over the phone.</span></div><!--text--auction-->
+              <div class="text text--perfectMatch">Let us find your property's<br>perfect match with<br><span class="u-bold">online auctions and inspections.</span></div><!--text--perfectMatch-->
+              <div class="text text--digitalAuction">Find your perfect<br>match online via<br><span class="u-bold">digital auction bidding.</span></div><!--text--digitalAuction-->
+            </div><!--body__text-->
+          </div><!--body-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/custom-rich-text.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/text-fit-min.js"></script>
+    <script src="js/fontfaceobserver.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+      {{ #placeholder-toggle-new }}document.body.classList.add("u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}"); {{ /placeholder-toggle-new }}
+      {{ #placeholder-validation }}document.body.classList.add("placeholder__validation--{{placeholder-validation}}"){{ /placeholder-validation }}
+    </script>
+    <script>
+
+      console.clear();
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      // All external font-families need to be added to 'fonts' array
+      document.addEventListener('DOMContentLoaded', function(event) {
+        const fonts = ['Playfair Display'];
+        const fontObservers = [];
+
+        fonts.forEach(font => {
+          const obs = new FontFaceObserver(font);
+          fontObservers.push(obs.load())
+        });
+
+        Promise.all(fontObservers).then(() => {
+          maxLineCheck();
+          maxHeightCheck();
+          injectDynamicContent();
+          hideEmptyTitles();
+
+          document.dispatchEvent(new Event('printready'));
+        });
+      });      
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+
+    </script>
+
+
+  </body>
+</html>
