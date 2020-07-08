@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html data-sign="OS?">
+
+<head>
+  <title>Outfit</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" type="text/css" href="./css/minireset.css">
+  <link rel="stylesheet" type="text/css" href="./css/main.css">
+  <link rel="stylesheet" type="text/css" href="./css/placeholder-controller.css">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i');
+    @import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i');
+    
+    /*Inputs Order
+    {{#AD--variation}}{{/AD--variation}}
+    {{#background-image}}{{/background-image}}
+    {{#AD--heading}}{{/AD--heading}}
+    {{#AD--subheading}}{{/AD--subheading}}
+    {{#year-2020}}{{/year-2020}}
+    {{#AD--footer-colour}}{{/AD--footer-colour}}
+    {{#AD--footer-left}}{{/AD--footer-left}}
+    {{#AD--footer-centre}}{{/AD--footer-centre}}
+    {{#AD--footer-right}}{{/AD--footer-right}}
+    {{#AD--background-colour}}{{/AD--background-colour}}
+    {{#AD--copy}}{{/AD--copy}}
+    */
+
+    :root {
+      --yellow: {{{account.colors.brand-color}}};
+      --white: {{{account.colors.white}}};
+      --light-grey: {{{account.colors.light-grey}}};
+      --dark-grey: {{{account.colors.secondary}}};
+      --grey: {{{account.colors.secondary}}};
+      --black: #000000;
+
+      --transparent-white: rgba(255, 255, 255, 0.9);
+      --transparent-black: rgba(0, 0, 0, 0.9);
+
+      --footer-white: var(--white);
+      --footer-grey: var(--transparent-white);
+    }
+
+    body {
+      font-family: "Lato";
+      font-size: 1rem;
+      color: var(--grey);
+      word-break: break-word;
+    }
+
+    .backgroundImage {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+    }
+
+    .backgroundImage div {
+      width: auto !important;
+      height: auto !important;
+      right: 0;
+      bottom: 0;
+    }
+
+    /* Helper classes */
+    .u-hide {
+      display: none;
+    }
+
+    /* Helper class for fixing Reposition tool bug */
+    .reposition-fix {
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+
+    .reposition-fix div {
+      top: 0 !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: stretch;
+    }
+
+    .main {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      padding: 3mm;
+    }
+
+    .main-inner {
+      text-align: center;
+      padding: 120px 82px;
+    }
+
+    .year,
+    .year p {
+      font-family: 'Lato';
+      font-weight: normal;
+      font-size: 45.37px;
+      line-height: 1em;
+      letter-spacing: 0.04em;
+      color: #939598;
+    }
+
+    .year {
+      text-align: right;
+    }
+
+    .heading,
+    .heading h1 {
+      font-family: 'Playfair Display';
+      font-weight: bold;
+      font-size: 109px;
+      line-height: 1.12em;
+      letter-spacing: 0;
+    }
+    
+    .heading {
+      max-height: 1.344em;
+    }
+    
+    .heading.overflow:after {
+      font-size: 0.4em;
+    }
+
+    .year+.heading {
+      margin-top: -30px;
+    }
+
+    .subheading,
+    .subheading h2 {
+      font-family: 'Lato';
+      font-weight: normal;
+      font-size: 39px;
+      line-height: 1.2em;
+      letter-spacing: 0.1em;
+      color: #939598;
+    }
+    
+    .subheading {
+      max-height: 1.44em;
+    }
+
+    .footer {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      padding: 0 3mm 3mm;
+      background: var(--footer-{{{AD--footer-colour}}}{{^AD--footer-colour}}white{{/AD--footer-colour}});
+    }
+
+    .footer-inner {
+      width: 100%;
+      padding: 22px 60px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .footer-left,
+    .footer-right,
+    .footer-centre {
+      flex: 1;
+      padding-left: 60px;
+      max-height: 2.64em;
+    }
+    
+    .footer .overflow:after {
+      font-size: 0.4em;
+    }
+
+    .footer,
+    .footer p {
+      font-family: 'Lato';
+      font-weight: normal;
+      font-size: 49.97px;
+      line-height: 1.2em;
+      letter-spacing: 0;
+    }
+    
+    .copy-inner {
+      width: 100%;
+    }
+
+    .copy,
+    .copy p,
+    .copy ul,
+    .copy ol {
+      font-family: 'Lato';
+      font-weight: normal;
+      font-size: 61.64px;
+      line-height: 1.275em;
+      letter-spacing: 0;
+    }
+
+    .copy p:not(:last-child),
+    .copy ul:not(:last-child),
+    .copy ol:not(:last-child) {
+      margin-bottom: 0.4em;
+    }
+
+    .copy ul {
+      letter-spacing: -0.015em;
+    }
+
+    .copy ul li {
+      padding-left: 47px;
+      position: relative;
+    }
+
+    .copy ul li::before {
+      content: '\2022';
+      position: absolute;
+      left: 0;
+    }
+
+    .copy ul li+li {
+      margin-top: 19px;
+    }
+
+    .copy ol {
+      font-size: 56.28px;
+      line-height: 1.25em;
+      letter-spacing: -0.015em;
+      padding-left: 1em;
+    }
+
+    .copy ol li+li {
+      margin-top: 30px;
+    }
+
+    .copy h1,
+    .copy h2 {
+      font-family: 'Playfair Display';
+      font-weight: normal;
+      font-size: 104.52px;
+      line-height: 1.2em;
+      letter-spacing: 0;
+    }
+    
+    .copy h2 {
+      font-size: 72.36px;
+    }
+
+    .copy h1:not(:last-child),
+    .copy h2:not(:last-child) {
+      margin-bottom: 0.3em;
+    }
+
+    .copy h1 em {
+      font-size: 0.68em;
+    }
+
+    /* LinkedIn + Social Square */
+    [data-variation="linkedin"] .linkedin-hide,
+    [data-variation="social-square"] .social-square-hide {
+      display: none !important;
+    }
+    
+    [data-variation="linkedin"] .main,
+    [data-variation="social-square"] .main {
+      justify-content: flex-start;
+      align-items: flex-end;
+    }
+
+
+
+    /* Recipe Cover */
+    [data-variation="recipe-cover"] .recipe-cover-hide {
+      display: none !important;
+    }
+    
+    [data-variation="recipe-cover"] .main {
+      background: var(--yellow);
+      height: auto;
+    }
+
+    [data-variation="recipe-cover"] .main-inner {
+      padding: 55px 82px 45px;
+    }
+
+    [data-variation="recipe-cover"] .heading,
+    [data-variation="recipe-cover"] .heading h1 {
+      font-size: 96.21px;
+      line-height: 1em;
+    }
+
+    [data-variation="recipe-cover"] .subheading,
+    [data-variation="recipe-cover"] .subheading h2 {
+      font-size: 39.91px;
+      letter-spacing: 0.13em;
+      text-align: right;
+    }
+
+
+    /* Recipe Internal */
+    [data-variation="recipe-internal"] .recipe-internal-hide {
+      display: none !important;
+    }
+
+    [data-variation="recipe-internal"] .main {
+      justify-content: flex-start;
+    }
+
+    [data-variation="recipe-internal"] .main-inner {
+      width: 100%;
+      height: 100%;
+      padding: 80px 96px;
+      text-align: left;
+    }
+    
+    [data-variation="recipe-internal"] .backgroundColor {
+      background-color: var(--{{{AD--background-colour}}}{{^AD--background-colour}}light-grey{{/AD--background-colour}})
+    }
+    
+    [data-variation="recipe-internal"][data-copy-position="centre"] .main-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    [data-variation="recipe-internal"][data-copy-position="centre"] .copy {
+      text-align: center;
+    }       
+    
+    [data-bg="dark-grey"] .copy {
+      color: var(--white);
+    }
+
+    @media (orientation: landscape) {
+      .main-inner {
+        padding: 135px 42px;
+      }
+
+      .year,
+      .year p {
+        font-size: 35.92px;
+      }
+
+      .heading,
+      .heading h1 {
+        font-size: 86.44px;
+      }
+
+      .year+.heading {
+        margin-top: -24px;
+      }
+
+      .subheading,
+      .subheading h2 {
+        font-size: 30.76px;
+      }
+    }
+  </style>
+</head>
+
+<body style="background: white" data-crop="{{show-crop}}">
+  <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+    <div class="placeholderMaster__item" data-bg="{{ placeholder-image }}"></div>
+  </div><!-- end placeholderMaster -->
+  <div class="page" 
+       data-variation="{{{AD--variation}}}{{^AD--variation}}social-square{{/AD--variation}}"
+       data-bg="{{{AD--background-colour}}}{{^AD--background-colour}}light-grey{{/AD--background-colour}}"
+       data-copy-position="{{AD--copy-position}}{{^AD--copy-position}}top{{/AD--copy-position}}"
+       data-olcontinue="{{AD--ol-continue}}{{^AD--ol-continue}}1{{/AD--ol-continue}}">
+
+    <div class="bleed">
+
+      <div class="container fit">
+        <div class="backgroundColor fit"></div>
+        <div class="backgroundImage reposition-fix">{{{background-image}}}</div>        
+        <div class="wrapper fit">
+          <div class="main">
+            <div class="main-inner">
+              {{#year-2020}}
+              <div class="year recipe-internal-hide recipe-cover-hide">
+                <p>{{{year-2020}}}</p>
+              </div>
+              {{/year-2020}}
+              <div class="heading recipe-internal-hide" data-max-height="css">
+                <h1>{{AD--heading}}</h1>
+              </div>
+              {{#AD--subheading}}
+              <div class="subheading recipe-internal-hide" data-max-height="css">
+                <h2>{{AD--subheading}}</h2>
+              </div>
+              {{/AD--subheading}}
+              {{#AD--copy}}
+              <div class="copy recipe-cover-hide social-square-hide linkedin-hide" data-max-height="dynamic">
+                {{{AD--copy}}}
+              </div>
+              {{/AD--copy}}
+            </div>
+          </div>
+          <div class="footer recipe-internal-hide social-square-hide linkedin-hide">
+            <div class="footer-inner">
+              <div class="footer-left" data-max-height="css">
+                {{#AD--footer-left}}<p>{{{AD--footer-left}}}</p>{{/AD--footer-left}}
+              </div>
+              <div class="footer-centre" data-max-height="css">
+                {{#AD--footer-centre}}<p>{{{AD--footer-centre}}}</p>{{/AD--footer-centre}}
+              </div>
+              <div class="footer-right" data-max-height="css">
+                {{#AD--footer-right}}<p>{{{AD--footer-right}}}</p>{{/AD--footer-right}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--container fit-->
+
+    </div>
+    <!--bleed-->
+
+  </div>
+  <!--page-->
+
+  <script>
+    window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+  </script>
+  <script src="js/main.js"></script>
+  <script src="js/prefixfree.js"></script>
+  <script src="js/placeholder-controller.js"></script>
+  <script src="js/check-export-mode.js"></script>
+  <script src="js/dynamic-inject.js"></script>
+  <script src="js/char-limit.js"></script>
+  <script src="js/max-line-check.js"></script>
+  <script src="js/max-height-check.js"></script>
+  <script src="js/textfit.js"></script>
+  <script src="js/utils.js"></script>
+  <script>
+      {{ #placeholder-toggle }}document.body.classList.add("u-placeholder-{{ placeholder-toggle }}{{^placeholder-toggle}}hide{{/placeholder-toggle}}"); {{ /placeholder-toggle }}
+  </script>
+  <script>
+
+    console.clear();
+    
+    function olStart() {
+      const page = document.querySelector('[data-olcontinue]');
+      const start = page.dataset.olcontinue;
+      
+      const ol = document.querySelector('.copy ol');
+      ol.setAttribute("start", start);
+    }
+
+    // Tracking text changes and firing text restriction functions (mutationObserver)
+    const overflowObserver = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        maxLineCheck();
+        maxHeightCheck();
+        olStart();
+      });
+    });
+
+    const injectObserver = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        injectDynamicContent();
+      });
+    });
+
+    const injectSources = document.querySelectorAll('[data-target-id]');
+
+    overflowObserver.observe(document.body, {
+      attributes: false,
+      characterData: true,
+      childList: true,
+      subtree: true,
+      attributeOldValue: false,
+      characterDataOldValue: true
+    });
+
+    if (injectSources.length > 0) {
+      injectSources.forEach(src => {
+        injectObserver.observe(src, {
+          attributes: false,
+          characterData: true,
+          childList: true,
+          subtree: true,
+          attributeOldValue: false,
+          characterDataOldValue: true
+        });
+      });
+    }
+
+    // Calling text size restriction functions once the fonts are loaded
+    document.fonts.ready.then(() => {
+      maxLineCheck();
+      maxHeightCheck();
+      olStart();
+      injectDynamicContent();
+    });
+
+    placeholderController();
+    checkCrop();
+    checkExport();
+
+    // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+    TextFit.fit({
+      selector: '.lockup',
+      alignItems: 'center',
+    });
+
+  </script>
+</body>
+
+</html>
