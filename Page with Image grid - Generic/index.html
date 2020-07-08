@@ -1,0 +1,37 @@
+<!doctype html>
+<!-- VERSION: 0.1.0 -->
+<html lang="en" async>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Page with Image Grid</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <article class="document" data-office-type="{{ _office__sub_type_code }}">
+      <section class="page-A4 page-with-margins" data-page-name="Page with image grid">
+        <div class="page__content justify-content-between h-100">
+          {{# title }}<h3 class="underblock flex-none">{{ title }}</h3>{{/ title }}
+
+          <div class="grid grid--2x2 h-60">
+            {{# collection.resizable_background_images---max-4 }}
+              <picture class="grid__image">{{{ resizable_background_image }}}</picture>
+            {{/ collection.resizable_background_images---max-4 }}
+          </div>
+
+          <div class="grid__captions">
+            {{# collection.resizable_background_images---max-4 }}
+              {{# image_caption }}<figcaption class="grid__caption">{{ image_caption }}</figcaption>{{/ image_caption }}
+            {{/ collection.resizable_background_images---max-4 }}
+          </div>
+        </div>
+      </section>
+    </article>
+  </body>
+</html>
