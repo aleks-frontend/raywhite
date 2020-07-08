@@ -1,0 +1,46 @@
+<!doctype html>
+<!-- VERSION: 0.0.0 -->
+<html lang="en" async>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Generic Content Pages</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+
+  <body>
+    <article class="document" data-office-type="{{ _office__sub_type_code }}">
+      <section class="page-A4 page-with-margins" data-page-name="Page with text grid">
+        <div class="page__content h-100">
+          <hgroup class="flex-none">
+            {{# multiline_title }}<h2 class="underblock">{{{ multiline_title }}}</h2>{{/ multiline_title }}
+            {{# subtitle }}<h4>{{ subtitle }}</h4>{{/ subtitle }}
+          </hgroup>
+
+          <div class="flex-fill" style="overflow: hidden;">
+            <div class="grid grid--2x2 h-100">
+              {{# collection.grid_items---max-4 }}
+                <div class="grid__item p-all background--lighterGrey">
+                  {{# grid_title }}<h4>{{ grid_title }}</h4>{{/ grid_title }}
+                  <div>
+                    {{# grid_subtitle }}<h6>{{ grid_subtitle }}</h6>{{/ grid_subtitle }}
+                    {{# formatted_text }}<div class="copy">{{{ formatted_text }}}</div>{{/ formatted_text }}
+                  </div>
+                </div>
+              {{/ collection.grid_items---max-4 }}
+              <picture class="grid__item background--mediumGrey">{{{ resizable_background_image }}}</picture>
+            </div>
+          </div>
+        </div>
+      </section>
+    </article>
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+</html>
