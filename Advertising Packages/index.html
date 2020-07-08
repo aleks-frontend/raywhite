@@ -1,0 +1,98 @@
+<!doctype html>
+<!-- VERSION: 0.1.1 -->
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width">
+      <title>Advertising Packages - {{ external_office__name }}</title>
+
+      {{{ account.snippets.tagmanager_script }}}
+
+      <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+      <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+      <link media="all" rel="stylesheet" href="index.css" />
+    </head>
+    <body>
+      <article class="document">
+        <section class="page-A4 page-with-margins">
+          <div class="row justify-content-center h-100">
+            {{# title }}
+              <header class="col-12">
+                <h3 class="page__heading">{{ title }}</h3>
+              </header>
+            {{/ title }}
+            {{# collection.advertising_packages.length }}
+            <div class="col-12">
+              <div class="row">
+                <div class="row no-gutters align-items-end justify-content-center packages">
+                  {{# collection.advertising_packages }}
+                    {{# block.featured_package }}
+                      <div class="col-5">
+                        <div class="package__card package__card--featured">
+                          <div class="package__content">
+                            <h3 class="package__price" data-format="$,.0f" data-formatter="d3.format">{{ package_price }}</h3>
+                            <ul class="package__list">
+                              {{# collection.package_items }}
+                                <li>{{ package_item }}</li>
+                              {{/ collection.package_items }}
+                            </ul>
+                          </div>
+                          <h6 class="package__name">{{ package_name }}</h6>
+                        </div>
+                      </div>
+                    {{/ block.featured_package }}
+
+                    {{# block.standard_package }}
+                      <div class="col">
+                        <div class="package__card">
+                          <div class="package__content">
+                            <h4 class="package__price" data-format="$,.0f" data-formatter="d3.format">{{ package_price }}</h4>
+                            <ul class="package__list">
+                              {{# collection.package_items }}
+                                <li>{{ package_item }}</li>
+                              {{/ collection.package_items }}
+                            </ul>
+                          </div>
+                          <h6 class="package__name">{{ package_name }}</h6>
+                        </div>
+                      </div>
+                    {{/ block.standard_package }}
+                  {{/ collection.advertising_packages }}
+                </div>
+              </div>
+            </div>
+            {{/ collection.advertising_packages.length }}
+            {{# spreadsheet.additional_products.length }}
+              <div class="col-12">
+                <h6>Add-ons and additional services</h6>
+                <div class="row">
+                  <table>
+                    <tbody>
+                      {{# spreadsheet.additional_products }}
+                        <tr>
+                          <th>{{ product_name }}</th>
+
+                          {{# opt_product_description }}<td>{{ opt_product_description }}</td>{{/ opt_product_description }}
+                          {{^ opt_product_description }}<td>&nbsp;</td>{{/ opt_product_description }}
+
+                          {{# opt_product_price }}<td class="text-right" data-format="$,.0f" data-formatter="d3.format">{{ opt_product_price }}</td>{{/ opt_product_price }}
+                          {{^ opt_product_price }}<td class="text-right">&nbsp;</td>{{/ opt_product_price }}
+                        </tr>
+                      {{/ spreadsheet.additional_products }}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            {{/ spreadsheet.additional_products.length }}
+            {{# disclaimer }}
+              <footer class="page__footer col-12 align-self-end">
+                <small class="muted">{{{ disclaimer }}}</small>
+              </footer>
+            {{/ disclaimer }}
+          </div>
+        </section>
+      </article>
+      <script type="text/javascript" src="index.js"></script>
+      <script>RW.init(window)</script>
+    </body>
+  </html>
