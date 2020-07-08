@@ -1,0 +1,80 @@
+<!doctype html>
+<!-- VERSION: 0.0.0 -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Banner Ad placement instructions</title>
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <article>
+      <section class="page-with-margins d-flex flex-column align-items-space-between">
+        <hgroup>
+          <h5>Booking Instructions</h5>
+          <h3><b>NZME Digital Display Ads</b></h3>
+        </hgroup>
+        <div class="copy">
+          <h6><b>Step 1:</b> Upload this folder to Google Drive</h6>
+          <p>Because most email providers restrict the types of files you can send, you should upload this folder as a <span class="text-monospace">.zip</span> to Google Drive in order to share it.</p>
+
+          <p><b>Please note:</b><br/> Ad material must be supplied 2 business days before the campaign start date.</p>
+
+          <h6><b>Step 2:</b> Confirm the details below are correct</h6>
+          <table>
+            <tbody>
+              <tr>
+                <th>Office/Business name:</th>
+                <td><div class="text-monospace">{{ office_name }}</div></td>
+              </tr>
+              <tr>
+                <th>Contact name:</th>
+                <td><div class="text-monospace">{{ contact_name }}</div></td>
+              </tr>
+              <tr>
+                <th>Contact Phone:</th>
+                <td><div class="text-monospace">{{ contact_phone }}</div></td>
+              </tr>
+              <tr>
+                <th>Contact Email:</th>
+                <td><div class="text-monospace">{{ contact_email }}</div></td>
+              </tr>
+              <tr>
+                <th>Campaign dates:</th>
+                <td>
+                  <div class="date-range text-monospace">
+                    {{# banner_ad_campaign_start_date }}<span>{{ banner_ad_campaign_start_date }}</span>{{/ banner_ad_campaign_start_date }}
+                    {{# banner_ad_campaign_end_date }}<span>{{ banner_ad_campaign_end_date }}</span>{{/ banner_ad_campaign_end_date }}
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th width="30%">Suburb(s) to target:</th>
+                <td width="70%">
+                  {{# collection.banner_ad_target_localities }}
+                    <div class="text-monospace">{{ locality_name }} {{ locality_postcode }}</div>
+                  {{/ collection.banner_ad_target_localities }}
+                </td>
+              </tr>
+              <tr>
+                <th>Link URL:</th>
+                <td>
+                  <div class="text-monospace">
+                    {{# banner_ad_target_url }}<u>{{ banner_ad_target_url }}</u>{{/ banner_ad_target_url }}
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h6><b>Step 3:</b> Send this booking sheet, and your designed Ad to your NZME Account Manager. If unknown, send to <a href="mailto:realestateadmin@nzme.co.nz">realestateadmin@nzme.co.nz</a></h6>
+          <hr/>
+          <div>Campaign length may need to be extended in some instances where impression inventory is low. Impressions cannot be guaranteed to deliver over specified campaign dates. If you have any questions, please contact <a href="mailto:realestateadmin@nzme.co.nz">realestateadmin@nzme.co.nz</a></div>
+        </div>
+      </section>
+    </article>
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+</html>
