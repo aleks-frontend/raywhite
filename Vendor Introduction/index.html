@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="version" content="0.1.0">
+    <title>Vendor Introduction{{# vendor_name }} - {{ vendor_name }}{{/ vendor_name }}</title>
+    
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+    <script type="text/javascript" src="index.js"></script>
+  </head>
+  <body>
+    <article class="document">
+      <section class="page-A4 page-with-margins">
+        <div class="row h-100 align-items-center">
+          <div class="col-12">
+            <h1 class="underblock">
+              <div id="heading">{{# vendor_name }}<b>{{ vendor_name }}{{# thank_you_heading }}, {{/ thank_you_heading }}</b>{{/ vendor_name }}{{ thank_you_heading }}</div>
+            </h1>
+            {{# thank_you_content }}
+              <div class="row">
+                <div class="col-11">{{{ thank_you_content }}}</div>
+              </div>
+            {{/ thank_you_content }}
+            {{# collection.thank_you_list.length }}
+              <p><b>Here’s what we’ll cover…</b></p>
+              <ul>
+                {{# collection.thank_you_list }}
+                  <li>{{ list_text }}</li>
+                {{/ collection.thank_you_list }}
+              </ul>
+            {{/ collection.thank_you_list.length }}
+          </div>
+        </div>
+      </section>
+    </article>
+    <script type="text/javascript">
+      RW.init(function () {
+        return RW.pf.Promise.all([
+          RW.fitty('#heading', {
+            minSize: 72,
+            maxSize: 96,
+            multiLine: true
+          }),
+          RW.isLoaded,
+        ]);
+      })
+      .then(function () {
+        return new RW.pf.Promise(function (resolve) { setTimeout(resolve, 500); });
+      })
+      .then(function () { document.dispatchEvent(new Event('printready')); });
+    </script>
+  </body>
+</html>
