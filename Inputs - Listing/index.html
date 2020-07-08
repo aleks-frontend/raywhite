@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en" async>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="version" content="0.0.0">
+    <title>Inputs Tester</title>
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Space+Mono">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <section class="page">
+      <h1>Listing</h1>
+      <div id="app"></div>
+    </section>
+    <script type="text/javascript" src="index.js"></script>
+    <script>
+      // Extract state in separate tag, protects against syntax errors
+      var INPUTS = {
+        active: {
+          external_listing_all__id: '{{ external_listing_all__id }}',
+          external_listing_all__is_current: '{{ external_listing_all__is_current }}',
+          external_listing_all__status: '{{ external_listing_all__status }}',
+          external_listing_all__address_street: `{{{ external_listing_all__address_street }}}`,
+          external_listing_all__address_state_code: '{{ external_listing_all__address_state_code }}',
+          external_listing_all__address_suburb: `{{{ external_listing_all__address_suburb }}}`,
+          external_listing_all__address_postcode: '{{ external_listing_all__address_postcode }}',
+          external_listing_all__address_country: '{{ external_listing_all__address_country }}',
+          external_listing_all__lng: '{{ external_listing_all__lng }}',
+          external_listing_all__lat: '{{ external_listing_all__lat }}',
+          external_listing_all__bedrooms: '{{ external_listing_all__bedrooms }}',
+          external_listing_all__bedrooms_label: '{{ external_listing_all__bedrooms_label }}',
+          external_listing_all__bathrooms: '{{ external_listing_all__bathrooms }}',
+          external_listing_all__bathrooms_label: '{{ external_listing_all__bathrooms_label }}',
+          external_listing_all__carspaces: '{{ external_listing_all__carspaces }}',
+          external_listing_all__carspaces_label: '{{ external_listing_all__carspaces_label }}',
+          external_listing_all__title: '{{ external_listing_all__title }}',
+          external_listing_all__description: `{{{ external_listing_all__description }}}`,
+          external_listing_all__image_url: '{{{ external_listing_all__image_url }}}',
+          external_listing_all__type_high: '{{ external_listing_all__type_high }}',
+          external_listing_all__type_detail: '{{ external_listing_all__type_detail }}',
+          external_listing_all__type: '{{ external_listing_all__type }}',
+          external_listing_all__created_date_ymd: '{{ external_listing_all__created_date_ymd }}',
+          external_listing_all__created_date_friendly: '{{ external_listing_all__created_date_friendly }}',
+          external_listing_all__created_date_day_of_week_full: '{{ external_listing_all__created_date_day_of_week_full }}',
+          external_listing_all__created_date_day_of_month: '{{ external_listing_all__created_date_day_of_month }}',
+          external_listing_all__created_date_month_short: '{{ external_listing_all__created_date_month_short }}',
+          external_listing_all__created_date_month_full: '{{ external_listing_all__created_date_month_full }}',
+          external_listing_all__created_date_year: '{{ external_listing_all__created_date_year }}',
+          external_listing_all__agent__name: '{{ external_listing_all__agent__name }}',
+          external_listing_all__agent_2__name: '{{ external_listing_all__agent_2__name }}',
+          external_listing_all__sold_date_ymd: '{{ external_listing_all__sold_date_ymd }}',
+          external_listing_all__sold_date_friendly: '{{ external_listing_all__sold_date_friendly }}',
+          external_listing_all__sold_date_day_of_week_full: '{{ external_listing_all__sold_date_day_of_week_full }}',
+          external_listing_all__sold_date_day_of_month: '{{ external_listing_all__sold_date_day_of_month }}',
+          external_listing_all__sold_date_month_short: '{{ external_listing_all__sold_date_month_short }}',
+          external_listing_all__sold_date_month_full: '{{ external_listing_all__sold_date_month_full }}',
+          external_listing_all__sold_date_year: '{{ external_listing_all__sold_date_year }}',
+          external_listing_all__sold_price: '{{ external_listing_all__sold_price }}',
+          external_listing_all__sold_price_value: '{{ external_listing_all__sold_price_value }}',
+          external_listing_all__rent_price: '{{ external_listing_all__rent_price }}',
+          external_listing_all__rent_price_value: '{{ external_listing_all__rent_price_value }}',
+          external_listing_all__rent_price_frequency: '{{ external_listing_all__rent_price_frequency }}',
+          external_listing_all__price_display: '{{ external_listing_all__price_display }}',
+          external_listing_all__building_area_m2: '{{ external_listing_all__building_area_m2 }}',
+          external_listing_all__building_rate_sold_m2: '{{ external_listing_all__building_rate_sold_m2 }}',
+          external_listing_all__land_area_m2: '{{ external_listing_all__land_area_m2 }}',
+          external_listing_all__land_rate_sold_m2: '{{ external_listing_all__land_rate_sold_m2 }}',
+          external_listing_all__land_area_acres: '{{ external_listing_all__land_area_acres }}',
+          external_listing_all__land_area_hectares: '{{ external_listing_all__land_area_hectares }}',
+        },
+        images: [
+          {{# spreadsheet.external_listing_all_images }}
+            { image_url: '{{{ image_url }}}' },
+          {{/ spreadsheet.external_listing_all_images }}
+        ],
+        deprecated: {
+          external_listing_all__display_price: '{{ external_listing_all__display_price }}',
+          external_listing_all__address_state: '{{ external_listing_all__address_state }}',
+        },
+      };
+    </script>
+    <script>
+      RW.init({
+        inputs: window.INPUTS || {},
+        el: document.getElementById('app'),
+      })
+    </script>
+  </body>
+</html>
