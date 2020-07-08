@@ -1,0 +1,55 @@
+<!doctype html>
+<!-- VERSION: 0.0.0 -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Agent - Banner Ad - A Name to Trust</title>
+    <meta name="ad.size" content="width=300,height=250">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="index.css" />
+    <script type="text/javascript">
+      var clickTag = 'https://www.google.com'
+    </script>
+  </head>
+  <body>
+    <main id="app" data-theme="{{ a_name_to_trust_theme }}"></main>
+    <script type="text/javascript" src="index.js"></script>
+    <script>
+      var decode = RW.entityDecoder(document)
+
+      var INPUTS = {
+        agent: {
+          name: decode('{{ _agent__name }}'),
+          headshot: '{{{ _agent__image_headshot }}}',
+          phone: decode('{{ _agent__phone }}'),
+        },
+        office: {
+          nameUnbranded: decode('{{ _office__name_unbranded }}'),
+          licenceCode: decode('{{ _office__licence_code }}'),
+        },
+        options: {
+          showHeadshot: '{{ show_headshot }}',
+          selectedTheme: decode('{{ a_name_to_trust_theme }}'),
+        },
+      }
+    </script>
+    <script type="text/javascript">
+      if (RW.mayInitClickTag(window)) {
+        // Make the whole doc link-y
+        document.addEventListener('click', function () {
+          window.open(window.clickTag)
+        })
+        window.document.body.style.cursor = 'pointer'
+      }
+
+      RW.init({
+        inputs: window.INPUTS || {},
+        el: document.getElementById('app'),
+        window,
+      })
+    </script>
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+</html>
