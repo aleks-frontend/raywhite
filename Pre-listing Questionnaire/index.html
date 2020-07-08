@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Prelist Questionnaire</title>
+    
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <article class="document">
+      <section class="page-A4 page-with-margins">
+        <div class="page-with-margins background--lighterGrey h-100">
+          <div class="row h-100 align-items-center no-gutters">
+            <div class="col-12">
+              <h1 class="headline underblock">{{{ questionnaire_headline }}}</h1>
+              <h5 class="leadin">{{{ questionnaire_lead_in }}}</h5>
+              <ul class="question-list">
+                {{# collection.questions_for_vendor }}
+
+                  {{# block.scale }}
+                  <li>
+                    <div>
+                      {{ question }}
+                      <div class="scale">
+                        <div class="row no-gutters justify-content-between scale--indicator">
+                          <div class="col-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" stroke-width="3" stroke="#fedb00" fill="white"/></svg></div>
+                          <div class="col-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><circle cx="24" cy="24" r="14" stroke-width="3" stroke="#fedb00" fill="white"/></svg></div>
+                          <div class="col-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><circle cx="24" cy="24" r="14" stroke-width="3" stroke="#fedb00" fill="white"/></svg></div>
+                          <div class="col-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><circle cx="24" cy="24" r="14" stroke-width="3" stroke="#fedb00" fill="white"/></svg></div>
+                          <div class="col-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><circle cx="24" cy="24" r="14" stroke-width="3" stroke="#fedb00" fill="white"/></svg></div>
+                          <div class="col-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><circle cx="24" cy="24" r="14" stroke-width="3" stroke="#fedb00" fill="white"/></svg></div>
+                          <div class="col-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" stroke-width="3" stroke="#fedb00" fill="white"/></svg></div>
+                        </div>
+                        <div class="row scale--labels">
+                          {{# min }}<div class="col text-left">{{ min }}</div>{{/ min }}
+                          {{# mid }}<div class="col text-center">{{ mid }}</div>{{/ mid }}
+                          {{# max }}<div class="col text-right">{{ max }}</div>{{/ max }}
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  {{/ block.scale }}
+
+                  {{# block.basic }}
+                  <li>
+                    <div>{{ question }}</div>
+                  </li>
+                  {{/ block.basic }}
+
+                {{/ collection.questions_for_vendor }}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </article>
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+</html>
