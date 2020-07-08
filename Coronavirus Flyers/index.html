@@ -1,0 +1,100 @@
+<!doctype html>
+<!-- VERSION: 1.0.0 -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title></title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+
+    <style>
+      
+      html{
+        height:100%;
+      }
+    
+
+      body{
+        height: 100%;
+        width: 100%;
+            padding: 10.1rem 4rem;
+      }
+
+      .logo{
+        height: 11rem;
+        display: flex;
+        justify-content: center;
+      }
+
+      .logo img{
+        width: 10.6rem;
+      }
+
+      .copy{
+        padding: 6.9rem 0rem;
+      }
+
+      .copy p{
+        line-height: 1.58;
+        font-size: 1.8rem;
+        margin-bottom: 0.8rem;
+        text-align: center;
+      }
+
+
+
+       .a3 .logo{
+          height: 16rem;
+          display: flex;
+          justify-content: center;
+        }
+      .a3  .logo img{
+          width: 14.8rem;
+        }
+        
+        body.a3{
+          height: 100%;
+          width: 100%;
+          padding: 14.1rem 9rem;
+        }
+      .a3  .copy{
+          padding: 9.4rem 0;
+        }
+      .a3  .copy p {
+          font-size: 2.5rem;
+      }
+
+      
+      
+    </style>
+  </head>
+  <body class="{{size}}">
+    <section class="logo">
+      <img src="{{{account.logos.primary}}}">
+    </section>
+    <section class="copy">
+     
+      <p> If you have recently visited an area </br> that’s been nominated as a Coronavirus </br> hotspot, or are unwell, or have been in </br> contact with someone who is ill, please </br> be respectful of the well being of others </br> and reconsider entering this property.  </p>
+   
+
+
+    </section>
+
+
+
+  <script type="text/javascript" src="index.js"></script>
+  <script>   RW.outfit.applyEditableDefaults(window, [
+      {
+        id: 'officeBio',
+        editable: RW.dom.text(window, 'officeBioEditable'),
+        external: RW.dom.html(window, 'officeBioExternal'),
+      },
+    ]);
+  </script>
+  </body>
+</html>
