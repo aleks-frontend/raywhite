@@ -1,0 +1,196 @@
+<!doctype html>
+<!-- VERSION: 1.0.0 -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+
+    <style>
+      .placeholder {
+        background-image: url(' https://files.outfit.io/media_library_items/170867/No%2520hand%2520shaking_A4_Flyer_FINALS.png');
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.5;
+        z-index: 5;
+        pointer-events: none;
+      }
+     
+      html{
+        height:100%;
+      }
+    
+
+      body{
+        height: 100%;
+        width: 100%;
+        padding: 1.8rem 3.9rem;
+      }
+
+      .logo{
+        height: 9rem;
+        display: flex;
+        justify-content: center;
+      }
+
+      .logo img{
+        width: 10.6rem;
+      }
+
+      .copy{
+        padding: 2rem 0rem;
+        text-align: center;
+      }
+      
+      .copy h1 {
+        line-height: 1;
+        font-size: 2.77rem;
+        margin: 0;
+        margin-bottom: 0.7rem;
+      }
+
+      .copy .wrapper{
+        display: flex;
+        padding: 0 8.6rem;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.4rem;
+      }
+      
+      .copy .wrapper h2{
+        margin-left: 0.3rem;
+        margin: 0;
+        margin-left: 0.3rem;
+        font-size: 1.7rem;
+      }
+      
+      .copy .wrapper img{
+        height: 5.2rem;
+      }
+
+      .copy p{
+        line-height: 1.28;
+        font-size: 1.8rem;
+       margin-bottom: 1.6rem;
+        text-align: center;
+      }
+
+      .bottom{
+        position: absolute;
+        font-size: 1.797rem;
+        text-align: center;
+        bottom: 1.9rem;
+      }
+
+
+       .a3 .logo{
+          height: 13.3rem;
+          display: flex;
+          justify-content: center;
+        }
+       .a3 .logo img{
+             width: 12.2rem;
+        }
+        
+        body.a3 {
+          height: 100%;
+          width: 100%;
+             padding: 2.4rem 10.3rem;
+        }
+       .a3 .copy{
+          padding: 2.5rem 0;
+        }
+        
+       .a3 .copy .wrapper {
+          padding: 0 7.5rem;
+          margin-bottom:2.1rem;
+        
+        }
+        
+      .a3  .copy .wrapper h2{
+          font-size: 2.4rem;
+        }
+
+       .a3 .copy .wrapper img {
+          height: 7.3rem;
+        }
+       .a3 .copy h1{
+          line-height: 1;
+          font-size: 3.94rem;
+          margin: 0;
+          margin-bottom: 0.7rem;
+        }
+        .a3 .copy p {
+          font-size: 2.5rem;
+          margin-bottom: 2.3rem;
+        }
+
+        .a3 .bottom{
+          bottom: 2.6rem;
+          left: 5.7rem;
+          font-size: 2.545rem !important;
+        }
+
+
+    </style>
+  </head>
+  <body class="{{size}}">
+    <section class="logo">
+      <img src="{{{account.logos.primary}}}">
+    </section>
+    <section class="copy">
+
+     <h1>We're contact conscious.</h1>
+     <p> Join in on the handshake shake-up. </br> Our favourite alternatives:  </p>
+  	<div class="wrapper">
+      <h2>Jazz hands</h2>
+      <img src="https://files.outfit.io/media_library_items/170976/1.png">
+  	</div>
+   	<div class="wrapper">
+      <h2>Thumbs up</h2>
+      <img src="https://files.outfit.io/media_library_items/170975/2.png">
+  	</div>
+   	<div class="wrapper">
+      <h2>Waving</h2>
+      <img src="https://files.outfit.io/media_library_items/170977/3.png">
+  	</div>
+   	<div class="wrapper">
+      <h2>Bowing</h2>
+      <img src="https://files.outfit.io/media_library_items/170973/4.png">
+  	</div>
+   	<div class="wrapper">
+      <h2>Tip of the hat</h2>
+      <img src="https://files.outfit.io/media_library_items/170978/5.png">
+  	</div>
+   	<div class="wrapper">
+      <h2>Namaste</h2>
+      <img src="https://files.outfit.io/media_library_items/170974/6.png">
+  	</div>
+  	<p class="bottom"> For real estate agents, shaking hands is part of the gig,</br> but for the next little while we’re shaking things up. </p>
+
+
+</section>
+
+
+
+  <script type="text/javascript" src="index.js"></script>
+  <script>   RW.outfit.applyEditableDefaults(window, [
+      {
+        id: 'officeBio',
+        editable: RW.dom.text(window, 'officeBioEditable'),
+        external: RW.dom.html(window, 'officeBioExternal'),
+      },
+    ]);
+  </script>
+  </body>
+</html>
