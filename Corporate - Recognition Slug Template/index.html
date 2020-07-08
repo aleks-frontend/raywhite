@@ -1,0 +1,34 @@
+<!doctype html>
+<!-- VERSION: 0.0.0 -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Recogntion Certificate Slug</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+
+    <script type="text/javascript" src="index.js"></script>
+  </head>
+  <body>
+    <article class="document">
+      {{# spreadsheet.certificate_pages }}
+        <section style="height: 100vh; width: 100vw;">
+          <div class="h-100 d-flex align-items-center justify-content-center">
+            <hgroup class="text-center" style="padding-bottom: 10vh">
+              <h1><div id="title">{{{ multiline_title }}}</div></h1>
+              {{# multiline_subtitle }}<h3>{{{ multiline_subtitle }}}</h3>{{/ multiline_subtitle }}
+            </hgroup>
+          </div>
+        </section>
+      {{/ spreadsheet.certificate_pages }}
+    </article>
+    <script type="text/javascript">
+      RW.fitty('#title', { maxSize: 46, multiLine: true })
+    </script>
+  </body>
+</html>
