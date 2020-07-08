@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html data-sign="OSR">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i');
+      @import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i');
+
+      :root {
+        --grey: {{{account.colors.secondary}}};
+        --yellow: {{{account.colors.brand-color}}};
+        --white: {{{account.colors.white}}};
+      }
+
+      /* Inputs Order
+
+      {{show-crop}}
+
+      */
+
+      html {
+        font-family: 'Lato';
+        color: var(--white);
+        word-break: break-word;
+      }
+
+      .fit {
+        top: 3mm;
+        bottom: 3mm;
+        left: 3mm;
+        right: 3mm;
+        display: flex;
+        padding: 50pt 84pt 72pt;
+      }
+
+      .backgroundImage,
+      .overlay {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .overlay {
+        background: var(--grey);
+        opacity: 0.7;
+      }
+
+      .body {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-contents:center;
+        justify-content:center;
+        flex: 1;
+      }
+
+      .topSection {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .logo {
+        display: none;
+        align-self: center;
+        width: 98pt;
+        margin-bottom: 11pt;
+      }
+
+      .theme--yellow .logo--primary {
+        display: block;
+      }
+
+      .theme--white .logo--secondary {
+        display: block;
+      }
+
+
+      .title,
+      .info,
+      .date,
+      .content {
+        text-align: center;
+      }
+
+
+      .title {
+        display: none;
+        margin-bottom: 14pt;
+        font-size: 59pt;
+        line-height: 1em;
+        font-family: 'Playfair Display';
+      }
+
+      .theme--yellow .title {
+        color: var(--yellow);
+      }
+
+      .theme--white .title {
+        color: var(--white);
+      }
+
+      .titleChoice--under-the-hammer .title--primary {
+        display: block;
+      }
+
+      .titleChoice--open-for-inspection .title--secondary {
+        display: block;
+      }
+
+      .titleChoice--open-home .title--tertiary {
+        display: block;
+      }
+
+      .info {
+        font-size: 40pt;
+        line-height: 1em;
+      }
+
+      .date {
+        font-size: 35pt;
+        line-height: 1.5em;
+      }
+      
+      .dateValidation {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .content {
+        flex: 1;
+        margin-top: 86pt;
+        font-size: 26pt;
+      }
+
+      .layoutChoice--square .content {
+        margin-top: 70pt;
+        line-height: 1.75em;
+      }
+
+      .layoutChoice--story .content {
+        line-height: 3.5em;
+      }
+
+      .frame {
+        position: absolute;
+        top: 1.2%;
+        left: 6%;
+        right: 6%;
+        bottom: 3.5%;
+        border: 5pt solid var(--yellow);
+        pointer-events: none;
+      }
+
+      .layoutChoice--square .frame { 
+        top: 3.2%;
+        bottom: 6.5%;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" data-crop="{{show-crop}}" class="theme--{{{RW_theme--oh}}}{{^RW_theme--oh}}yellow{{/RW_theme--oh}}
+                                                                   layoutChoice--{{{RW_layout-choice--oh}}}
+                                                                   titleChoice--{{{RW_title-choice--oh}}}">
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          <div class="body">
+            <div class="topSection js-subtrahend">
+              <div class="title title--tertiary" style="color:black; line-height:1.5;">COVID-19 </br> Communications Kit</div><!--title--tertiary-->
+            </div><!-- topSection -->
+          </div><!--body-->
+          <div class="frame"></div><!-- frame -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/custom-rich-text.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/text-fit-min.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+
+      dateUtil();
+      function dateUtil(){
+        var dates = document.querySelectorAll(".dateValidation");
+        var date = "{{{RW_date--oh}}}";
+        dates.forEach(function(date){
+          var dateFormat = 'dddd MMMM DD YYYY';
+          var dateValue = date.innerText;
+          console.log(dateValue);
+          var yearsCount = parseInt({{{proceeding-years}}}{{^proceeding-years}}3{{/proceeding-years}});
+          var startYear = parseInt({{{start-year}}}{{^start-year}}2020{{/start-year}});
+          var m = "";
+          var a = false;
+          var i = 0;
+          
+          for(i=0; i<=yearsCount; i++){
+            if(!a){
+              let tempDate = dateValue;
+              currentYearCheck = startYear + i;
+              tempDate += " " + currentYearCheck;
+              m = moment(tempDate , dateFormat);
+              a = m.isValid();
+              console.log(m.invalidAt());
+              console.log(m);
+            }
+          }
+          
+          if(a != true) {
+            date.classList.add("overflow-date");
+          } else {
+            date.classList.remove("overflow-date");
+          }
+        });
+      }
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+          dateUtil();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+      });
+
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+
+    </script>
+
+
+  </body>
+</html>
