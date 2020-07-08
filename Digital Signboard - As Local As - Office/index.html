@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Digital Signboard - As Local As - {{ external_office_name }}</title>
+    
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,700">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+    <style type="text/css">
+      {{# background_image }}
+        .tile.tile-with-photo .overlay {
+          background-image: url('{{{ background_image }}}') !important;
+        }
+      {{/ background_image }}
+
+      {{# overlay_align_x }} .tile-with-photo .overlay__wrapper { {{ overlay_align_x }}: 0; } {{/ overlay_align_x }}
+      {{^ overlay_align_x }} .tile-with-photo .overlay__wrapper { left: 0; } {{/ overlay_align_x }}
+
+      {{# overlay_align_y }} .tile-with-photo .overlay__wrapper { {{ overlay_align_y }}: 0; } {{/ overlay_align_y }}
+      {{^ overlay_align_y }} .tile-with-photo .overlay__wrapper { bottom: 0; } {{/ overlay_align_y }}
+    </style>
+  </head>
+  <body>
+    <main class="tile{{# background_image }} tile-with-photo{{/ background_image }}">
+      <section class="overlay">
+        <div class="overlay__wrapper">
+          <div class="overlay__border">
+            <dl>
+              <dt>As local as</dt>
+              <dd>{{ as_local_as }}</dd>
+              <dt>As wise as</dt>
+              <dd>116 years in<br/>the business</dd>
+            </dl>
+          </div>
+        </div>
+      </section>
+      <footer class="footer">
+        <div>{{ external_office_email }} &nbsp; &nbsp; | &nbsp; &nbsp; {{ external_office_phone_number }}</div>
+        <div><b>{{ external_office_website_display }}{{^ external_office_website_display }}raywhite.com{{/ external_office_website_display }}</b></div>
+      </footer>
+    </main>
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+</html>
