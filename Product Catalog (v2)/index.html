@@ -1,0 +1,74 @@
+<!doctype html>
+<!-- VERSION: 0.0.0 -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Product catalog</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <article class="document">
+      {{# collection.catalog_pages }}
+        {{# block.page_with_products }}
+          <section class="page-A4 page-with-wide-margins">
+            <div class="d-flex flex-column h-100">
+              <hgroup>
+                {{# page_section }}<h6><span class="highlight">{{ page_section }}</span></h6>{{/ page_section }}
+                <h3>{{ title }}</h3>
+                {{# subtitle }}<p>{{ subtitle }}</p>{{/ subtitle }}
+              </hgroup>
+
+              <div class="flex-fill">
+                <div class="h-100 product-card-grid">
+                  {{# collection.product_groups---max-4 }}
+                    <figure class="product">
+                      <div class="product__image">
+                        <picture class="h-100">
+                          {{# collection.photo_badge }}
+                            <div class="new-badge">{{ badge_text }}</div>
+                          {{/ collection.photo_badge }}
+                          {{# collection.resizable_background_images---max-2.length }}
+                            <div class="product__images">
+                            {{# collection.resizable_background_images---max-2 }}
+                              <picture>{{{ resizable_background_image }}}</picture>
+                            {{/ collection.resizable_background_images---max-2 }}
+                            </div>
+                          {{/ collection.resizable_background_images---max-2.length }}
+                        </picture>
+                      </div>
+                      <div class="product__content">
+                        <hgroup>
+                          <h6 class="product__title">{{ group_name }}</h6>
+                          {{# group_description }}<p class="product__description">{{ group_description }}</p>{{/ group_description }}
+                        </hgroup>
+
+                        {{# spreadsheet.products---max-10.length }}
+                          <table class="product__table align-self-end">
+                            <tbody>
+                              {{# spreadsheet.products---max-10 }}
+                              <tr>
+                                <td>{{ product_name }}</td>
+                                <th class="text-right" data-format="$,.2f" data-formatter="d3.format">{{ product_price }}</th>
+                              </tr>
+                              {{/ spreadsheet.products---max-10 }}
+                            </tbody>
+                          </table>
+                        {{/ spreadsheet.products---max-10.length }}
+                      </div>
+                    </figure>
+                  {{/ collection.product_groups---max-4 }}
+                </div>
+              </div>
+            </div>
+          </section>
+        {{/ block.page_with_products }}
+      {{/ collection.catalog_pages }}
+    </article>
+  </body>
+</html>
