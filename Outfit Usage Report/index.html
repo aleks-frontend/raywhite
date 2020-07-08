@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en" async>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="version" content="0.0.0">
+    <title>Outfit Usage Report</title>
+    <link media="all" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body class="loading">
+    <h1>Outfit Usage Report</h1>
+
+    <section id="chart-page" class="page-A4 page-landscape page-with-margins background--darkGrey">
+      <div id="chart" class="h-100"></div>
+    </section>
+
+    <div id="app"></div>
+
+    <script type="text/javascript" src="index.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", async function() {
+        // Bail if not in editor iframe
+        if (!RW.isInEditorIframe(window)) return;
+
+        const data = await fetch('/users?sort_by=name.asc').then(res => res.json())
+        const teams = data.teams
+        const pages = data.total_pages
+
+        const getOffices = fetch("https://raywhiteapi.ep.dynamics.net/v1/organisations", {
+          body: JSON.stringify({
+            id: [...new Set(teams.map(t => +t.provider_group_id.split(':')[0]))].filter(id => id > 0),
+            statusCode: null,
+            public: null,
+          }),
+          headers: {
+            Accept: "application/json",
+            "Cache-Control": "no-cache",
+            "Content-Type": "application/json",
+            "Postman-Token": "b18c58eb-c319-4a7d-b606-b5d511f1c63e",
+            "X-Apikey": "FB889BB8-4AC9-40C2-829A-DD42D51626DE"
+          },
+          method: "POST"
+        })
+
+        const offices = (await getOffices.then(res => res.json())).data
+        const sleep = duration => new Promise(resolve => setTimeout(resolve, duration))
+        
+        const getUsers = async (page) => {
+          let retries = 5
+          while (retries--) {
+            const res = await fetch(`/users?sort_by=updated_at.asc&page=${page}`).catch(() => {})
+            if (!res || !res.ok) {
+              await sleep(5 - retries * 500)
+              continue
+            }
+
+            return await res.json()
+          }
+        }
+
+        // Load way less in dev mode so that iteration is faster
+        const allPages = '{{ dev_mode }}'
+          ? await Promise.all([getUsers(1)])
+          : await Promise.all([...new Array(pages)].map((_, idx) => getUsers(idx + 1)))
+        const users = [].concat(...allPages.map(p => p.users))
+          .filter(u => u.email && u.email.indexOf('@outfit.io') === -1)
+
+        document.body.classList.remove('loading');
+
+        RW.init({
+          inputs: { users, teams, offices },
+          el: document.getElementById('app'),
+        })
+        .catch(function () {
+          document.body.innerHTML = '<h1>FAILED</h1>';
+        })
+        .then(function () {
+          document.dispatchEvent(new Event('printready'));
+        });
+      });
+    </script>
+    <script>
+
+    </script>
+  </body>
+</html>
