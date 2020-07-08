@@ -1,0 +1,43 @@
+<!doctype html>
+<!-- VERSION: 0.0.0 -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Social Media - Auction Collective Campaign - Testimonial</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <main class="tile" data-template-name="Event Cover">
+      <picture class="tile__background">{{{ resizable_background_image }}}</picture>
+      <div class="tile__overlay">
+        <div class="logo">
+          <div class="logo__border">
+            <hgroup class="logo__title">
+              <h2>&ldquo;{{ testimonial_content }}&rdquo;</h2>
+            </hgroup>
+            <div class="logo__subtitle-wrap">
+              <div class="logo__subtitle"><div id="vendorName">{{ testimonial_author }}</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-hash">
+        {{footer_hash}}
+      </div>
+
+    </main>
+    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript">
+      document.addEventListener('DOMContentLoaded', function() {
+        RW.fitty('#vendorName', { maxSize: 20 })
+      })
+    </script>
+  </body>
+</html>
