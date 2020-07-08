@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Family owned since 1902</title>
+    
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <article class="document">
+      <section id="Page1" class="page-A4 page-with-margins">
+        <div class="row">
+          <div class="col-9">
+            <h2 class="overblock">{{ family_history_title }}</h2>
+          </div>
+        </div>
+        <div class="row no-gutters">
+          <div class="col-8">
+            <div class="leadin">{{ family_history_subtitle }}</div>
+            <div class="copy">{{{ family_history_body }}}</div>
+          </div>
+          <div class="col-3 offset-1">
+            <dl class="timeline">
+              {{# spreadsheet.family_history_timeline }}
+                <dt><span class="highlight">{{ timeline_year }}</span></dt>
+                <dd>{{ timeline_description }}</dd>
+              {{/ spreadsheet.family_history_timeline }}
+            </dl>
+          </div>
+        </div>
+      </section>
+      <section id="Page2" class="page-A4 page-with-margins">
+        <div class="row no-gutters">
+          <div class="col-12">
+            <figure class="figure--caption-overlay">
+              <picture class="aspect--one-half">{{{ resizable_background_image_1 }}}</picture>
+              <figcaption>Brian, Sam, Dan and Ben White</figcaption>
+            </figure>
+          </div>
+          <div class="col-7">
+            <figure class="figure--caption-overlay">
+              <picture class="aspect--six-sevenths">{{{ resizable_background_image_2 }}}</picture>
+              <figcaption>Alan White conducting an auction with sons Paul and Brian in the 1950’s</figcaption>
+            </figure>
+          </div>
+          <div class="col-5">
+            <figure class="figure--caption-overlay">
+              <picture class="aspect--six-fifths">{{{ resizable_background_image_3 }}}</picture>
+              <figcaption>Ray White (front left)</figcaption>
+            </figure>
+          </div>
+          <div class="col-12">
+            <figure class="figure--caption-overlay">
+              <picture class="aspect--two-fifths with-spacer-2x">{{{ resizable_background_image_4 }}}</picture>
+              <figcaption>If you travel to Crows Nest, a small town in the Darling Downs 132km west of Brisbane, you can still see the original shed where Ray began his auction business in 1902.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+    </article>
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+</html>
