@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="version" content="0.1.1">
+    <title>Social Media Tile (Square) - {{ external_listing_all__address_street }}, {{ external_listing_all__address_suburb }}</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,500,600,700">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:400,500,600,700">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <main class="tile tile--{{# overlay_style }}{{ overlay_style }}{{/ overlay_style }}{{^ overlay_style }}bold{{/ overlay_style }} tile--{{# logo_alignment }}{{ logo_alignment }}{{/ logo_alignment }}{{^ logo_alignment }}right{{/ logo_alignment }}">
+      <div class="tile__overlay align-items-center">
+        <div class="tile__sticker">
+          <div class="tile__title">
+            <h1 class="tile__status">{{ external_listing_all__status }}</h1>
+            <h4 class="tile__address">
+              <div>{{ external_listing_all__address_street }}</div>
+              <div>{{ external_listing_all__address_suburb }}</div>
+            </h4>
+            <div class="tile__description">
+              {{# external_listing_all__is_current }}
+                <h5 class="tile__price">{{ external_listing_all__display_price }}</h5>
+              {{/ external_listing_all__is_current }}
+              {{^ external_listing_all__is_current }}
+                <h5 class="tile__price">{{ external_listing_all__sold_price }}</h5>
+              {{/ external_listing_all__is_current }}
+
+              <div id="propertyDescription">
+                {{# editable_listing_all__description }}<div>{{{ editable_listing_all__description }}}</div>{{/ editable_listing_all__description }}
+                {{^ editable_listing_all__description }}<div>{{{ external_listing_all__description }}}</div>{{/ editable_listing_all__description }}
+              </div>
+            </div>
+            <dl class="tile__agents">
+              {{# spreadsheet.external_agents }}
+                <div>
+                  <dt>{{ agent_name }}</dt>
+                  <dd>{{ agent_phone_local }}</dd>
+                </div>
+              {{/ spreadsheet.external_agents }}
+            </dl>
+          </div>
+        </div>
+      </div>
+      <picture class="tile__photo" style="background-image: url('{{{ external_listing_all__image_url }}}?maxwidth=2388&scale=both')">{{{ resizable_background_image }}}</picture>
+    </main>
+    <script type="text/javascript" src="index.js"></script>
+    <script id="propertyDescriptionExternal" type="text/template">{{{ external_listing_all__description }}}</script>
+    <script id="propertyDescriptionEditable" type="text/template">{{{ editable_listing_all__description }}}</script>
+
+    <script type="text/javascript">
+      RW.outfit.applyEditableDefaults(window, [{
+        id: 'propertyDescription', // the id attribute of the element that contains the data
+        editable: RW.dom.html(window, 'propertyDescriptionEditable'), // the current value of the editable override
+        external: RW.dom.html(window, 'propertyDescriptionExternal'), // the currrent value of the external data
+      }]);
+    </script>
+  </body>
+</html>
