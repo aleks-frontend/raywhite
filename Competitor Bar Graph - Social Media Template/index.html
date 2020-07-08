@@ -1,0 +1,56 @@
+<!doctype html>
+<!-- VERSION: 0.0.0 -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Competitor Graph</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <main class="tile">
+      <header class="tile__headline-group">
+        <h1>
+          <span class="color-yellow">
+            Ray White
+            {{# show_office_name }} {{ _office__name_unbranded }} {{/ show_office_name }}
+          </span>
+          <span>{{ value__label }}</span>
+          <span class="color-yellow" style="break-inside: avoid;">{{ locality_name }}</span>
+        </h1>
+        <h3 class="tile__headline3">Here’s the proof.</h3>
+      </header>
+      <figure id="competitorChart" class="tile__chart"></figure>
+      <footer class="tile__footer">
+        <div id="legend" class="tile__chipset"></div>
+        <div class="tile__source">
+          {{ _office__website_display }}
+          <div class="disclaimer">
+            Source:&nbsp;
+            {{# value__source }}<span>{{ value__source }}</span>{{/ value__source }}
+            {{^ value__source }}<span>Not specified</span>{{/ value__source }}
+          </div>
+        </div>
+      </footer>
+    </main>
+    <script type="text/javascript">
+    </script>
+    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript">
+      RW.marketShareChart('#competitorChart', {
+        labelFormat: '{{ value__format }}',
+        office: +'{{ office__value }}',
+        competitors: [
+          {{# spreadsheet.competitor__values }}
+            +'{{ value }}',
+          {{/ spreadsheet.competitor__values }}
+        ]
+      })
+    </script>
+  </body>
+</html>
