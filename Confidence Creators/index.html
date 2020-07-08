@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html data-sign="OS?">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+    
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:300,300i,400,400i,500,500i,600,600i,700,700i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:300,300i,400,400i,500,500i,600,600i,700,700i">
+
+    <style>
+
+      html {
+        font-family: "Playfair display";
+        font-size: 11pt;
+        color: #000;
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }
+      
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+      
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+      
+      /*1200x628px size*/
+      @media only screen and (max-height: 628px) and (min-width: 1200px) {
+        
+        .container{
+          background-color: rgb(235,235,235);
+          color: #595959;
+          display: grid;
+          grid-template-rows: 190px 370px 50px;
+        }
+        
+         .header{
+           font-size: 60px;
+           text-align: center;
+           align-self: center;
+        }
+        
+        .footer{
+          font-size: 30px;
+          text-align: left;
+          align-self: end;
+          justify-self: end;
+          display: grid;
+          grid-template-columns: 365px;
+        }
+        
+        .footer p{
+          text-align: left;
+          font-size: 20px;
+          margin-top: 5px;
+        }
+        .outfit-resizable-background{
+          height: 450px;
+          width: 830px;
+          top: 155px !important;
+          background-position: 0px -300px !important
+        }
+        .row-body{
+          align-self: center;
+          justify-content: center;
+          display: grid;
+          grid-template-columns: 90%;
+        }
+        .inner-content{
+          padding: 30px 20px 40px 20px;
+          max-height: 330px !important;
+          min-width: 400px;
+          max-width: 400px;
+          z-Index: 3;
+          background-color: #FFE512;
+          position: relative;
+          align-self: center;
+          justify-content: center;
+          justify-self: end;
+          margin-top:-80px;
+          font-family: 'Lato';
+          letter-spacing: 2px;
+        }
+        
+        .inner-content-title, .inner-content-title p {
+          font-size: 20px;
+          font-weight: 600;
+        }
+        .inner-content-body {
+          margin-top: 10px;
+        }
+        .inner-content li, .inner-content ul li p {
+          font-size: 20px;
+          font-weight: 300;
+        }
+        
+        .inner-content  li:nth-child(n+1):before {
+          height: 15px;
+        }
+        
+        .container.commercial .footer h3{
+          padding-right: 60px;
+        }
+        
+       .container.commercial .outfit-resizable-background{
+          background-position: center !important;
+        }
+      }
+      
+      /*A4 size*/
+        .container.a4{
+          background-color: rgb(235,235,235);
+          color: #595959;
+          display: grid;
+          grid-template-rows: 190px 780px 1fr;
+          background-clip: content-box;
+          padding: 40px;
+        }        
+         .container.a4 .header{
+           font-size: 50px;
+           text-align: center;
+           align-self: center;
+        }
+        
+        .container.a4 .footer{
+          font-size: 35px;
+          text-align: left;
+          align-self: center;
+          justify-self: center;
+        }
+        
+        .container.a4 .footer p{
+          text-align: left;
+          font-size: 20px;
+          margin-top: 5px;
+        }
+        .container.a4 .outfit-resizable-background{
+          top: 260px !important;
+          height: 730px;
+          width: 450px
+        }
+        .container.a4 .row-body{
+          align-self: center;
+          justify-content: center;
+          display: grid;
+          grid-template-columns: 95%;
+        }
+        .container.a4 .inner-content{
+          padding: 10px 20px 20px 20px;
+          max-height: 630px !important;
+          min-width: 370px;
+          max-width: 370px;
+          z-Index: 3;
+          background-color: #FFE512;
+          position: relative;
+          align-self: center;
+          justify-content: center;
+          justify-self: end;
+          margin-top:-20px;
+          font-family: 'Lato';
+          letter-spacing: 2px;
+        }
+        
+        .container.a4 .inner-content-title, .inner-content-title p {
+          font-size: 20px;
+          font-weight: 600;
+        }
+        .container.a4 .inner-content-body p, .inner-content-body{
+          font-size: 15px;
+          font-weight: 400;
+        }
+        
+        .container.a4 .inner-content  li:nth-child(n+1):before {
+          content: none;
+        }
+        
+         .container.a4 .inner-content ul {
+          list-style: inside;
+          line-height:1.6;
+        }
+         
+         .container.a4 .inner-content ul li {
+           font-size: 15px;
+           margin-top: 0 !important;
+         }
+         
+        .container.commercial.a4 .outfit-resizable-background{
+          background-position: 30% 10% !important;
+        } 
+      
+      .container.commercial .header{
+        font-family:'Oswald';
+      }
+      
+      .container.commercial .footer h3{
+        font-family:'Oswald';
+        font-weight: 700;
+      }
+      
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" data-crop="{{show-crop}}" data-reduce-export-font-size-by-percent="0" data-reduce-firefox-font-size-by-percent="0" data-prevent-export-overflow="false">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit {{{confidence_creators_layout_choice}}} {{{confidence_creators_size_choice}}}">
+          <h1 class="header">{{{confidence_creators_page_title_text}}}</h1>
+          
+          <div class="row-body">
+          {{{confidence_creators_feature_image}}}
+            
+            <div data-max-height="css" class="inner-content">
+              <div class="inner-content-title">
+                {{{confidence_creator_content_title_text}}}
+              </div>
+              
+              <div class="inner-content-body">
+              {{{confidence_creators_body-text}}}
+              </div>
+            </div>
+            
+          </div>
+          
+          <div class="footer">{{{confidence_creators_page_footer_text}}}</div>
+          
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/custom-rich-text.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/text-fit-min.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+      {{ #placeholder-toggle-new }}document.body.classList.add("u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}"); {{ /placeholder-toggle-new }}
+      {{ #placeholder-validation }}document.body.classList.add("placeholder__validation--{{placeholder-validation}}"){{ /placeholder-validation }}
+    </script>
+    <script>
+      
+      console.clear();
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+      
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+      
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+      
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+
+    </script>
+
+
+  </body>
+</html>
