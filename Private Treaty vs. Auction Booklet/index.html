@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en" async>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="version" content="0.1.0">
+    <title>Private Treaty vs. Auction Booklet</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,400i,700,900">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <article class="document" data-office-state="{{ external_office__address_country_code }}{{ external_office__address_state_code }}">
+      <section class="page page-landscape page-with-minimal-margins">
+        <div class="row no-gutters h-100">
+
+          <div id="cover__back" class="col background--lighterGrey">
+            <div class="h-100 page-with-minimal-margins">
+              <div class="row align-items-center justify-content-center h-100">
+                {{# external_opt_agent__name }}
+                  <!-- IF Agent -->
+                  <div class="col-9">
+                    <div class="row justify-content-center">
+                      <div class="col-6">
+                          <figure class="contact">
+                            <picture class="aspect--square circle background--lightGrey contact__photo" style="background-image: url('{{{ external_opt_agent__image_headshot }}}')">{{{ resizable_custom_headshot }}}</picture>
+                            <figcaption class="contact__details">
+                              <div class="contact__name">{{ external_opt_agent__name }}</div>
+                              {{# external_opt_agent__phone_local }}
+                                <div class="contact__phone">{{ external_opt_agent__phone_local }}</div>
+                              {{/ external_opt_agent__phone_local }}
+                              {{# external_opt_agent__email }}
+                                <div class="contact__email">{{ external_opt_agent__email }}</div>
+                              {{/ external_opt_agent__email }}
+                            </figcaption>
+                          </figure>
+                      </div>
+                    </div>
+
+                    <div class="copy">
+                      <div id="bio" style="overflow: hidden; max-height: 32em;">
+                        {{# editable_bio_html }}<div>{{{ editable_bio_html }}}</div>{{/ editable_bio_html }}
+                        {{^ editable_bio_html }}<div>{{{ external_opt_agent__bio_html }}}</div>{{/ editable_bio_html }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-9 align-self-end text-center">
+                    <div><b>{{ external_office__name }}</b></div>
+                    <div>{{ external_office__website_display }}</div>
+                  </div>
+                {{/ external_opt_agent__name }}
+                {{^ external_opt_agent__name }}
+                  <!-- IF No agent-->
+                  {{# external_opt_team__name }}
+                    <div class="col-9">
+                      <div class="row justify-content-center">
+                        <div class="col-6">
+                            <figure class="contact">
+                              <picture class="aspect--square circle background--lightGrey contact__photo" style="background-image: url('{{{ external_opt_team__image }}}')">{{{ resizable_custom_headshot }}}</picture>
+                              <figcaption class="contact__details">
+                                <div class="contact__name">{{ external_opt_team__name }}</div>
+                                {{# external_opt_team__phone_local }}
+                                  <div class="contact__phone">{{ external_opt_team__phone_local }}</div>
+                                {{/ external_opt_team__phone_local }}
+                                {{# external_opt_team__email }}
+                                  <div class="contact__email">{{ external_opt_team__email }}</div>
+                                {{/ external_opt_team__email }}
+                              </figcaption>
+                            </figure>
+                        </div>
+                      </div>
+
+                      <div class="copy">
+                        <div id="bio" style="overflow: hidden; max-height: 32em;">
+                          {{# editable_bio_html }}<div>{{{ editable_bio_html }}}</div>{{/ editable_bio_html }}
+                          {{^ editable_bio_html }}<div>{{{ external_opt_team__bio_html }}}</div>{{/ editable_bio_html }}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-9 align-self-end text-center">
+                      <div><b>{{ external_office__name }}</b></div>
+                      <div>{{ external_office__website_display }}</div>
+                    </div>
+                  {{/ external_opt_team__name }}
+                  {{^ external_opt_team__name }}
+                    <div class="col-6">
+                      <div class="row no-gutters justify-content-center">
+                        <div class="col-7">
+                          <svg class="logo" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'>
+                            <title>Ray White®</title>
+                            <rect id='block' fill='#ffe512' width='120' height='120'/>
+                            <g id='logomark' fill='#52524f'>
+                              <path id='logomark--R' d='M21.26,100.13s-.22-.26.12-.31c2.52-.36,4.25-3,4.57-4.79a4.46,4.46,0,0,0-1.07-4.14c-1.29-1.4-2.48-1.38-4.7-1.31H15.7a.41.41,0,0,0-.4.34l-2.76,14.8a.27.27,0,0,0,.28.34h3a.41.41,0,0,0,.4-.34l.85-4.59h0s0,0,.22.28l3.24,4.37a.72.72,0,0,0,.54.28h3.77s.34,0,.13-.27Zm-2.14-3.29h-1a.26.26,0,0,1-.27-.34l.78-4.07H20c1.9.07,2.6,1,2.35,2.42C22.23,95.59,21.62,96.9,19.12,96.84Z'/>
+                              <path id='logomark--a' d='M39.42,93.63H36.34L36,95.08a3,3,0,0,0-3-1.85,7.26,7.26,0,0,0-6.88,6.1c-.61,3.28,1,6.12,4.62,6.12a4.68,4.68,0,0,0,3.56-2l-.24,1.26a.27.27,0,0,0,.28.34H37.3a.43.43,0,0,0,.41-.34L39.7,94A.27.27,0,0,0,39.42,93.63Zm-4.13,5.7a3.56,3.56,0,0,1-3.41,2.93,2.32,2.32,0,0,1-2.31-2.89,3.55,3.55,0,0,1,3.37-2.94A2.28,2.28,0,0,1,35.29,99.33Z'/>
+                              <path id='logomark--y' d='M52.26,93.63H49.39a.63.63,0,0,0-.51.29l-3,5.33s-.16.3-.23,0l-1-5.26a.42.42,0,0,0-.41-.33h-3A.26.26,0,0,0,41,94l2,9.87a1,1,0,0,1-.1.63l-2.17,3.83s-.17.3.17.3h2.81a.62.62,0,0,0,.51-.3l8.19-14.37S52.6,93.63,52.26,93.63Z'/>
+                              <path id='logomark--W' d='M71.71,89.81H68.6a.55.55,0,0,0-.48.31L64.3,98.31s-.15.31-.16,0l-.45-8.13a.36.36,0,0,0-.36-.34H61a.53.53,0,0,0-.47.32l-3.49,8.18s-.13.31-.16,0l-.6-8.13a.36.36,0,0,0-.36-.34H53a.31.31,0,0,0-.32.34l1.06,14.57a.37.37,0,0,0,.37.34H57a.53.53,0,0,0,.47-.32l3.48-8.6s.12-.31.14,0l.29,8.54a.35.35,0,0,0,.36.35h3a.55.55,0,0,0,.48-.31L71.9,90.12S72.05,89.81,71.71,89.81Z'/>
+                              <path id='logomark--h' d='M78.92,93.23a3.89,3.89,0,0,0-3.21,1.45h0s0,0,0-.34l.78-4.19a.27.27,0,0,0-.28-.34H73.49a.41.41,0,0,0-.4.34l-2.71,14.57a.27.27,0,0,0,.28.34H73.4a.42.42,0,0,0,.41-.34l1.11-6c.1-.55.45-2.51,2.37-2.51s1.46,2.08,1.36,2.63l-1.1,5.89a.27.27,0,0,0,.28.34h2.74a.41.41,0,0,0,.4-.34l1.13-6c.38-2,.46-3-.3-4.18A3.46,3.46,0,0,0,78.92,93.23Z'/>
+                              <g id='logomark--i'>
+                                <path d='M87.9,93.68H85.17a.42.42,0,0,0-.41.33l-2,10.76a.27.27,0,0,0,.28.34h2.73a.42.42,0,0,0,.41-.34l2-10.76A.27.27,0,0,0,87.9,93.68Z'/>
+                                <path d='M88.61,89.86H85.87a.41.41,0,0,0-.4.34l-.36,1.93a.27.27,0,0,0,.28.33h2.74a.41.41,0,0,0,.4-.33l.36-1.93A.27.27,0,0,0,88.61,89.86Z'/>
+                              </g>
+                              <path id='logomark--t' d='M96.61,93.68h-1.3a.27.27,0,0,1-.28-.34l.58-3.14a.27.27,0,0,0-.28-.34H92.59a.41.41,0,0,0-.4.34l-.65,3.48H90.2a.42.42,0,0,0-.41.33l-.42,2.26h1.35a.27.27,0,0,1,.28.34l-1.51,8.16a.27.27,0,0,0,.28.34H92.5a.43.43,0,0,0,.41-.34l1.57-8.5h1.31a.41.41,0,0,0,.4-.33Z'/>
+                              <path id='logomark--e' d='M103.41,93.36a7.58,7.58,0,0,0-7.11,6.06,4.89,4.89,0,0,0,4.93,6.06,6.24,6.24,0,0,0,3.44-.84,8.3,8.3,0,0,0,2.82-2.47s.18-.29-.16-.29h-3.46a2.45,2.45,0,0,1-2.11.79c-1.33,0-2.35-.69-2.3-2h8.23s.34,0,.38-.13a7.92,7.92,0,0,0,.24-1C109,96.05,106.9,93.36,103.41,93.36Zm1.35,5H99.91a3.2,3.2,0,0,1,3-2,2,2,0,0,1,2.22,1.61A.32.32,0,0,1,104.76,98.4Z'/>
+                              <g id='logomark--registered'>
+                                <path d='M110.17,104c0-.29-.17-.43-.52-.43h-.58v1.49h.24v-.64h.24l.41.64h.25l-.43-.66A.38.38,0,0,0,110.17,104Zm-.62.23h-.24v-.47h.3c.16,0,.33,0,.33.23S109.75,104.25,109.55,104.25Z'/>
+                                <path d='M109.57,103.06a1.27,1.27,0,0,0-1.28,1.27,1.25,1.25,0,0,0,.37.91,1.28,1.28,0,0,0,2.19-.91A1.27,1.27,0,0,0,109.57,103.06Zm0,2.36a1.09,1.09,0,1,1,1.05-1.09A1,1,0,0,1,109.57,105.42Z'/>
+                              </g>
+                            </g>
+                          </svg>
+                        </div>
+                      </div>
+                      <figure class="contact">
+                        <figcaption class="contact__details">
+                          <div class="contact__name">{{ external_office__name }}</div>
+                          {{# external_office__phone_local }}
+                            <div class="contact__phone">{{ external_office__phone_local }}</div>
+                          {{/ external_office__phone_local }}
+                          {{# external_office__email }}
+                            <div class="contact__email">{{ external_office__email }}</div>
+                          {{/ external_office__email }}
+                          <div>{{ external_office__website_display }}</div>
+
+                          <div class="copy">
+                            <div id="bio" style="max-height: 13rem; overflow: hidden;">
+                              {{# editable_bio_html }}<div>{{{ editable_bio_html }}}</div>{{/ editable_bio_html }}
+                              {{^ editable_bio_html }}<div>{{{ external_office__bio_html }}}</div>{{/ editable_bio_html }}
+                            </div>
+                          </div>
+                        </figcaption>
+                      </figure>
+                    </div>
+                  {{/ external_opt_team__name }}
+                {{/ external_opt_agent__name }}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-1 page__gutter"></div>
+
+          <div id="cover__front" class="col">
+            <figure class="cover h-100">
+              <svg class="cover__logo" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'>
+                <title>Ray White®</title>
+                <rect id='block' fill='#ffe512' width='120' height='120'/>
+                <g id='logomark' fill='#52524f'>
+                  <path id='logomark--R' d='M21.26,100.13s-.22-.26.12-.31c2.52-.36,4.25-3,4.57-4.79a4.46,4.46,0,0,0-1.07-4.14c-1.29-1.4-2.48-1.38-4.7-1.31H15.7a.41.41,0,0,0-.4.34l-2.76,14.8a.27.27,0,0,0,.28.34h3a.41.41,0,0,0,.4-.34l.85-4.59h0s0,0,.22.28l3.24,4.37a.72.72,0,0,0,.54.28h3.77s.34,0,.13-.27Zm-2.14-3.29h-1a.26.26,0,0,1-.27-.34l.78-4.07H20c1.9.07,2.6,1,2.35,2.42C22.23,95.59,21.62,96.9,19.12,96.84Z'/>
+                  <path id='logomark--a' d='M39.42,93.63H36.34L36,95.08a3,3,0,0,0-3-1.85,7.26,7.26,0,0,0-6.88,6.1c-.61,3.28,1,6.12,4.62,6.12a4.68,4.68,0,0,0,3.56-2l-.24,1.26a.27.27,0,0,0,.28.34H37.3a.43.43,0,0,0,.41-.34L39.7,94A.27.27,0,0,0,39.42,93.63Zm-4.13,5.7a3.56,3.56,0,0,1-3.41,2.93,2.32,2.32,0,0,1-2.31-2.89,3.55,3.55,0,0,1,3.37-2.94A2.28,2.28,0,0,1,35.29,99.33Z'/>
+                  <path id='logomark--y' d='M52.26,93.63H49.39a.63.63,0,0,0-.51.29l-3,5.33s-.16.3-.23,0l-1-5.26a.42.42,0,0,0-.41-.33h-3A.26.26,0,0,0,41,94l2,9.87a1,1,0,0,1-.1.63l-2.17,3.83s-.17.3.17.3h2.81a.62.62,0,0,0,.51-.3l8.19-14.37S52.6,93.63,52.26,93.63Z'/>
+                  <path id='logomark--W' d='M71.71,89.81H68.6a.55.55,0,0,0-.48.31L64.3,98.31s-.15.31-.16,0l-.45-8.13a.36.36,0,0,0-.36-.34H61a.53.53,0,0,0-.47.32l-3.49,8.18s-.13.31-.16,0l-.6-8.13a.36.36,0,0,0-.36-.34H53a.31.31,0,0,0-.32.34l1.06,14.57a.37.37,0,0,0,.37.34H57a.53.53,0,0,0,.47-.32l3.48-8.6s.12-.31.14,0l.29,8.54a.35.35,0,0,0,.36.35h3a.55.55,0,0,0,.48-.31L71.9,90.12S72.05,89.81,71.71,89.81Z'/>
+                  <path id='logomark--h' d='M78.92,93.23a3.89,3.89,0,0,0-3.21,1.45h0s0,0,0-.34l.78-4.19a.27.27,0,0,0-.28-.34H73.49a.41.41,0,0,0-.4.34l-2.71,14.57a.27.27,0,0,0,.28.34H73.4a.42.42,0,0,0,.41-.34l1.11-6c.1-.55.45-2.51,2.37-2.51s1.46,2.08,1.36,2.63l-1.1,5.89a.27.27,0,0,0,.28.34h2.74a.41.41,0,0,0,.4-.34l1.13-6c.38-2,.46-3-.3-4.18A3.46,3.46,0,0,0,78.92,93.23Z'/>
+                  <g id='logomark--i'>
+                    <path d='M87.9,93.68H85.17a.42.42,0,0,0-.41.33l-2,10.76a.27.27,0,0,0,.28.34h2.73a.42.42,0,0,0,.41-.34l2-10.76A.27.27,0,0,0,87.9,93.68Z'/>
+                    <path d='M88.61,89.86H85.87a.41.41,0,0,0-.4.34l-.36,1.93a.27.27,0,0,0,.28.33h2.74a.41.41,0,0,0,.4-.33l.36-1.93A.27.27,0,0,0,88.61,89.86Z'/>
+                  </g>
+                  <path id='logomark--t' d='M96.61,93.68h-1.3a.27.27,0,0,1-.28-.34l.58-3.14a.27.27,0,0,0-.28-.34H92.59a.41.41,0,0,0-.4.34l-.65,3.48H90.2a.42.42,0,0,0-.41.33l-.42,2.26h1.35a.27.27,0,0,1,.28.34l-1.51,8.16a.27.27,0,0,0,.28.34H92.5a.43.43,0,0,0,.41-.34l1.57-8.5h1.31a.41.41,0,0,0,.4-.33Z'/>
+                  <path id='logomark--e' d='M103.41,93.36a7.58,7.58,0,0,0-7.11,6.06,4.89,4.89,0,0,0,4.93,6.06,6.24,6.24,0,0,0,3.44-.84,8.3,8.3,0,0,0,2.82-2.47s.18-.29-.16-.29h-3.46a2.45,2.45,0,0,1-2.11.79c-1.33,0-2.35-.69-2.3-2h8.23s.34,0,.38-.13a7.92,7.92,0,0,0,.24-1C109,96.05,106.9,93.36,103.41,93.36Zm1.35,5H99.91a3.2,3.2,0,0,1,3-2,2,2,0,0,1,2.22,1.61A.32.32,0,0,1,104.76,98.4Z'/>
+                  <g id='logomark--registered'>
+                    <path d='M110.17,104c0-.29-.17-.43-.52-.43h-.58v1.49h.24v-.64h.24l.41.64h.25l-.43-.66A.38.38,0,0,0,110.17,104Zm-.62.23h-.24v-.47h.3c.16,0,.33,0,.33.23S109.75,104.25,109.55,104.25Z'/>
+                    <path d='M109.57,103.06a1.27,1.27,0,0,0-1.28,1.27,1.25,1.25,0,0,0,.37.91,1.28,1.28,0,0,0,2.19-.91A1.27,1.27,0,0,0,109.57,103.06Zm0,2.36a1.09,1.09,0,1,1,1.05-1.09A1,1,0,0,1,109.57,105.42Z'/>
+                  </g>
+                </g>
+              </svg>
+              <picture class="cover__background h-100" style="background-image: url('https://rw-media.s3.amazonaws.com/raywhitecom/wp-content/uploads/2019/03/29150319/Agent_at_inspection-CMYK.jpg')">
+                <!-- TODO: Add this back in when Oufit Asset Permssions are fixed
+                {{{ resizable_background_image }}}
+                -->
+              </picture>
+              <figcaption class="cover__overlay">
+                <hgroup class="cover__title">
+                  <h2 class="underblock">
+                    So you<br/>
+                    want to sell,<br/>
+                    <i>now how?</i>
+                  </h2>
+                </hgroup>
+              </figcaption>
+            </div>
+          </div>
+        </figure>
+      </section>
+
+      <section class="page page-landscape page-with-minimal-margins">
+        <div class="split-background h-100 page-with-margins">
+          <div class="row no-gutters align-items-center justify-content-between h-100">
+            <div class="page__disclaimer">Source: Ray White Group data 2018-2019</div>
+            <div class="col-12 align-self-start">
+              <header class="quote-header">
+                <h3>There are plenty of different terms used to describe property campaigns, but there are really only two ways of marketing - <b>private treaty</b> and <b>auction</b>.</h3>
+                <h3>Choosing the <b>right one</b> for you is easy.</h3>
+              </header>
+            </div>
+
+            <div class="col text-center">
+              <hgroup>
+                <h5 class="elipsis-offset"><b>If you…</b></h5>
+                <div class="row circles">
+                  <div class="col">
+                    <div class="aspect--square circle background--darkGrey">
+                      ...aren’t in a hurry and don’t want to feel any time pressure.
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="aspect--square circle background--darkGrey">
+                      ...want to dissuade inspections from buyers who have searched in a different price bracket.
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="aspect--square circle background--darkGrey">
+                      ...don’t mind the respect of opening your home for more inspections over a longer period.
+                    </div>
+                  </div>
+                </div>
+                <h5>
+                  Then choose to market your property<br/>
+                  via <b>private treaty.</b>
+                </h5>
+                <div class="row no-gutters justify-content-center">
+                  <div class="col-2">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 57.18 43.76">
+                      <title>handshake</title>
+                      <path d="M42.11,9.65l6.25,14.23-3.57,2.36L34.33,17.05s-1-1.59-3.51-.19a24.14,24.14,0,0,0-3.41,2.33,4.1,4.1,0,0,1-5.07,0,3.08,3.08,0,0,1,0-4.28c.67-.57,5.29-5.26,7.05-6.12a8.41,8.41,0,0,1,5.23-.64c1,.35,6.25,2.08,7.49,1.53" />
+                      <path d="M8.73,23.92,14.9,9.67A14.37,14.37,0,0,0,21.46,8.4a5.69,5.69,0,0,1,5.47,0s-6.29,5.23-6.55,6.33c0,0-2.29,2.56.77,5.32,0,0,2.42,2.72,5.44,1.62A58.51,58.51,0,0,0,31.65,18a1.27,1.27,0,0,1,1.7.38l10.38,9.1a1.14,1.14,0,0,0,1,.42c.64-.08-1.41,3.45-4.17,2,0,0,0,4.51-4.76,2.55,0,0,.08,4.21-4.3,2.76,0,0-.38,4.38-4.42,2.55l3.66-3.31s1.73-5.36-4-4.81c0,0-.16-3.91-4.46-3.06,0,0-.17-3.7-4.38-2.85,0,0,0-3.6-4-3a46.91,46.91,0,0,0-4.55,3.78Z" />
+                      <path d="M16.49,24.05a1.87,1.87,0,0,1-.4,1.16h0l-.54.46L13.4,27.54l-.5.43a1.84,1.84,0,0,1-1,.26,1.87,1.87,0,0,1-1.18-.42h0l-.4-.48h0a1.86,1.86,0,0,1,.08-2l.66-.57,2-1.76h0l.62-.55h0a1.91,1.91,0,0,1,.88-.22,1.84,1.84,0,0,1,1.21.45h0l.36.43h0a1.87,1.87,0,0,1,.28,1" />
+                      <path d="M20.83,27.08a1.87,1.87,0,0,1-.4,1.15h0l-.54.47-2.16,1.86-.49.44a1.94,1.94,0,0,1-1,.26,1.85,1.85,0,0,1-1.19-.43h0l-.41-.47h0a1.87,1.87,0,0,1,.08-2.06l.66-.57,2-1.76h0l.63-.54h0a1.85,1.85,0,0,1,.88-.22,1.91,1.91,0,0,1,1.21.44h0l.37.42h0a1.83,1.83,0,0,1,.29,1" />
+                      <path d="M25.18,30.21a1.82,1.82,0,0,1-.4,1.15h0l-.54.46L22.08,33.7l-.5.43a1.81,1.81,0,0,1-.95.26A1.89,1.89,0,0,1,19.44,34h0L19,33.49h0a1.86,1.86,0,0,1-.27-1,1.83,1.83,0,0,1,.35-1.08l.66-.58,2-1.75h0l.63-.55h0a1.86,1.86,0,0,1,2.09.23h0l.37.43h0a1.88,1.88,0,0,1,.29,1" />
+                      <path d="M29.39,33.11a1.87,1.87,0,0,1-.4,1.15h0l-.54.47L26.29,36.6l-.5.43a1.9,1.9,0,0,1-.95.26,1.85,1.85,0,0,1-1.19-.43h0l-.41-.47h0a1.86,1.86,0,0,1-.27-1,1.89,1.89,0,0,1,.35-1.09l.66-.57L26,32h0l.63-.54h0a1.86,1.86,0,0,1,2.09.23h0l.37.42h0a1.83,1.83,0,0,1,.29,1" />
+                      <path d="M7.06,23.44a.78.78,0,0,1-1,.43L1.78,22a.8.8,0,0,1-.37-1.06L8,6.11a.8.8,0,0,1,1-.43L13.3,7.57a.8.8,0,0,1,.36,1.06Z" />
+                      <path d="M50.06,23.44a.79.79,0,0,0,1,.42l4.23-1.93a.78.78,0,0,0,.36-1.06L49,6.12a.78.78,0,0,0-1-.43L43.7,7.62a.79.79,0,0,0-.36,1.06Z" />
+                    </svg>
+                  </div>
+                </div>
+              </hgroup>
+            </div>
+
+            <div class="col-1"></div>
+
+            <div class="col text-center">
+              <hgroup>
+                <h5 class="elipsis-offset"><b>If you…</b></h5>
+                <div class="row circles">
+                  <div class="col">
+                    <div class="aspect--square circle background--white">
+                      ...are keen to compress the time it takes to finalise a sale.
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="aspect--square circle background--white">
+                      ...want to<br/>
+                      attract all possible buyers, regardless of their original budget.
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="aspect--square circle background--white">
+                      ...are willing<br/>
+                      to create time pressure for buyers to increase competition.
+                    </div>
+                  </div>
+                </div>
+                <h5>
+                  Then choose to market your property<br/>
+                  via <b>auction.</b>
+                </h5>
+                <div class="row no-gutters justify-content-center">
+                  <div class="col-2">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 57.18 43.76">
+                      <title>gavel</title>
+                      <path d="M50.1,33.71,27.71,16.47l2.46-3.1a2.8,2.8,0,0,0,1.68.56,2.85,2.85,0,0,0,1.73-5.12L24.13,1.66a2.82,2.82,0,0,0-3.84,4.09l-8,10.11L12,15.67a2.85,2.85,0,1,0-3.44,4.54L18,27.36a2.83,2.83,0,0,0,4.08-3.82l2.66-3.34L47.19,37.5a2.39,2.39,0,0,0,2.91-3.79" />
+                      <path d="M28.94,37.38h-.21a.83.83,0,0,0,0-.15,2.65,2.65,0,0,0-2.65-2.65H11.54a2.65,2.65,0,0,0-2.65,2.65c0,.05,0,.1,0,.15h-.2a2.65,2.65,0,1,0,0,5.3H28.94a2.65,2.65,0,0,0,0-5.3" />
+                    </svg>
+                  </div>
+                </div>
+              </hgroup>
+            </div>
+
+            <div class="w-100"></div>
+
+            <div class="col-6 align-self-end">
+              <figure class="bar-charts">
+                <h6>
+                  {{# external_office__address_state_code }}
+                    <span>{{ external_office__address_state_code }}</span>
+                  {{/ external_office__address_state_code }}
+                  {{^ external_office__address_state_code }}
+                    <span>{{ external_office__address_country_code }}</span>
+                  {{/ external_office__address_state_code }} clearance rates via <b>private treaty</b>
+                </h6>
+                {{# spreadsheet.private_treaty_clearance_rates }}
+                  <div class="bar-charts__channel background--lightGrey" data-state-code="{{ clearance_rate_state_code }}">
+                    <div class="bar-charts__label">{{ clearance_rate_label }}</div>
+                    <div class="bar-charts__bar background--darkGrey" data-width="{{# clearance_rate_value }}{{ clearance_rate_value }}{{/ clearance_rate_value }}{{^ clearance_rate_value }}0{{/ clearance_rate_value }}"></div>
+                  </div>
+                {{/ spreadsheet.private_treaty_clearance_rates }}
+              </figure>
+            </div>
+
+            <div class="col-6 align-self-end" >
+              <figure class="bar-charts flex-row-reverse">
+                <h6 class="text-right">
+                  {{# external_office__address_state_code }}
+                    <span>{{ external_office__address_state_code }}</span>
+                  {{/ external_office__address_state_code }}
+                  {{^ external_office__address_state_code }}
+                    <span>{{ external_office__address_country_code }}</span>
+                  {{/ external_office__address_state_code }} clearance rates via <b>auction</b>
+                </h6>
+                {{# spreadsheet.auction_clearance_rates }}
+                  <div class="bar-charts__channel background--tinted" data-state-code="{{ clearance_rate_state_code }}">
+                    <div class="bar-charts__label">{{ clearance_rate_label }}</div>
+                    <div class="bar-charts__bar background--white" data-width="{{# clearance_rate_value }}{{ clearance_rate_value }}{{/ clearance_rate_value }}{{^ clearance_rate_value }}0{{/ clearance_rate_value }}"></div>
+                  </div>
+                {{/ spreadsheet.auction_clearance_rates }}
+              </figure>
+            </div>
+          </div>
+        </div>
+      </section>
+    </article>
+    <script type="text/javascript" src="index.js"></script>
+    <script id="bioExternal" type="text/template">{{# external_opt_agent__name }} {{{ external_opt_agent__bio_html }}} {{/ external_opt_agent__name }} {{^ external_opt_agent__name }} {{# external_opt_team__name }} {{{ external_opt_team__bio_html }}} {{/ external_opt_team__name }} {{^ external_opt_team__name }} {{{ external_office__bio_html }}} {{/ external_opt_team__name }} {{/ external_opt_agent__name }}</script>
+    <script id="bioEditable" type="text/template">{{{ editable_bio_html }}}</script>
+    <script type="text/javascript">
+      RW.outfit.applyEditableDefaults(window, [
+        {
+          id: 'bio',
+          editable: RW.dom.text(window, 'bioEditable'),
+          external: RW.dom.html(window, 'bioExternal'),
+        },
+      ]);
+    </script>
+  </body>
+</html>
