@@ -1,0 +1,52 @@
+<!doctype html>
+<!-- VERSION: 1.0.0 -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Social Media - Agent Recognition</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="index.css" />
+    <style type="text/css">
+      .tile__background {
+        {{# background_position_x }}
+          background-position-x: {{ background_position_x }}% !important;
+        {{/ background_position_x }}
+      }
+    </style>
+  </head>
+  <body>
+    <main class="tile tile--{{# logo_alignment }}{{ logo_alignment }}{{/ logo_alignment }}{{^ logo_alignment }}left{{/ logo_alignment }}">
+      <picture class="tile__background" style="background-image: url('{{{ external_agent__image_lifestyle }}}?maxwidh=1200&scale=both')">{{{ resizable_background_image }}}</picture>
+      {{# recognition_use_fytd }}
+        <!-- this parser sucks -->
+        {{# external_agent__recognition_sales_svg }}
+          <div class="tile__overlay">
+            <div class="tile__title">Congratulations {{ external_agent__name }}</div>
+            <div class="tile__award">
+              <div class="tile__award--logo">{{{ external_agent__fytd_recognition_sales_svg }}}</div>
+              <div class="tile__award--shadow">{{{ external_agent__fytd_recognition_sales_svg }}}</div>
+            </div>
+          </div>
+        {{/ external_agent__recognition_sales_svg }}
+      {{/ recognition_use_fytd }}
+      {{^ recognition_use_fytd }}
+        <!-- this parser sucks -->
+        {{# external_agent__recognition_sales_svg }}
+          <div class="tile__overlay">
+            <div class="tile__title">Congratulations {{ external_agent__name }}</div>
+            <div class="tile__award">
+              <div class="tile__award--logo">{{{ external_agent__recognition_sales_svg }}}</div>
+              <div class="tile__award--shadow">{{{ external_agent__recognition_sales_svg }}}</div>
+            </div>
+          </div>
+        {{/ external_agent__recognition_sales_svg }}
+      {{/ recognition_use_fytd }}
+    </main>
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+</html>
