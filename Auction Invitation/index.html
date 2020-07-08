@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html data-sign="OS?">
+
+<head>
+  <title>Outfit</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" type="text/css" href="./css/minireset.css">
+  <link rel="stylesheet" type="text/css" href="./css/main.css">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i');
+    @import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i');
+
+    :root {
+      --yellow: {{{account.colors.brand-color}}};
+      --white: {{{account.colors.white}}};
+      --black: #000000;
+    }
+
+    body {
+      font-family: "Lato";
+      font-size: 1rem;
+      color: var(--black);
+      word-break: break-word;
+    }
+
+    .backgroundImage {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+    }
+
+    .backgroundImage div {
+      width: auto !important;
+      height: auto !important;
+      right: 0;
+      bottom: 0;
+    }
+
+    /* Helper classes */
+    .u-hide {
+      display: none;
+    }
+    
+    .overflow[data-validate-type="datetime"]:hover:after {
+      content: "Date Format is invalid";
+    }
+
+    /* Helper class for fixing Reposition tool bug */
+    .reposition-fix {
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+
+    .reposition-fix div {
+      top: 0 !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    .wrapper {
+      position: absolute;
+      top: 3mm;
+      right: 3mm;
+      bottom: 3mm;
+      left: 3mm;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .box {
+      width: 90%;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.9);
+    }
+
+    .border {
+      border: solid 2px var(--yellow);
+      padding: 30px 10px;
+    }
+
+    .copy {
+      text-align: center;
+      color: var(--white);
+    }
+
+    .name {
+      font-family: 'Playfair Display';
+      font-weight: normal;
+      font-size: 65px;
+      line-height: 1.2em;
+      margin-bottom: 0.15em;
+    }
+
+    .location,
+    .datetime {
+      font-family: 'Lato';
+      font-weight: normal;
+      font-size: 55.25px;
+      line-height: 1.2em;
+      margin-bottom: 0.2em;
+    }
+    
+    @media (orientation: portrait) {
+      @media (aspect-ratio: 1/1) {
+        .box {
+          padding: 18px 16px;
+        }
+        
+        .border {
+          padding: 10px;
+        }
+      }
+    }
+    
+    @media (orientation: landscape) {
+      .box {
+        width: 74.5%;
+      }
+    }
+  </style>
+</head>
+
+<body style="background: white" data-crop="{{show-crop}}">
+ 
+  <div class="page">
+
+    <div class="bleed">
+
+      <div class="container fit">
+        <div class="backgroundImage reposition-fix">{{{background-image-repositionable}}}</div>
+        <div class="wrapper">
+          <div class="box">
+            <div class="border">
+              <div class="copy">
+                <p class="name" data-max-line="1">
+                  {{{AI--auction-event-name}}}
+                  {{^AI--auction-event-name}}
+                  Auction event name
+                  {{/AI--auction-event-name}}
+                </p>
+                <p class="location" data-max-line="1">
+                  {{{AI--location}}}
+                  {{^AI--location}}
+                  Location
+                  {{/AI--location}}
+                </p>
+                <p class="datetime" data-validate-type="datetime">
+                  {{{AI--when}}}
+                  {{^AI--when}}
+                  Day, Date, Time
+                  {{/AI--when}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--container fit-->
+
+    </div>
+    <!--bleed-->
+
+  </div>
+  <!--page-->
+
+  <script>
+    window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+  </script>
+  <script src="js/main.js"></script>
+  <script src="js/prefixfree.js"></script>  
+  <script src="js/check-export-mode.js"></script>
+  <script src="js/dynamic-inject.js"></script>
+  <script src="js/char-limit.js"></script>
+  <script src="js/max-line-check.js"></script>
+  <script src="js/max-height-check.js"></script>
+  <script src="js/textfit.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/moment.js"></script>
+ 
+  <script>
+
+    console.clear();
+    
+    function validation() {
+      const els = document.querySelectorAll("[data-validate-type]");
+      
+      els.forEach(el => {
+        const type = el.dataset.validateType;
+        const value = el.innerText;
+        let error = false;
+
+        switch(type) {
+          case 'datetime':
+            const values = value.split(', ');
+            const date0 = moment(values[0], 'dddd', true);
+            const date1 = moment(values[1], 'MMMM D', true);
+            const date2 = moment(values[2], 'ha', true);
+            if (value === 'Day, Date, Time') {
+              //no validation, remove this condition if the placeholder need to be checked also.
+            } else if (values.length < 3 || (date0 && !date0.isValid()) || (date1 && !date1.isValid()) || (date2 && !date2.isValid())) {
+              error = true;
+            }
+            break;
+        }
+
+        if (error) {
+          el.classList.add("overflow"); 
+        } else {
+          el.classList.remove("overflow");
+        }
+      });
+    }
+
+    // Tracking text changes and firing text restriction functions (mutationObserver)
+    const overflowObserver = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {        
+        maxLineCheck();
+        maxHeightCheck();
+        validation();
+      });
+    });
+
+    const injectObserver = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        injectDynamicContent();
+      });
+    });
+
+    const injectSources = document.querySelectorAll('[data-target-id]');
+
+    overflowObserver.observe(document.body, {
+      attributes: false,
+      characterData: true,
+      childList: true,
+      subtree: true,
+      attributeOldValue: false,
+      characterDataOldValue: true
+    });
+
+    if (injectSources.length > 0) {
+      injectSources.forEach(src => {
+        injectObserver.observe(src, {
+          attributes: false,
+          characterData: true,
+          childList: true,
+          subtree: true,
+          attributeOldValue: false,
+          characterDataOldValue: true
+        });
+      });
+    }
+
+    // Calling text size restriction functions once the fonts are loaded
+    document.fonts.ready.then(() => {
+      maxLineCheck();
+      maxHeightCheck();     
+      validation();
+      injectDynamicContent();
+    });
+
+    checkCrop();
+    checkExport();    
+
+    // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+    TextFit.fit({
+      selector: '.lockup',
+      alignItems: 'center',
+    });
+
+  </script>
+</body>
+
+</html>
