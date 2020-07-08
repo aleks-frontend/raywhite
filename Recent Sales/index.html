@@ -1,0 +1,253 @@
+<!doctype html>
+<!-- VERSION: 0.0.1 -->
+<html lang="en" async>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Recent Sales in {{ external_localities_names }}</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+
+    <script type="text/javascript">
+      var queue = [];
+      var start = new Date().getTime();
+      function log(msg) {
+        queue.push([msg, new Date().getTime()]);
+      }
+      log('head script');
+      window.addEventListener('unhandledrejection', function(event) {
+        log('unhandled rejection ' + event);
+        document.dispatchEvent(new Event('printready'));
+      });
+      window.onerror = function (message, source, lineno, colno, error) {
+        log(['unhandled error', message, source, lineno, colno, error].join(' \n'));
+        document.dispatchEvent(new Event('printready'));
+      };
+    </script>
+  </head>
+  <body>
+    <article class="document">
+      <section class="page-A4 page-with-margins">
+        <hgroup class="text-center page__header">
+          <h3 id="PageTitle" class="overblock">
+            <b>
+              {{{ recent_sales_title }}}
+              {{^ recent_sales_title }}
+                Recent Sales near {{ external_localities_names }}
+              {{/ recent_sales_title }}
+            </b>
+          </h3>
+          <h6>Sold by Ray White</h6>
+        </hgroup>
+        <main id="RecentSales"></main>
+        <footer class="page__footer disclaimer">We make no representation or warranty as to the accuracy, reliability or completeness of the information contained in this document &ndash; independent advice should be obtained before making any decision. We acknowledge that information contained in this document may be sourced and obtained in part from third parties. Accordingly, no warranty, representation or undertaking, whether expressed or implied, is made and no responsibility is accepted by us as to the accuracy of any part of this or any other information supplied on our behalf. For more information: <u>raywhite.com/data-disclaimers</u></footer>
+      </section>
+
+      <section class="page-A4 page-with-margins justify-content-between">
+        {{^ map_display_disable }}
+        <picture
+          id="RecentSalesMap"
+          class="aspect--three-eighths map"
+        ></picture>
+        {{/ map_display_disable }}
+        <main id="MarketData"></main>
+        <footer class="page__footer">
+          <div class="row">
+            <div class="col">
+              <b>{{ external_office_name }}</b>
+            </div>
+            {{# external_office_licence_code }}
+              <div class="col text-right">
+                <small class="muted">Business Licence: </small>
+                <small class="muted">{{ external_office_licence_code }}</small>
+              </div>
+            {{/ external_office_licence_code }}
+            <div class="col-12"><hr class="spacer" /></div>
+            <div class="col-6">
+              {{ external_office_address_1 }}&nbsp; | &nbsp;
+              {{# external_office_address_2 }}{{ external_office_address_2 }}<br/>{{/ external_office_address_2 }}
+              {{ external_office_address_suburb }}{{# external_office_address_state_code }}, {{ external_office_address_state_code }} {{/ external_office_address_state_code }}{{ external_office_address_postcode }}
+            </div>
+            <div class="col-6">
+              <div class="row">
+                <div class="col text-right">
+                  {{# use_international_phone_format }}
+                    {{# external_office_phone_international }}<a href="tel:{{ external_office_phone_international }}">{{ external_office_phone_international }}</a>{{/ external_office_phone_international }}
+                  {{/ use_international_phone_format }}
+                  {{^ use_international_phone_format }}
+                    {{# external_office_phone_local }}<a href="tel:{{ external_office_phone_local }}">{{ external_office_phone_local }}</a>{{/ external_office_phone_local }}
+                  {{/ use_international_phone_format }}
+                </div>
+                {{# external_office_website_display }}
+                <div class="col text-right"><a href="{{ external_office_website_url }}">{{ external_office_website_display }}</a></div>
+                {{/ external_office_website_display }}
+              </div>
+            </div>
+          </div>
+        </footer>
+      </section>
+
+      {{# debug }}
+      <article class="page-A4">
+        <div id="logging-container" class="page-with-margins">
+      </article>
+      {{/ debug }}
+
+    </article>
+    <script type="text/javascript" src="index.js"></script>
+    <script>
+      // Extract state in separate tag, protects against syntax errors
+      var INITIAL_STATE = {};
+      var decodeEntities = RW.entityDecoder(document)
+    </script>
+    <script>
+      var marketSales = [
+        {{# spreadsheet.external_sales_market }}
+        {
+          status: 'sold',
+          address: decodeEntities('{{ sale_market_address_street }}, {{ sale_market_address_suburb }}'),
+          type: '{{ sale_market_type }}',
+          features: [
+            {{# sale_market_bedrooms }}'{{ sale_market_bedrooms }} {{ sale_market_bedrooms_label }}',{{/ sale_market_bedrooms}}
+            {{# sale_market_bathrooms }}'{{ sale_market_bathrooms }} {{ sale_market_bathrooms_label}}',{{/ sale_market_bathrooms}}
+            {{# sale_market_carspaces }}'{{ sale_market_carspaces }} {{ sale_market_carspaces_label}}',{{/ sale_market_carspaces}}
+          ],
+          date: '{{ sale_market_sold_date_day_of_month }} {{ sale_market_sold_date_month_short }} {{ sale_market_sold_date_year }}',
+          price: '{{ sale_market_sold_price }}',
+          lat: '{{ sale_market_lat }}',
+          lng: '{{ sale_market_lng }}',
+        },
+        {{/ spreadsheet.external_sales_market }}
+      ].map(function (sale) {
+        if (sale.price) sale.price = ('$' + sale.price).replace(/\$+/, '$')
+        return sale
+      })
+
+      var marketListings = [
+        {{# spreadsheet.external_listings_market_recent }}
+        {
+          status: 'current',
+          address: decodeEntities('{{ listing_address_street }}, {{ listing_address_suburb }}'),
+          type: '{{ listing_type }}',
+          features: [
+            {{# listing_bedrooms }}'{{ listing_bedrooms }} {{ listing_bedrooms_label }}',{{/ listing_bedrooms}}
+            {{# listing_bathrooms }}'{{ listing_bathrooms }} {{ listing_bathrooms_label}}',{{/ listing_bathrooms}}
+            {{# listing_carspaces }}'{{ listing_carspaces }} {{ listing_carspaces_label}}',{{/ listing_carspaces}}
+          ],
+          date: '{{  listing_listed_date_day_of_month }} {{ listing_listed_date_month_short }} {{  listing_listed_date_year }}',
+          price: '{{ listing_price_display_single }}',
+          lat: '{{ listing_lat }}',
+          lng: '{{ listing_lng }}',
+        },
+        {{/ spreadsheet.external_listings_market_recent }}
+      ]
+
+      var limit = {{# map_display_disable }} 16 {{/ map_display_disable }} {{^ map_display_disable }} 12 {{/ map_display_disable }}
+      var marketData = [].concat(
+        marketSales.slice(0, Math.min(limit, limit - Math.min(marketListings.length, 5))),
+        marketListings.slice(0, Math.min(limit, limit - Math.min(marketSales.length, 7)))
+      )
+    </script>
+    <script>
+      // Extract state in separate tag, protects against syntax errors
+      var INPUTS = {
+        zoomModifier: '{{ map_zoom_modifier }}',
+        noPricePlaceholder: decodeEntities('{{ no_price_placeholder }}'),
+        officeSales: [
+          {{# spreadsheet.external_listings_sold }}
+          {
+            address: decodeEntities('{{ listing_address_street }}, {{ listing_address_suburb }}'),
+            type: decodeEntities('{{ listing_type }}'),
+            features: [
+              {{# listing_bedrooms }}'{{ listing_bedrooms }} {{ listing_bedrooms_label }}',{{/ listing_bedrooms}}
+              {{# listing_bathrooms }}'{{ listing_bathrooms }} {{ listing_bathrooms_label}}',{{/ listing_bathrooms}}
+              {{# listing_carspaces }}'{{ listing_carspaces }} {{ listing_carspaces_label}}',{{/ listing_carspaces}}
+            ],
+            date: '{{  listing_sold_date_day_of_month }} {{ listing_sold_date_month_short }} {{  listing_sold_date_year }}'.trim(),
+            price: '{{ listing_sold_price }}',
+            imageUrl: '{{{ listing_image_url }}}',
+          },
+          {{/ spreadsheet.external_listings_sold }}
+        ],
+        marketData: marketData,
+      };
+    </script>
+    <script>
+      {{# debug }}
+      window.log = RW.getLogger(document, '#logging-container', {
+        start: start,
+        queue: queue
+      });
+      {{/ debug }}
+      log('main script started');
+
+      {{^ map_display_disable }}
+      let resolveMapLoaded;
+      const mapLoaded = new RW.pf.Promise(function (resolve) {
+        resolveMapLoaded = resolve;
+      }).then(function () { log('map loaded'); });
+
+      function initMap() {
+        RW.mapInit({
+          el: document.getElementById('RecentSalesMap'),
+          maps: google.maps,
+          zoomModifier: INPUTS.zoomModifier,
+          data: INPUTS.marketData,
+          log: log,
+        }).catch(function (err) {
+          log(err.message);
+          document.getElementById('RecentSalesMap').innerHTML = '<h1>FAILED</h1>';
+        }).then(resolveMapLoaded);
+      }
+      {{/ map_display_disable }}
+
+      RW.init(function () {
+        return RW.pf.Promise.all([
+          RW.fitty('#PageTitle', {
+            maxSize: 40,
+          }),
+
+          RW.recentSales({
+              state: window.INITIAL_STATE || {},
+              inputs: window.INPUTS || {},
+              el: document.getElementById('RecentSales'),
+            })
+            .catch(function () { document.getElementById('RecentSales') = '<h1>FAILED</h1>' }),
+
+          RW.marketData({
+              state: window.INITIAL_STATE || {},
+              inputs: window.INPUTS || {},
+              el: document.getElementById('MarketData'),
+            })
+            .catch(function () { document.getElementById('MarketData') = '<h1>FAILED</h1>' }),
+          {{^ map_display_disable }}
+            mapLoaded,
+          {{/ map_display_disable }}
+          RW.isLoaded.then(function () { log('page loaded'); }),
+        ]);
+      })
+      .then(function () {
+        return new RW.pf.Promise(function (resolve) {
+          log('all done waiting 500ms');
+          setTimeout(resolve, 500);
+        });
+      })
+      .then(function () {
+        log('dispatching print ready');
+        document.dispatchEvent(new Event('printready'));
+      });
+    </script>
+
+  {{^ map_display_disable }}
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key={{account.snippets.google_maps_api_key}}&v=quarterly&callback=initMap"
+      async
+      defer
+    ></script>
+  {{/ map_display_disable }}
+  </body>
+</html>
