@@ -1,0 +1,57 @@
+<!doctype html>
+<!-- VERSION: 0.1.0 -->
+<html lang="en" async>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Team Grid (Auto) - Commercial</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div
+      id="app"
+      data-title="{{ multiline_title }}"
+      data-footer="{{# show_footer }}true{{/ show_footer }}{{^ show_footer }}false{{/ show_footer }}"
+    >
+    </div>
+    <script type="text/javascript" src="index.js"></script>
+    <script>
+      var decode = RW.entityDecoder(document)
+
+      // Extract state in separate tag, protects against syntax errors
+      var INPUTS = {
+        showFooter: '{{ show_footer }}',
+        maxPerPage: +'{{ grid_max_items_per_page }}' || 12,
+        documentTitle: decode('{{ document_title }}'),
+        title: decode('{{ multiline_title }}'),
+        agents: [
+          {{# spreadsheet._agents }}
+            {
+              name: decode('{{ agent__name }}'),
+              jobTitle: decode('{{ agent__job_title }}'),
+              imageHeadshot: decode('{{ agent__image_headshot }}'),
+            },
+          {{/ spreadsheet._agents }}
+        ],
+      };
+    </script>
+    <script>
+      RW.init({
+        inputs: window.INPUTS || {},
+        el: document.getElementById('app'),
+      })
+      .catch(function (error) {
+        console.error(error)
+        document.body.innerHTML = '<h1>FAILED</h1>';
+      })
+      .then(function () {
+        document.dispatchEvent(new Event('printready'));
+      });
+    </script>
+  </body>
+</html>
