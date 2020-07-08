@@ -1,0 +1,97 @@
+<!doctype html>
+<!-- VERSION: 0.0.0 -->
+<html lang="en" async>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Pricing Table</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <article class="document">
+      <section class="page-A4 page-with-margins">
+        <div class="row h-100 align-items-top">
+          <div class="col-12 align-self-top">
+            <h2 class="underblock">{{ title }}</h2>
+            <div class="copy">{{{ formatted_text }}}</div>
+          </div>
+          <div id="app" class="col-12"></div>
+          <footer class="col-12 page__footer align-self-end">
+            <div class="row no-gutters">
+              <div class="col">
+                <b>{{ external_office__name }}</b>
+              </div>
+              {{# external_office__licence_code }}
+                <div class="col text-right">
+                  <small class="muted">Business Licence:</small>
+                  <small class="muted">{{ external_office__licence_code }}</small>
+                </div>
+              {{/ external_office__licence_code }}
+              <div class="col-12"><hr class="spacer" /></div>
+              <div class="col-6">
+                {{ external_office__address_1 }}&nbsp; | &nbsp;
+                {{# external_office__address_2 }}{{ external_office__address_2 }}<br/>{{/ external_office__address_2 }}
+                {{ external_office__address_suburb }}{{# external_office__address_state_code }}, {{ external_office__address_state_code }} {{/ external_office__address_state_code }}{{ external_office__address_postcode }}
+              </div>
+              <div class="col-6">
+                <div class="row no-gutters">
+                  <div class="col text-center">
+                    {{# use_international_phone_format }}
+                      {{# external_office__phone_international }}<a href="tel:{{ external_office__phone_international }}">{{ external_office__phone_international }}</a>{{/ external_office__phone_international }}
+                    {{/ use_international_phone_format }}
+                    {{^ use_international_phone_format }}
+                      {{# external_office__phone_local }}<a href="tel:{{ external_office__phone_local }}">{{ external_office__phone_local }}</a>{{/ external_office__phone_local }}
+                    {{/ use_international_phone_format }}
+                  </div>
+                  {{# external_office__website_display }}
+                  <div class="col text-right"><a href="{{ external_office__website_url }}">{{ external_office__website_display }}</a></div>
+                  {{/ external_office__website_display }}
+                </div>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </section>
+    </article>
+    <script type="text/javascript" src="index.js"></script>
+    <script>
+      // Extract state in separate tag, protects against syntax errors
+      var INITIAL_STATE = {};
+    </script>
+    <script>
+      var decodeEntities = RW.entityDecoder(document)
+      // Extract state in separate tag, protects against syntax errors
+      var INPUTS = {
+        showTotal: {{# show_price_total }}true,{{/ show_price_total }}{{^ show_price_total }}false,{{/ show_price_total }}
+        marketingSummaryItems: [
+          {{# spreadsheet.marketing_summary_items }}
+          {
+            category: decodeEntities(`{{ marketing_summary_category }}`),
+            description: decodeEntities(`{{ marketing_summary_description }}`),
+            price: decodeEntities(`{{ marketing_summary_price }}`),
+          },
+          {{/ spreadsheet.marketing_summary_items }}
+        ],
+      };
+    </script>
+    <script>
+      RW
+        .init({
+          state: window.INITIAL_STATE || {},
+          inputs: window.INPUTS || {},
+          el: document.getElementById('app'),
+        })
+        .catch(function () {
+          document.body.innerHTML = '<h1>FAILED</h1>';
+        })
+        .then(function () {
+          document.dispatchEvent(new Event('printready'));
+        });
+    </script>
+  </body>
+</html>
