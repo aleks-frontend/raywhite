@@ -1,0 +1,42 @@
+<!doctype html>
+<!-- VERSION: 0.0.0 -->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Great Ten out of Ten - Social Tile</title>
+
+  {{{ account.snippets.tagmanager_script }}}
+
+  <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700">
+  <link media="all" rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+  <link media="all" rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+  <main class="tile{{#overlay_theme}} tile--{{ overlay_theme }}{{/overlay_theme}}{{# overlay_alignment }} tile--{{ overlay_alignment }}{{/ overlay_alignment }}">
+    <div class="tile__border"></div>
+    <div class="tile__overlay">
+      <header class="tile__header">
+        <h2>Another <span class="text--uppercase text--yellow">great</span></h2>
+        <h1>10<span class="text--yellow">/</span>10</h1>
+        <h3>for customer service</h3>
+      </header>
+      <div class="tile__separator"></div>
+      <div class="tile__content">
+        <h3>
+          <span>{{ _agent__first_name }}</span> <span>{{ _agent__last_name }}</span>
+        </h3>
+        <h4>{{ _office__name }}</h4>
+      </div>
+    </div>
+    <picture class="tile__background--image">
+      {{{ resizable_background_image }}}
+    </picture>
+  </main>
+  <script type="text/javascript" src="index.js"></script>
+</body>
+
+</html>
