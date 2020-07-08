@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html data-sign="OSR">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i');
+      @import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i');
+
+      :root {
+        --pink: #ec008c;
+        --yellow: {{{account.colors.brand-color}}};
+        --light-grey: #808080;
+        --darker-grey: #58595B;
+        --white: #fff;
+        --header-front-background-color: #e7e7e8;
+        --agent-name-section-background-color: #58595B;
+        --side-background-color: #e0e1e2;
+      }
+
+      /* Inputs Order
+
+      {{show-crop}}
+      {{RW_back-page-layout-choice--cs2p}}
+      {{{RW_suburb--cs2p}}}
+      {{{RW_street-address--cs2p}}}
+      {{RW_left-feature-image--cs2p}}
+      {{RW_centre-feature-image--cs2p}}
+      {{RW_right-feature-image--cs2p}}
+      {{{RW_monthly-report--cs2p}}}
+      {{{RW_property-features--cs2p}}}
+      {{{RW_sold-price--cs2p}}}
+      {{RW_number-of-bedrooms--cs2p}}
+      {{RW_number-of-bathrooms--cs2p}}
+      {{RW_number-of-parking-spaces--cs2p}}
+      {{RW_number-of-amenities--cs2p}}
+      {{#collection.RW_agent-details--cs2p}}{{/collection.RW_agent-details--cs2p}}
+      {{{RW_number-of-inspections--cs2p}}}
+      {{{RW_enquiry-internet--cs2p}}}
+      {{{RW_enquiry-newspaper--cs2p}}}
+      {{{RW_enquiry-signboard--cs2p}}}
+      {{{RW_enquiry-databse--cs2p}}}
+      {{RW_office-name--cs2p}}
+      {{RW_feature-image--cs2p}}
+      {{{RW_top-copy--cs2p}}}
+      {{{RW_bottom-copy--cs2p}}}
+      {{{RW_office--cs2p}}}
+      {{{RW_office--cs2p}}}
+      */
+
+      html {
+        font-family: 'Lato';
+        word-break: break-word;
+        color: var(--light-grey);
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      /*.layoutChoice--front-page .page--frontPage,
+      .layoutChoice--customer-review .page--customerReview {
+      display: block;
+      }*/
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .header {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 284pt;
+        padding: 75pt 43pt 0;
+        background-color: var(--header-front-background-color);
+      }
+
+      .title__container {
+        width: 350pt;
+      }
+
+      .pretitle,
+      .title {
+        font-family: 'Playfair Display';
+        font-size: 54pt;
+        line-height: 1.1em;
+      }
+
+      .title {
+        color: var(--darker-grey);
+      }
+
+      .address__container {
+        display: flex;
+        align-items: center;
+        font-size: 14pt;
+        line-height: 1.2em;
+      }
+
+      .state {
+        margin-right: 10pt;
+        padding: 4.3pt 9pt;
+        font-family: 'Playfair Display';
+        font-size: 22pt;
+        line-height: 1.2em;
+        color: var(--darker-grey);
+        background-color: var(--yellow);
+      }
+
+      .address {
+        font-size: 14pt;
+        line-height: 1.2em;
+      }
+
+      .address--backPage {
+        font-size: 9pt;
+        margin-left: 0;
+      }
+
+      .address + .address {
+        margin-left: 4pt;
+      }
+
+      .logo {
+        position: absolute;
+        top: 0;
+        right: 42pt;
+        width: 139pt;
+        font-size: 0;
+      }
+
+      .featureImage__container {
+        position: relative;
+        display: flex;
+        height: 212pt;
+        padding: 5pt 0;
+        margin-left: -5pt;
+      }
+
+      .featureImageDefault {
+        display: none;
+        position: absolute;
+        top: 5pt;
+        left: 5pt;
+        right: 0;
+        bottom: 5pt;
+        background: url('https://files.outfit.io/media_library_items/174918/RW-CasweStady-Socialile-LinkedIn-image.jpg') no-repeat;
+        background-size: cover;
+      }
+
+      .no-left-image.no-centre-image.no-right-image .featureImageDefault { display: block;}
+
+      .featureImage {
+        position: relative;
+        flex: 1;
+        margin-left: 5pt;
+      }
+
+      .body {
+        display: flex;
+        flex: 1;
+      }
+
+      .body--frontPage {
+        flex-direction: column; 
+        padding: 23pt 44pt 43pt;
+        background-color: var(--header-front-background-color);
+      }
+
+      .body--backPage {
+        display: none;
+      }
+
+      .backPageLayoutChoice--default .body--default {
+        display: flex;
+        padding-top: 4pt;
+      }
+
+      .backPageLayoutChoice--customer-review .body--customerReview {
+        display: flex;
+        padding: 28pt 28pt 20pt 67pt;
+      }
+
+      .body__top {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 13pt;
+        padding-bottom: 7pt;
+        border-bottom: 1pt solid var(--darker-grey);
+      }
+
+      .feature__container {
+        display: flex;
+        margin-left: 25pt;
+      }
+
+      .feature {
+        display: flex;
+        align-items: center;
+        margin-left: 9pt;
+      }
+
+      .feature:first-child {
+        margin-left: 0;
+      }
+
+      .feature__number {
+        font-size: 10pt;
+        line-height: 1.2em;
+      }
+
+      .feature__icon {
+        width: 20pt;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+      }
+
+      .feature__number + .feature__icon {
+        margin-left: 5pt;
+      }
+
+      .body__bottom {
+        position: relative;
+        display: flex;
+        flex: 1;
+      }
+
+      .column--left {
+        width: 261pt;
+        padding-right: 17pt;
+      }
+
+      .column--right {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+
+      .copy {
+        font-size: 8.5pt;
+        line-height: 1.5em;
+      }
+
+      .copy + .copy {
+        margin-top: 22.5pt;
+      }
+
+      .copy p,
+      .copy ul {
+        font-size: 8.9pt;
+        line-height: 1.5em;
+        font-weight: 300;
+      }
+
+      .copy strong {
+        font-weight: 700;
+      }
+
+      ul {
+        padding-left: 15pt;
+      }
+
+      li {
+        position: relative;
+        margin-bottom: 0.5pt;
+      }
+
+      li:last-child {
+        margin-bottom: 0;
+      }
+
+      li:before {
+        content: "\2022";
+        position: absolute;
+        top: 0;  
+        left: -15pt;        
+      }
+
+      .agent__container {
+        display: flex;
+        flex: 1;
+      }
+
+      .fit--back .agent__container {
+        flex-direction: column;
+        margin-bottom: 51pt;
+      }
+
+      .sold {
+        flex: 1;
+        margin-right: 30pt;
+      }
+
+      .sold__text {
+        font-size: 8.9pt;
+        line-height: 1.2em;
+      }
+
+      .agent__inner {
+        width: 120pt;
+        flex: 1;
+      }
+
+      .agent + .agent {
+        margin-top: 14pt;
+      }
+
+      .agent__text {
+        font-size: 8.9pt;
+        line-height: 1.3em;
+      }
+
+      .report__container {
+        display: flex;
+        flex-direction: column;
+        height: 73.6pt;
+      }
+
+      .report__title,
+      .enquiry__title {
+        border-bottom: 1pt solid var(--darker-grey);
+      }
+
+      .report__title p,
+      .enquiry__title p {
+        width: 82pt;
+        padding: 2pt 0 2pt 7pt;
+        font-size: 9pt;
+        line-height: 1.2em;
+        color: var(--white);
+        background: var(--darker-grey);
+      }
+
+      .report {
+        display: flex;
+        flex: 1;
+        padding: 7pt 0 8pt 9pt;
+      }
+
+      .report__number {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 114pt;
+        margin-right: 12pt;
+        font-size: 20pt;
+        line-height: 1.2em;
+        border: 2pt solid var(--yellow);
+        border-radius: 50%;
+      }
+
+      .report__text {
+        align-self: center;
+        font-size: 7.9pt;
+        line-height: 1.2em;
+      }
+
+      .report__text + .report__text {
+        margin-left: 13pt;
+      }
+
+      .enquiry__container {
+        display: flex;
+        flex-direction: column;
+        height: 66.5pt;
+      }
+
+      .enquiry {
+        display: flex;
+        flex: 1;
+      }
+
+      .enquiry__item {
+        width: 58.5pt;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+
+      .enquiry__item + .enquiry__item {
+        margin-left: 10pt;
+      }
+
+      .enquiry__label {
+        text-align: center;
+        font-size: 8.2pt;
+        line-height: 1.2em;
+      }
+
+      .enquiry__separator {
+        height: 1pt;
+        margin: 6.3pt 0;
+        background-color: var(--darker-grey);
+      }
+
+      .enquiry__value {
+        font-size: 12pt;
+        line-height: 1.2em;
+        text-align: center;
+      }
+
+      .url {
+        font-size: 14pt;
+        line-height: 1.2em;
+      }
+
+      .url--frontPage {
+        position: absolute !important;
+        bottom: -16pt;
+        left: 0pt;
+        width: 235pt;
+      }
+
+      .hero__container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        height: 542pt;
+      }
+
+      .hero {
+        position: relative;
+        flex: 1;
+        background-color: var(--pink);
+      }
+
+      .heroTitle__container {
+        position: relative;
+        height: 77pt;
+        padding: 6pt 38pt;
+        background: var(--agent-name-section-background-color);
+      }
+
+      .hero__title {
+        font-family: 'Playfair Display';
+        font-size: 26.1pt;
+        line-height: 1.2em;
+        color: var(--white);
+      }
+
+      .section {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        padding: 14pt 20pt 26pt 46pt;
+      }
+
+      .text__container {
+        flex: 1;
+        padding-bottom: 10pt;
+      }
+
+      .text--top {
+        margin-bottom: 15pt;
+        font-size: 12.5pt;
+        line-height: 1.2em;
+      }
+
+      .text__separator {
+        margin-bottom: 9pt;
+        width: 33pt;
+        height: 4pt;
+        background-color: var(--yellow);
+      }
+
+      .no-top-copy .text__separator {
+        display: none;
+      }
+
+      .text--bottom {
+        font-size: 9.5pt;
+        line-height: 1.2em;
+      }
+
+      .side {
+        display: flex;
+        flex-direction: column;
+        width: 216pt;
+        padding: 13pt 22pt 34pt 22pt;
+        background: var(--side-background-color);
+      }
+
+      .agent__url {
+        font-size: 8pt;
+        line-height: 1.2em;
+      }
+
+      .side .agent__text {
+        font-size: 8.5pt;
+        line-height: 1.5em;
+      }
+
+      .additional__suburb {
+        font-size: 8.5pt;
+        line-height: 1.5em;
+      }
+
+      .office {
+        position: relative;
+        margin-bottom: 53pt;
+        font-size: 11pt;
+        line-height: 1.2em;
+      }
+
+      .office:before {
+        position: absolute;
+        top: -12pt;
+        left: 0;
+        content: '';
+        width: 30pt;
+        height: 3pt;
+        background-color: var(--darker-grey);
+      }
+
+      .testimonial__container {
+        flex: 1;
+      }
+
+      .testimonial__heading {
+        margin-bottom: 43pt;
+        font-family: 'Playfair Display';
+        font-size: 42.5pt;
+        line-height: 1em;
+        color: var(--darker-grey);
+      }
+
+      .testimonial {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .testimonial__item {
+        padding-right: 15pt;
+        margin-bottom: 14.4pt;
+        width: 50%;
+      }
+
+      .testimonial__text {
+        font-size: 9.7pt;
+        line-height: 1.2em;
+      }
+
+      .yellowRectangle {
+        display: none;
+        position: absolute;
+        bottom: 0;
+        right: 42pt;
+        width: 142pt;
+        height: 21pt;
+        background: var(--yellow);
+      }
+
+      .backPageLayoutChoice--customer-review .yellowRectangle {
+        display: block;
+      }
+
+      .u-font-light {
+        font-weight: 300;
+      }
+
+      .u-font-semibold {
+        font-weight: 700;
+      }
+
+      .report__number.overflow:after{
+        right: -12.5em;
+        font-size: 0.6em;
+      }
+
+      .enquiry__value.overflow:after {
+        right: -3.5em;
+        top: 0.9em;
+        font-size: 0.9em;
+        max-height: 145%;
+      }
+
+      .feature__number.overflow:after {
+        right: -67pt;
+        max-height: 134%;
+      }
+
+      .text--top.overflow:after,
+      .text--top.overflow:before,
+      .text--bottom.overflow:after,
+      .text--bottom.overflow:before,
+      .testimonial__text.overflow:after,
+      .testimonial__text.overflow:before {
+        font-size: 1.5em;
+      }
+
+      .copy.overflow:before,
+      .copy.overflow:after {
+        font-size: 1.3em;
+      }
+
+
+      .address__container.overflow:before,
+      .address__container.overflow:after {
+        font-size: 1.2em;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" data-crop="{{show-crop}}"
+        class="backPageLayoutChoice--{{{RW_back-page-layout-choice--cs2p}}}{{^RW_back-page-layout-choice--cs2p}}default{{/RW_back-page-layout-choice--cs2p}}
+               {{^RW_top-copy--cs2p}}no-top-copy{{/RW_top-copy--cs2p}}"
+        data-reduce-export-font-size-by-percent="0" data-reduce-firefox-font-size-by-percent="0" data-prevent-export-overflow="false">
+
+    <div class="page page--frontPage">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          <div class="header">
+            <div class="title__container">
+              <div class="pretitle">Case study</div><!--pretitle-->
+              {{#RW_suburb--cs2p}}
+              <div class="title textFit">{{{RW_suburb--cs2p}}}</div><!--title-->
+              {{/RW_suburb--cs2p}}
+            </div><!--title__container-->
+            <div class="address__container" data-max-height="47">
+              <div class="state">Sold</div><!--state-->
+              {{#RW_street-address--cs2p}}
+              <div class="address u-font-light">{{{RW_street-address--cs2p}}}{{#RW_suburb--cs2p}},{{/RW_suburb--cs2p}}</div><!--address-->
+              {{/RW_street-address--cs2p}}
+              {{#RW_suburb--cs2p}}
+              <div class="address u-font-semibold">{{{RW_suburb--cs2p}}}</div><!--address-->
+              {{/RW_suburb--cs2p}}
+            </div><!--address__container-->
+            <img src="{{{account.logos.primary}}}" class="logo"><!--logo-->
+          </div><!--header-->
+          <div class="featureImage__container  
+                      {{^RW_left-feature-image--cs2p}}no-left-image{{/RW_left-feature-image--cs2p}}
+                      {{^RW_centre-feature-image--cs2p}}no-centre-image{{/RW_centre-feature-image--cs2p}}
+                      {{^RW_right-feature-image--cs2p}}no-right-image{{/RW_right-feature-image--cs2p}}
+                      ">
+            {{#RW_left-feature-image--cs2p}}
+            <div class="featureImage">
+              <div class="reposition-fix">{{{RW_left-feature-image--cs2p}}}</div><!--reposition-fix-->
+            </div><!--featureImage-->
+            {{/RW_left-feature-image--cs2p}}
+            {{#RW_centre-feature-image--cs2p}}
+            <div class="featureImage">
+              <div class="reposition-fix">{{{RW_centre-feature-image--cs2p}}}</div><!--reposition-fix-->
+            </div><!--featureImage-->
+            {{/RW_centre-feature-image--cs2p}}
+            {{#RW_right-feature-image--cs2p}}
+            <div class="featureImage">
+              <div class="reposition-fix">{{{RW_right-feature-image--cs2p}}}</div><!--reposition-fix-->
+            </div><!--featureImage-->
+            {{/RW_right-feature-image--cs2p}}
+            <div class="featureImageDefault"></div><!-- featureImageDefault -->
+          </div><!--featureImage__container-->
+          <div class="body body--frontPage">
+            <div class="body__top">
+              <div class="address__container" data-max-line="1">
+                <div class="address u-font-light">{{{RW_street-address--cs2p}}}{{#RW_suburb--cs2p}},{{/RW_suburb--cs2p}}</div><!--address-->
+                <div class="address u-font-semibold">{{{RW_suburb--cs2p}}}</div><!--address-->
+              </div><!--address__container-->
+              <div class="feature__container">
+                {{#RW_number-of-bedrooms--cs2p}}
+                <div class="feature">
+                  <div class="feature__number" data-char-limit="2">{{{RW_number-of-bedrooms--cs2p}}}</div><!--feature__number-->
+                  <img class="feature__icon" src="https://files.outfit.io/media_library_items/171775/RW-bedrooms-icon.svg"><!--feature__icon-->
+                </div><!--feature-->
+                {{/RW_number-of-bedrooms--cs2p}}
+                {{#RW_number-of-bathrooms--cs2p}}
+                <div class="feature">
+                  <div class="feature__number" data-char-limit="2">{{{RW_number-of-bathrooms--cs2p}}}</div><!--feature__number-->
+                  <img class="feature__icon" src="https://files.outfit.io/media_library_items/171778/RW-bathrooms-icon.svg"><!--feature__icon-->
+                </div><!--feature-->
+                {{/RW_number-of-bathrooms--cs2p}}
+                {{#RW_number-of-parking-spaces--cs2p}}
+                <div class="feature">
+                  <div class="feature__number" data-char-limit="2">{{{RW_number-of-parking-spaces--cs2p}}}</div><!--feature__number-->
+                  <img class="feature__icon" src="https://files.outfit.io/media_library_items/171776/RW-parking%2520space-icon.svg"><!--feature__icon-->
+                </div><!--feature-->
+                {{/RW_number-of-parking-spaces--cs2p}}
+                {{#RW_number-of-amenities--cs2p}}
+                <div class="feature">
+                  <div class="feature__number" data-char-limit="2">{{{RW_number-of-amenities--cs2p}}}</div><!--feature__number-->
+                  <img class="feature__icon" src="https://files.outfit.io/media_library_items/171799/RW-CaseStady-2page-amenities%2520icon.svg"><!--feature__icon-->
+                </div><!--feature-->
+                {{/RW_number-of-amenities--cs2p}}
+              </div><!--feature__container-->
+            </div><!--body__top-->
+            <div class="body__bottom">
+              <div class="column column--left">
+                {{#RW_monthly-report--cs2p}}
+                <div class="copy" data-max-line="8">{{{RW_monthly-report--cs2p}}}</div><!--copy 190-->
+                {{/RW_monthly-report--cs2p}}
+                {{#RW_property-features--cs2p}}
+                <div class="copy" data-max-line="6">{{{RW_property-features--cs2p}}}</div><!--copy 120-->
+                {{/RW_property-features--cs2p}}
+              </div><!--column--left-->
+              <div class="column column--right">
+                <div class="agent__container">
+                  <div class="sold">
+                    {{#RW_sold-price--cs2p}}<div class="sold__text u-font-semibold">Sold</div>{{/RW_sold-price--cs2p}}<!--sold__text-->
+                    <div class="sold__text u-font-light" data-max-line="3">{{{RW_sold-price--cs2p}}}</div><!--sold__text-->
+                  </div><!--sold-->
+                  <div class="agent__inner">
+                    {{#collection.RW_agent-details--cs2p}}
+                    {{#block.RW_agent-details--cs2p}}
+                    <div class="agent">
+                      <div class="agent__text u-font-semibold" data-max-line="1">{{{RW_agent-name--cs2p}}}</div><!--agent__text-->
+                      <div class="agent__text u-font-light" data-char-limit="12">{{RW_agent-phone-number--cs2p}}</div><!--agent__text-->
+                      <div class="agent__text u-font-light" data-max-line="1">{{{RW_agent-email--cs2p}}}</div><!--agent__text-->
+                    </div><!--agent-->
+                    {{/block.RW_agent-details--cs2p}}
+                    {{/collection.RW_agent-details--cs2p}}
+                  </div><!--agent__inner-->
+                </div><!--agent__container-->
+                <div class="report__container">
+                  <div class="report__title"><p>Campaign Report</p></div><!--report__title-->
+                  <div class="report">
+                    <div class="report__number" data-char-limit="3">{{{RW_number-of-inspections--cs2p}}}{{^RW_number-of-inspections--cs2p}}25{{/RW_number-of-inspections--cs2p}}</div><!--report__number-->
+                    <div class="report__text u-font-semibold">Inspections throughout the campaign</div><!--report__text-->
+                    <div class="report__text u-font-light">Several of these buyers, as well as our existing database of buyers, have asked us to find them a property in the area.</div><!--report__text-->
+                  </div><!--report-->
+                </div><!--report__container-->
+                <div class="enquiry__container">
+                  <div class="enquiry__title"><p>Source of Enquiry</p></div><!--enquiry__title-->
+                  <div class="enquiry">
+                    {{#RW_enquiry-internet--cs2p}}
+                    <div class="enquiry__item">
+                      <div class="enquiry__value u-font-semibold" data-char-limit="3">{{{RW_enquiry-internet--cs2p}}}%</div><!--enquiry__value-->
+                      <div class="enquiry__separator"></div><!--enquiry__separator-->
+                      <div class="enquiry__label u-font-light">Internet</div><!--enquiry__label-->
+                    </div><!--enquiry__item--> 
+                    {{/RW_enquiry-internet--cs2p}}
+                    {{#RW_enquiry-newspaper--cs2p}}
+                    <div class="enquiry__item">
+                      <div class="enquiry__value u-font-semibold" data-char-limit="3">{{{RW_enquiry-newspaper--cs2p}}}%</div><!--enquiry__value-->
+                      <div class="enquiry__separator"></div><!--enquiry__separator-->
+                      <div class="enquiry__label u-font-light">Newspaper</div><!--enquiry__label-->
+                    </div><!--enquiry__item-->
+                    {{/RW_enquiry-newspaper--cs2p}}
+                    {{#RW_enquiry-signboard--cs2p}}
+                    <div class="enquiry__item">
+                      <div class="enquiry__value u-font-semibold" data-char-limit="3">{{{RW_enquiry-signboard--cs2p}}}%</div><!--enquiry__value-->
+                      <div class="enquiry__separator"></div><!--enquiry__separator-->
+                      <div class="enquiry__label u-font-light">Signboard</div><!--enquiry__label-->
+                    </div><!--enquiry__item-->  
+                    {{/RW_enquiry-signboard--cs2p}}
+                    {{#RW_enquiry-databse--cs2p}}
+                    <div class="enquiry__item">
+                      <div class="enquiry__value u-font-semibold enquiry__value--database" data-char-limit="3">{{{RW_enquiry-databse--cs2p}}}%</div><!--enquiry__value-->
+                      <div class="enquiry__separator"></div><!--enquiry__separator-->
+                      <div class="enquiry__label u-font-light">Database</div><!--enquiry__label-->
+                    </div><!--enquiry__item-->
+                    {{/RW_enquiry-databse--cs2p}}
+                  </div><!--enquiry-->
+                </div><!--enquiry__container-->
+              </div><!--column--right-->
+              <div class="url url--frontPage u-font-semibold" data-max-line="1">raywhite{{{RW_office-name--cs2p}}}{{^RW_office-name--cs2p}}(office-name){{/RW_office-name--cs2p}}.com</div><!--url--frontPage-->
+            </div><!--body__bottom-->
+          </div><!--body-->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <div class="page page--customerReview">
+
+      <div class="bleed">
+
+        <div class="container fit fit--back">
+          <div class="hero__container">
+            <div class="hero">
+              <div class="reposition-fix">{{{RW_feature-image--cs2p}}}</div><!--reposition-fix-->
+            </div><!--hero-->
+            <div class="heroTitle__container">
+              {{#collection.RW_agent-details--cs2p}}
+              {{#block.RW_agent-details--cs2p}}
+              <div class="hero__title" data-max-line="1">{{{RW_agent-name--cs2p}}}</div><!--hero__title-->
+              {{/block.RW_agent-details--cs2p}}
+              {{/collection.RW_agent-details--cs2p}}
+            </div><!--heroTitle__container-->
+            <img src="{{{account.logos.primary}}}" class="logo"><!--logo-->
+          </div><!--hero__container-->
+          <div class="body body--backPage body--default">
+            <div class="section">
+              <div class="text__container">
+                {{#RW_top-copy--cs2p}}
+                <div class="text text--top js-subtrahend u-font-semibold" data-max-line="4">{{{RW_top-copy--cs2p}}}</div><!--text--top-->
+                {{/RW_top-copy--cs2p}}
+                {{#RW_bottom-copy--cs2p}}
+                <div class="text__separator js-subtrahend"></div>
+                {{/RW_bottom-copy--cs2p}}
+                {{#RW_bottom-copy--cs2p}}
+                <div class="text text--bottom u-font-semibold" data-max-height="dynamic">{{{RW_bottom-copy--cs2p}}}</div><!--text--bottom-->
+                {{/RW_bottom-copy--cs2p}}
+              </div><!--text__container-->
+              <div class="url url--backPage u-font-semibold" data-max-line="1">raywhite{{{RW_office--cs2p}}}.com</div><!--url--backPage-->
+            </div><!--section-->
+            <div class="side">
+              <div class="agent__container">
+                {{^collection.RW_agent-details--cs2p.length}}
+                <div class="agent__url agent__url--top" data-max-line="1">raywhite{{{RW_suburb--cs2p}}}.com</div><!--agent__url--top-->
+                {{/collection.RW_agent-details--cs2p.length}}
+                <div class="agent__inner">
+                  {{#collection.RW_agent-details--cs2p}}
+                  {{#block.RW_agent-details--cs2p}}
+                  <div class="agent">
+                    <div class="agent__text u-font-semibold" data-max-line="1">{{{RW_agent-name--cs2p}}}</div><!--agent__text-->
+                    <div class="agent__text u-font-light" data-char-limit="12">{{RW_agent-phone-number--cs2p}}</div><!--agent__text-->
+                    <div class="agent__text u-font-light" data-max-line="1">{{{RW_agent-email--cs2p}}}</div><!--agent__text-->
+                    <div class="agent__url" data-max-line="1">raywhite{{{RW_suburb--cs2p}}}.com</div><!--agent__url--top-->
+                  </div><!--agent-->
+                  {{/block.RW_agent-details--cs2p}}
+                  {{/collection.RW_agent-details--cs2p}}
+                </div><!--agent__inner-->
+                {{#collection.RW_agent-details--cs2p.length}}
+                <div class="agent__url agent__url--bottom" data-max-line="1">raywhite{{{RW_suburb--cs2p}}}.com</div><!--agent__url--bottom-->
+                {{/collection.RW_agent-details--cs2p.length}}
+              </div><!--agent__container-->
+              {{#RW_office--cs2p}}
+              <div class="office u-font-semibold" data-max-line="1">Ray White {{{RW_office--cs2p}}}</div><!--office-->
+              {{/RW_office--cs2p}}
+              {{#RW_street-address--cs2p}}
+              <div class="address address--backPage u-font-semibold" data-max-line="1">{{{RW_street-address--cs2p}}}</div><!--address--backPage-->
+              {{/RW_street-address--cs2p}}
+            </div><!--side-->
+          </div><!--body--backPage body--default-->
+          <div class="body body--backPage body--customerReview">
+            <div class="testimonial__container">
+              <div class="testimonial__inner" data-max-height="dynamic">
+                <div class="testimonial__heading">Hear what our<br>clients have to say</div><!--testimonial__heading-->
+                <div class="testimonial">
+                  {{#collection.RW_customer-testimonials--cs2p}}
+                  {{#block.RW_customer-testimonials--cs2p}}
+                  <div class="testimonial__item">
+                    <div class="testimonial__text" data-max-line="4">{{{customer-quote}}}</div><!--testimonial__text-->
+                    <div class="testimonial__text u-font-semibold" data-max-line="2">{{{customer-name}}}</div><!--testimonial__text-->
+                  </div><!--testimonial__item-->
+                  {{/block.RW_customer-testimonials--cs2p}}
+                  {{/collection.RW_customer-testimonials--cs2p}}
+                </div><!--testimonial-->
+              </div><!-- testimonial__inner -->
+            </div><!--testimonial__container-->
+          </div><!--body--backPage body--customerReview-->
+          <div class="yellowRectangle"></div><!--yellowRectangle-->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/custom-rich-text.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/text-fit-min.js"></script>
+    <script src="js/fontfaceobserver.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+
+    <script>
+
+      console.clear();
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      // All external font-families need to be added to 'fonts' array
+      document.addEventListener('DOMContentLoaded', function(event) {
+        const fonts = ['Lato','Playfair Display'];
+        const fontObservers = [];
+
+        fonts.forEach(font => {
+          const obs = new FontFaceObserver(font);
+          fontObservers.push(obs.load())
+        });
+
+        Promise.all(fontObservers).then(() => {
+          maxLineCheck();
+          maxHeightCheck();
+          injectDynamicContent();
+          hideEmptyTitles();
+
+          document.dispatchEvent(new Event('printready'));
+        });
+      });      
+
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+      setInterval(() => {textFitMin('.textFit', 16)}, 500);
+
+    </script>
+
+
+  </body>
+</html>
