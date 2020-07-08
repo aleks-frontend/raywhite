@@ -1,0 +1,38 @@
+<!doctype html>
+<!-- VERSION: 0.1.0 -->
+<html lang="en" async>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Property Grid - For Lease</title>
+
+    {{{ account.snippets.tagmanager_script }}}
+
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+    <link media="all" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+    <link media="all" rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <article class="document">
+      <section class="page-A4 page-with-margins">
+        <div class="grid">
+          <header class="page__header cell cell-2x2">
+            <h1><div id="pageTitle">{{ title }}</div></h1>
+            <h4>{{ subtitle }}</h4>
+          </header>
+          {{# spreadsheet._listings---status-LSE--scope-office }}
+            <figure id="{{ listing__id }}"class="property cell">
+              <picture class="property__image" style="background-image: url('{{{ listing__image_url }}}?maxwidth=1024&scale=down')"></picture>
+              <figcaption class="property__details">
+                <div class="property__address text-truncate">{{ listing__address_street }}, {{ listing__address_suburb }}</div>
+                {{# listing__price_display }}<div class="property__price">{{ listing__price_display }}</div>{{/ listing__price_display }}
+              </figcaption>
+            </figure>
+          {{/ spreadsheet._listings---status-LSE--scope-office }}
+        </div>
+      </section>
+    <article>
+    <script type="text/javascript" src="index.js"></script>
+    <script>RW.init();</script>
+  </body>
+</html>
